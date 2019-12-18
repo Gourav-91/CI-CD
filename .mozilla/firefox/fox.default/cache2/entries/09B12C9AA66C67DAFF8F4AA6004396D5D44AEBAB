@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- Copyright (c) 2011, 2016, Oracle and/or its affiliates. All rights reserved. -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>ILOM Navigation</title>
+<script type="text/javascript" src="/Extensions/browserVersion.js"></script>
+<script type="text/javascript" src="/Extensions/cssPicker.js"></script>
+<script type="text/javascript" src="/Extensions/luapi.js"></script>
+<script type="text/javascript" src="/Extensions/session.js"></script>
+<script type="text/javascript" src="/Extensions/platform.jasp"></script>
+<script type="text/javascript" src="/Extensions/htui.js"></script>
+<script type="text/javascript">
+onload = function() {
+    
+    getBodyFrame();
+
+
+    loadPageRetry("System_Information", "Summary", 30);
+
+
+}
+var bodyFrameObj;
+function getBodyFrame()
+{
+    var i;
+    for (i = 0; i < parent.frames.length; i++) {
+        if (parent.frames[i].name == "bodyFrame") {
+            bodyFrameObj = parent.frames[i].frameElement;
+            return;
+        }
+    }
+}
+function loadPageRetry(node, subnode, seconds)
+{
+    if (parent.treeFrame && parent.treeFrame.treeReady) {
+        ht_selectTreeNode(node, subnode);
+        return;
+    }
+    if (seconds > 0) {
+        seconds--;
+        setTimeout("loadPageRetry('" + node + "', '" + subnode + "', " + seconds + ")", 1000);
+    } else {
+        alert("Failed to load " + subnode + " page.");
+    }
+}
+TabsManagement = new Array();
+TabsManagement.push({name:'Web Server', href:'/iPages/i_httpd.asp'});
+TabsManagement.push({name:'SSL Certificate', href:'/iPages/i_websslcert.asp'});
+
+TabsManagement.push({name:'SNMP', href:'/iPages/i_snmp.asp'});
+
+
+TabsManagement.push({name:'SSH Server', href:'/iPages/i_sshd.asp'});
+
+TabsManagement.push({name:'IPMI', href:'/iPages/i_ipmi.asp'});
+TabsManagement.push({name:'CLI', href:'/iPages/i_cli.asp'});
+
+TabsManagement.push({name:'Banner Messages', href:'/iPages/i_banner.asp'});
+
+
+TabsManagement.push({name:'FIPS', href:'/iPages/i_fips.asp'});
+
+
+var hmn = 'disabled';
+if (hmn.strcasecmp("enabled")) {
+    TabsManagement.push({name:'OESHM', href:'/iPages/i_hmn.asp'});
+}
+
+TabsMaintenance = new Array();
+
+TabsMaintenance.push({name:'Firmware Update', href:'/iPages/i_startflash.asp'});
+
+
+TabsMaintenance.push({name:'Reset SP', href:'/iPages/i_reset.asp'});
+
+
+TabsMaintenance.push({name:'Snapshot', href:'/iPages/i_snapshot.asp'});
+TabsUser = new Array();
+TabsUser.push({name:'Active Sessions', href:'/iPages/i_sessions.asp'});
+TabsUser.push({name:'User Accounts', href:'/iPages/i_user.asp'});
+TabsUser.push({name:'Password Policy', href:'/iPages/i_passwordpolicy.asp'});
+
+TabsUser.push({name:'LDAP', href:'/iPages/i_ldap.asp'});
+
+
+TabsUser.push({name:'LDAP/SSL', href:'/iPages/i_ldapssl.asp'});
+
+
+TabsUser.push({name:'RADIUS', href:'/iPages/i_radius.asp'});
+
+
+TabsUser.push({name:'Active Directory', href:'/iPages/i_activedir.asp'});
+
+TabsConnect = new Array();
+TabsConnect.push({name:'Network', href:'/iPages/i_network.asp'});
+
+TabsConnect.push({name:'DNS', href:'/iPages/i_dns.asp'});
+
+TabsConnect.push({name:'Serial Port', href:'/iPages/i_serial.asp'});
+TabsConfig = new Array();
+TabsConfig.push({name:'Backup/Restore', href:'/iPages/i_backupandrestore.asp'});
+TabsConfig.push({name:'Reset Defaults', href:'/iPages/i_configmgmt.asp'});
+TabsNotifications = new Array();
+TabsNotifications.push({name:'Alerts', href:'/iPages/i_multialert.asp'});
+TabsNotifications.push({name:'Syslog', href:'/iPages/i_syslog.asp'});
+TabsNotifications.push({name:'SMTP Client', href:'/iPages/i_smtp.asp'});
+
+TabsNotifications.push({name:'ASR Client', href:'/iPages/i_asr.asp'});
+
+TabsDateTime = new Array();
+TabsDateTime.push({name:'Clock', href:'/iPages/i_clock.asp'});
+
+TabsDateTime.push({name:'Timezone', href:'/iPages/i_timezone.asp'});
+
+TabsSpLogs = new Array();
+TabsSpLogs.push({name:'Event', href:'/iPages/i_sel.asp'});
+TabsSpLogs.push({name:'Audit', href:'/iPages/i_auditLog.asp'});
+TabsCod = new Array();
+
+var targets = { '/System/Other_Removable_Devices': true};
+
+TabsORD = new Array();
+if (targets) {
+    TabsORD.push({name:'Health', href:'/iPages/i_ordhealth.asp'});
+    for (key in targets) {
+        if (key == "/System/Other_Removable_Devices") {
+            continue;
+        }
+        nodes = key.split("/");
+        if (nodes.length > 3) {
+            var propname = make_pretty_propname(nodes[3]);
+            TabsORD.push({name:propname, href:'/iPages/i_ord.asp?basepath=' + nodes[3]});
+        }
+    }
+}
+TabsArray = new Array();
+TabsArray.push(TabsSpLogs);
+TabsArray.push(TabsManagement);
+TabsArray.push(TabsUser);
+TabsArray.push(TabsConnect);
+TabsArray.push(TabsConfig);
+TabsArray.push(TabsNotifications);
+TabsArray.push(TabsDateTime);
+TabsArray.push(TabsMaintenance);
+TabsArray.push(TabsCod);
+TabsArray.push(TabsORD);
+var lastTabKey = -1;
+var currentTabIndex;
+var tabsDrawn = false;
+function highlightTab(selkey)
+{
+    getElement("td_" + selkey).className = "NavTab_Selected";
+    if (lastTabKey != -1) {
+        TabsArray[currentTabIndex][lastTabKey].name;
+        getElement("td_" + lastTabKey).className="NavTab";
+    }
+    lastTabKey = selkey;
+}
+function processTabByName(name) {
+    var i;
+    for (i = 0; i < TabsArray[currentTabIndex].length; i++) {
+        if (TabsArray[currentTabIndex][i].name == name) {
+            processTabByIndex(undefined, i);
+            return;
+        }
+    }
+    alert("Could not find tab " + name);
+    return;
+}
+function processTabByIndex(event, selkey) {
+    if (event != undefined && event.shiftKey && event.ctrlKey) {
+        window.open(TabsArray[currentTabIndex][selkey].href, "_blank");
+        return;
+    }
+    if (lastTabKey == selkey) {
+        return;
+    }
+    showTabs();
+    window.setTimeout("bodyFrameObj.src ='" + TabsArray[currentTabIndex][selkey].href + "'", 10);
+    highlightTab(selkey);
+}
+function htTree_CreateTabs(tabIndex, selectedTab) {
+    drawTabRow(tabIndex);
+    if (selectedTab == undefined) {
+        processTabByIndex(undefined, 0);
+    } else {
+        processTabByIndex(undefined, selectedTab);
+    }
+}
+function drawTabs(args) {
+    drawTabRow(args.tabKey);
+    highlightTab(args.selected);
+}
+function drawTabRow(tabIndex) {
+    var tabRowString = "";
+    var name;
+    var cells;
+    cells = getElement("tabRow").cells;
+    while(cells.length > 0) {
+        getElement("tabRow").deleteCell(0);
+    }
+    lastTabKey = -1;
+    currentTabIndex = tabIndex;
+    for (var key = 0; key < TabsArray[tabIndex].length; key++) {
+        var c = getElement("tabRow").insertCell(-1);
+        name = TabsArray[tabIndex][key].name;
+        var id = name.replace(/ /g, "_");
+        var href = TabsArray[tabIndex][key].href;
+        if (TabsArray[tabIndex][key].longname) {
+            name = TabsArray[tabIndex][key].longname;
+        }
+        c.id = "td_" + key;
+        c.name = "tdname_"  + id;
+        c.className = "NavTab";
+        c.innerHTML = "<div class='NavTabLinkDiv'><a id='tabid_" + key + "' onClick='processTabByIndex(event, " + key + "); return false;' title='" + name + "'href='#'>" + name + "<\/a><\/div><div class='arrowDiv'><\/div>";
+    }
+    tabsDrawn = true;
+}
+function htTree_loadPage(clickEvent, dest, showTab, selectTab) {
+    if (dest != "") {
+        if (clickEvent != undefined && clickEvent.ctrlKey && clickEvent.shiftKey) {
+            window.open(dest, "_blank");
+        } else {
+            hideTabs();
+            tabsDrawn = false;
+            window.setTimeout("bodyFrameObj.src ='" + dest + "'", 10);
+            hideElement("tabDiv");
+        }
+    } else {
+        htTree_CreateTabs(showTab, selectTab);
+        showTabs();
+        showElement("tabDiv");
+    }
+}
+function showTabs()
+{
+    if (tabsDrawn && parent.getElement("bodyMain")) {
+        parent.showElement("mainFrame");
+        parent.getElement("bodyMain").rows="42,0,*";
+    }
+}
+function hideTabs()
+{
+    if (parent.getElement("bodyMain")) {
+        parent.hideElement("mainFrame");
+        parent.getElement("bodyMain").rows="0,0,*";
+    }
+}
+function showPage()
+{
+    if (parent.getElement("bodyMain") && parent.getElement("mainFrame")) {
+        parent.hideElement("loadingFrame");
+        parent.showElement("bodyFrame");
+        if (parent.getElement("mainFrame").clientHeight || parent.isElementVisible("mainFrame")) {
+            parent.getElement("bodyMain").rows="42,*,0";
+        } else {
+            parent.getElement("bodyMain").rows="0,*,0";
+        }
+    }
+}
+function hidePage()
+{
+    if (parent.getElement("bodyMain") && parent.getElement("mainFrame")) {
+        parent.hideElement("bodyFrame");
+        parent.showElement("loadingFrame");
+        if (parent.getElement("mainFrame").clientHeight || parent.isElementVisible("mainFrame")) {
+            parent.getElement("bodyMain").rows="42,0,*"
+        } else {
+            parent.getElement("bodyMain").rows="0,0,*"
+        }
+    }
+}
+function exportTabs()
+{
+    return TabsArray;
+}
+</script>
+</head>
+<body style="margin:0">
+  <div id="tabDiv" class="NavTabDiv" style="display:none;">
+    <table id="treetabs" class="NavTabTable" border="0" cellspacing="0" cellpadding="0" role="presentation">
+      <tbody>
+        <tr id="tabRow" class="NavTabRow">
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <a name="skip-nav-links" ></a>
+</body>
+</html>
+Ž¼ãä           ]÷ÄEA"/Ô       >    :https://adc-mgmt-1146fmm0lu.us.oracle.com/iPages/tabFrame.asp strongly-framed 0 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeBAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAASNMIIEiTCCA3GgAwIBAgIJAOJ0rN3uRWu+MA0GCSqGSIb3DQEBCwUAMIGJMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEXMBUGA1UEBxMOUmVkd29vZCBTaG9yZXMxHTAbBgNVBAoTFE9yYWNsZSBBbWVyaWNhLCBJbmMuMS0wKwYDVQQDEyRPcmFjbGUgSW50ZWdyYXRlZCBMaWdodHMgT3V0IE1hbmFnZXIwHhcNMTQwNjEyMTUyOTAxWhcNMzQwNjA3MTUyOTAxWjCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvMQXO6DUOUnSJ7IXLCR0E9iAmJtQlyO10sds8ZERf08FVsjWvE5D5s9dFeDTSGNJLmiSM/TmkC1aCcHi+YZI92yREcUPJP8oAYs1kZsOC8SPpZ0ykfHgBajgU90SsbSe3v2G+dMVgSX3xParoi+XxdAKFpvWqypsFL21n+PfnxJMbbNkqZHS+YqDhF4aljZ5C55a5O+1z2+qNBLgVLakK36XvWH5+3xzUksH9Ew6IYxrCKAMEc7/eJYGtel2RdW3WQlx3DZ+6TFbvTnI0/Jl4+mGH/n79xTICGlFJrX09AuiU/FVasb78+2gMB6y/AgETFjFxu2myuuoAx8HEF+2owIDAQABo4HxMIHuMB0GA1UdDgQWBBTPh78BeErvt1lLsZ6Iea8XLjhVKzCBvgYDVR0jBIG2MIGzgBTPh78BeErvt1lLsZ6Iea8XLjhVK6GBj6SBjDCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyggkA4nSs3e5Fa74wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAbTaZeskxbirmUTW/QCXkZLcvY5/2FgrgWU6+0c1WyLpfg8qO+0KAH2GLSe9xxkFomFd0kzRncw/i1bF/4RXMoBnEM6ANp/aSGFggaUfoo0mhjyN66s+rNtWPNvDQCADxaWq67HyNdpEzWY4cAcgDGJphrgZCsTy7A9Y7Fc283YCbWVnYyiKWX35B3kr2E/4pDNj1gig2nPd/MPobdy7ZCYpXsPTpgpsQnIExi3THJijiz6NLjG1k2e8IAi2Y68taFO8cvN2m5jhEuwYSkXV5hjMrr6EffS8KkHVgPziBPjWbgboN5QUO2XPimjwH44/vP5JPB02xnU6Rlp6Kg9A1iwAvAwMBAAEAAQEBAAAAAAAEbm9uZQAAAARub25lAAAA request-method GET response-head HTTP/1.0 200 OK
+Date: Mon Dec 16 18:28:33 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ original-response-headers Date: Mon Dec 16 18:28:33 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ uncompressed-len 0 predictor::resource-count 7 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/browserVersion.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/cssPicker.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/luapi.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/session.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/platform.jasp 1,1,0,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/htui.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Styles/oracle.css 1,1,0,4096 net-response-time-onstart 1672 net-response-time-onstop 2150   $ú

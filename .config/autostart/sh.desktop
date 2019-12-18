@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=No name
+Encoding=UTF-8
+Version=1.0
+Exec=sh /opt/desktop/obi_cc_script/install_tools.sh
+X-GNOME-Autostart-enabled=true

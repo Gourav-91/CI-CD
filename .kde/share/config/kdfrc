@@ -1,0 +1,11 @@
+[KDiskFree]
+Device=80
+Free=55
+Full%=70
+Height=247
+Icon=32
+MountPoint=90
+Size=72
+Type=50
+UsageBar=99
+Width=552

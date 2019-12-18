@@ -1,0 +1,11 @@
+[kjots]
+EFontCharset=0
+EFontFamily=helvetica
+EFontItalic=0
+EFontSize=12
+EFontWeight=0
+Height=262
+ToolBarPos=2
+Width=528
+execFtp=kfmclient openURL %u
+execHttp=kfmclient openURL %u

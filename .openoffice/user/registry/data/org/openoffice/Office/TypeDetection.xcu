@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="TypeDetection" oor:package="org.openoffice.Office">
+ <node oor:name="Filters">
+  <node oor:name="MS Excel 97">
+   <prop oor:name="Data" oor:type="xs:string">
+    <value>5,calc_MS_Excel_97,com.sun.star.sheet.SpreadsheetDocument,,323,,0,</value>
+   </prop>
+   <prop oor:name="UIName">
+    <value xml:lang="en-US">Microsoft Excel 97/2000/XP</value>
+   </prop>
+  </node>
+  <node oor:name="MS PowerPoint 97">
+   <prop oor:name="Data" oor:type="xs:string">
+    <value>3,impress_MS_PowerPoint_97,com.sun.star.presentation.PresentationDocument,,323,emp,0,</value>
+   </prop>
+   <prop oor:name="UIName">
+    <value xml:lang="en-US">Microsoft PowerPoint 97/2000/XP</value>
+   </prop>
+  </node>
+  <node oor:name="MS Word 97">
+   <prop oor:name="Data" oor:type="xs:string">
+    <value>3,writer_MS_Word_97,com.sun.star.text.TextDocument,,323,CWW8,0,</value>
+   </prop>
+   <prop oor:name="UIName">
+    <value xml:lang="en-US">Microsoft Word 97/2000/XP</value>
+   </prop>
+  </node>
+  <node oor:name="StarOffice XML (Calc)">
+   <prop oor:name="Data" oor:type="xs:string">
+    <value>1,calc_StarOffice_XML_Calc,com.sun.star.sheet.SpreadsheetDocument,,39,,6200,</value>
+   </prop>
+   <prop oor:name="UIName">
+    <value xml:lang="cs">Sešit OpenOffice.org 1.0</value>
+    <value xml:lang="da">OpenOffice.org 1.0-regneark</value>
+    <value xml:lang="de">OpenOffice.org 1.0 Tabellendokument</value>
+    <value xml:lang="el">Υπολογιστικό φύλλο OpenOffice.org 1.0</value>
+    <value xml:lang="en-US">OpenOffice.org 1.0 Spreadsheet</value>
+    <value xml:lang="es">OpenOffice.org 1.0 Hoja de cálculo</value>
+    <value xml:lang="fr">OpenOffice.org 1.0 Classeur</value>
+    <value xml:lang="it">OpenOffice.org 1.0 Foglio elettronico</value>
+    <value xml:lang="ja">OpenOffice.org 1.0 表計算ドキュメント</value>
+    <value xml:lang="ko">OpenOffice.org 1.0 스프레드시트</value>
+    <value xml:lang="nl">OpenOffice.org 1.0 Werkbladdocument</value>
+    <value xml:lang="pl">OpenOffice.org 1.0 - Arkusz kalkulacyjny</value>
+    <value xml:lang="pt">OpenOffice.org 1.0 Folha de cálculo</value>
+    <value xml:lang="ru">OpenOffice.org 1.0 Электронная таблица</value>
+    <value xml:lang="sk">Zošit OpenOffice.org 1.0</value>
+    <value xml:lang="sv">OpenOffice.org 1.0 tabelldokument</value>
+    <value xml:lang="tr">OpenOffice.org 1.0 Hesap Çizelgesi</value>
+    <value xml:lang="zh-CN">OpenOffice.org 1.0 工作表文档</value>
+    <value xml:lang="zh-TW">OpenOffice.org 1.0 工作表文件</value>
+   </prop>
+  </node>
+  <node oor:name="StarOffice XML (Impress)">
+   <prop oor:name="Data" oor:type="xs:string">
+    <value>1,impress_StarOffice_XML_Impress,com.sun.star.presentation.PresentationDocument,,268435495,XML,6200,</value>
+   </prop>
+   <prop oor:name="UIName">
+    <value xml:lang="cs">Prezentace OpenOffice.org 1.0</value>
+    <value xml:lang="da">OpenOffice.org 1.0-præsentation</value>
+    <value xml:lang="de">OpenOffice.org 1.0 Präsentation</value>
+    <value xml:lang="el">Παρουσίαση OpenOffice.org 1.0</value>
+    <value xml:lang="en-US">OpenOffice.org 1.0 Presentation</value>
+    <value xml:lang="es">OpenOffice.org 1.0 - Presentación</value>
+    <value xml:lang="fr">OpenOffice.org 1.0 Présentation</value>
+    <value xml:lang="it">OpenOffice.org 1.0 Presentazione</value>
+    <value xml:lang="ja">OpenOffice.org 1.0 プレゼンテーション</value>
+    <value xml:lang="ko">OpenOffice.org 1.0 프레젠테이션</value>
+    <value xml:lang="nl">OpenOffice.org 1.0 Presentatie</value>
+    <value xml:lang="pl">OpenOffice.org 1.0 - Prezentacja</value>
+    <value xml:lang="pt">OpenOffice.org 1.0 Apresentação</value>
+    <value xml:lang="ru">OpenOffice.org 1.0 Презентация</value>
+    <value xml:lang="sk">Prezentácia OpenOffice.org 1.0</value>
+    <value xml:lang="sv">OpenOffice.org 1.0 presentation</value>
+    <value xml:lang="tr">OpenOffice.org 1.0 Sunumu</value>
+    <value xml:lang="zh-CN">OpenOffice.org 1.0 演示文稿</value>
+    <value xml:lang="zh-TW">OpenOffice.org 1.0 簡報</value>
+   </prop>
+  </node>
+  <node oor:name="StarOffice XML (Writer)">
+   <prop oor:name="Data" oor:type="xs:string">
+    <value>1,writer_StarOffice_XML_Writer,com.sun.star.text.TextDocument,,268435495,CXML,6200,</value>
+   </prop>
+   <prop oor:name="UIName">
+    <value xml:lang="cs">Textový dokument OpenOffice.org 1.0</value>
+    <value xml:lang="da">OpenOffice.org 1.0-tekstdokument</value>
+    <value xml:lang="de">OpenOffice.org 1.0 Textdokument</value>
+    <value xml:lang="el">OpenOffice.org 1.0 Έγγραφο Κειμένου</value>
+    <value xml:lang="en-US">OpenOffice.org 1.0 Text Document</value>
+    <value xml:lang="es">OpenOffice.org 1.0 Documento de texto</value>
+    <value xml:lang="fr">OpenOffice.org 1.0 Texte</value>
+    <value xml:lang="it">OpenOffice.org 1.0 Documento di testo</value>
+    <value xml:lang="ja">OpenOffice.org 1.0 文書ドキュメント</value>
+    <value xml:lang="ko">OpenOffice.org 1.0 텍스트 문서</value>
+    <value xml:lang="nl">OpenOffice.org 1.0 Tekstdocument</value>
+    <value xml:lang="pl">OpenOffice.org 1.0 - Dokument tekstowy</value>
+    <value xml:lang="pt">OpenOffice.org 1.0 Texto</value>
+    <value xml:lang="ru">OpenOffice.org 1.0 Текстовый документ</value>
+    <value xml:lang="sk">Textový dokument OpenOffice.org 1.0</value>
+    <value xml:lang="sv">OpenOffice.org 1.0 textdokument</value>
+    <value xml:lang="tr">OpenOffice.org 1.0 Metin Belgesi</value>
+    <value xml:lang="zh-CN">OpenOffice.org 1.0 文本文档</value>
+    <value xml:lang="zh-TW">OpenOffice.org 1.0 文字文件</value>
+   </prop>
+  </node>
+ </node>
+</oor:component-data>

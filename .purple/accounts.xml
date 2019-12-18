@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<account version='1.0'>
+	<account>
+		<protocol>prpl-jabber</protocol>
+		<name>gourav.s.sarkar@oracle.com/Pidgin</name>
+		<statuses>
+			<status type='available' name='Available' active='true'>
+				<attributes/>
+			</status>
+			<status type='freeforchat' name='Chatty' active='false'>
+				<attributes/>
+			</status>
+			<status type='away' name='Away' active='false'>
+				<attributes/>
+			</status>
+			<status type='extended_away' name='Extended away' active='false'>
+				<attributes/>
+			</status>
+			<status type='dnd' name='Do Not Disturb' active='false'>
+				<attributes/>
+			</status>
+			<status type='offline' name='Offline' active='false'>
+				<attributes/>
+			</status>
+		</statuses>
+		<userinfo>&lt;query xmlns=&apos;vcard-temp&apos;/&gt;</userinfo>
+		<settings>
+			<setting name='use-global-buddyicon' type='bool'>1</setting>
+			<setting name='require_tls' type='bool'>0</setting>
+			<setting name='check-mail' type='bool'>0</setting>
+			<setting name='connect_server' type='string'>stbeehive.oracle.com</setting>
+			<setting name='old_ssl' type='bool'>1</setting>
+			<setting name='auth_plain_in_clear' type='bool'>0</setting>
+			<setting name='port' type='int'>5223</setting>
+		</settings>
+		<settings ui='gtk-gaim'>
+			<setting name='auto-login' type='bool'>1</setting>
+		</settings>
+		<proxy>
+			<type>none</type>
+		</proxy>
+	</account>
+</account>

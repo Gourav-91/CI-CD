@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=Quicktime Movie Files
+Hidden=true
+Icon=
+MimeType=application/octet-stream
+Patterns=*.MOV;*.mov
+Type=MimeType

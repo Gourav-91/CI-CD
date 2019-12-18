@@ -1,0 +1,90 @@
+
+Linux OBI 7.6.64.1
+==================
+
+Oracle Linux 7.6 release notes: https://docs.oracle.com/cd/E52668_01/F10004/html/index.html
+Linux OBI 7.6.64.1 release notes: https://mydesktop.oraclecorp.com/myd_files/myd_static/obi/lobi.shtml
+
+What's new in Linux OBI 7.6.64.0:
+---------------------------------
+- Updated mandatory software including MyDesktop 5.0.0.3, McAfee ENS 10.5.2
+- Updated the Yum Repositories
+- Removed remove the --exclude=kernel* from root's cron job
+- Updated the Cisco AnyConnect icon.
+- Fixed the MyDesktop detection of the LOBI version.
+- Installed Slack V3.4.0 and Zoom
+- Removed GDS wiki bookmark from Firefox
+- Both Interactive and Destructive Install request LUKS Pass phrase
+- Added "search oraclecorp.com oracle.com" to DNS searches.
+- Enabled UEKR5 repo in yum.
+
+Linux OBI 7.6.64.0
+==================
+
+Oracle Linux 7.6 release notes: https://docs.oracle.com/cd/E52668_01/F10004/html/index.html
+Linux OBI 7.6.64.0 release notes: https://mydesktop.oraclecorp.com/myd_files/myd_static/obi/lobi.shtml
+
+
+What's new in Linux OBI 7.6.64.0:
+---------------------------------
+
+- Build against core OS Oracle Linux 7 Update 6
+- Replaced Symantec Encryption Desktop with LUKS
+- Updated mandatory software including MyDesktop 4.6.3.1, McAfee ENS 10.2.2, CrashPlan 6.0.3
+- Cisco AnyConnect 4.6.02033
+- OpenConnect VPN
+- KDE 4.14.8, GNOME 3.22
+- GIMP 2.8.16
+
+
+Please provide any feedback by email (GDS_LinuxNews_ww@oracle.com) or forum (http://myforums.oracle.com/jive3/forum.jspa?forumID=3396)
+
+
+Thanks,
+GDS Team
+
+What's new in Linux OBI 7.5.64.0:
+---------------------------------
+
+- Build against core OS Oracle Linux 7 Update 5
+- Replaced Symantec Encryption Desktop with LUKS
+- Updated mandatory software including MyDesktop 4.6.3.1, McAfee ENS 10.2.2, CrashPlan 6.0.3
+- Cisco AnyConnect 4.5.02033
+- Cinnamon 3.6.7, KDE 4.14.8, MATE 1.16.2, GNOME 3.22
+- GIMP 2.8.16
+
+
+What's new in Linux OBI 7.2.64.1:
+---------------------------------
+
+- Maintenance release to fix minor network issues with Skylake microarchitecture
+- Updated core OS packages including MyDesktop (4.6.1.0), McAfee (2.0.3) and CrashPlan (4.6.0)
+- Replaced Apache OpenOffice with LibreOffice
+- Other minor fixes (e.g. McAfee SELinux support)
+
+
+What's new in Linux OBI 7.2.64.0:
+---------------------------------
+
+- OS based on core Oracle Linux 7.2 with package list updated as of Dec 2015
+- Red Hat Compatible Kernel (RHCK) 3.10 is the default, Oracle UEK3 (based on 3.8.13) offered as an alternative via yum
+- Ksplice (rebootless kernel updates) installed and active by default
+- Predefined yum schedule for OS updates which are executed automatically in the background
+- Symantec Drive Encryption installed and activated by default on physical machines (SDE installation needs direct wired connectivity to Oracle LAN. Should the automatic installation fail, please consult the Linux OBI home page to perform the manual installation)
+- 4 Desktop Environments installed by default: Cinnamon 2.0.14, MATE 1.10, KDE 4.14, GNOME 3.14
+- GIMP 2.8.10
+- Cisco AnyConnect 4.1.06020
+- CrashPlan 2.6.4 (requires direct wired connectivity to Oracle LAN. Should the automatic installation fail, please consult the Linux OBI home page to perform the manual installation)
+- McAfee for Linux 2.0.2 with On-Access scan enabled by default
+- improved hardware support
+
+
+Please provide any feedback by email (GDS_LinuxNews_ww@oracle.com) or forum (http://myforums.oracle.com/jive3/forum.jspa?forumID=3396)
+
+
+Thanks,
+GDS Team
+
+
+
+

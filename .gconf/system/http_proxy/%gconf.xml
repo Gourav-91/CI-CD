@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="port" mtime="1575638034" type="int" value="80"/>
+	<entry name="use_http_proxy" mtime="1575638034" type="bool" value="true"/>
+	<entry name="host" mtime="1575638034" type="string">
+		<stringvalue>www-proxy.us.oracle.com</stringvalue>
+	</entry>
+</gconf>

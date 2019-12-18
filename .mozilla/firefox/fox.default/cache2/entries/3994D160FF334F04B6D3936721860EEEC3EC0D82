@@ -1,0 +1,314 @@
+
+<html lang="en-us">
+<head>
+    <link rel="stylesheet" href="/i/css/apex.min.css?v=4.2.2.00.11" type="text/css" />
+<!--[if IE]><link rel="stylesheet" href="/i/css/apex_ie.min.css?v=4.2.2.00.11" type="text/css" /><![endif]-->
+<link rel="stylesheet" href="/i/libraries/jquery-ui/1.8.22/themes/base/jquery-ui.min.css" type="text/css" />
+
+
+
+
+<script type="text/javascript">
+var apex_img_dir = "/i/", htmldb_Img_Dir = apex_img_dir;
+</script>
+<script src="/i/libraries/apex/minified/desktop_all.min.js?v=4.2.2.00.11" type="text/javascript"></script>
+<script src="/i/libraries/apex/minified/legacy.min.js?v=4.2.2.00.11" type="text/javascript"></script>
+
+
+
+
+<script language="javascript">
+var n=navigator
+var d=document
+var ua=n.userAgent.toLowerCase()
+var name=n.appName.toLowerCase()
+var version=n.appVersion.toLowerCase()
+var s_dom=document.getElementById?true:false
+    d.cookie="cookies"
+var s_cookies=(d.cookie)?true:false
+var s_moz=(ua.indexOf('mozilla')!=-1&&ua.substr(ua.indexOf("mozilla")+8,1)>=5&&ua.indexOf('konqueror')<0)?true:false
+var s_ie=(document.all && s_dom )
+var s_iphone=((ua.indexOf('safari')!=-1)&&(ua.indexOf('iphone')!=-1))?true:false
+var s_safari=((ua.indexOf('safari')!=-1)&&(ua.indexOf('mac')!=-1))?true:false
+var s_opera=(ua.indexOf("opera")!=-1&&ua.substr(ua.indexOf("opera")+6,1)>=8&&ua.indexOf('opera mini')<0)?true:false
+var s_other=(ua.indexOf('mozilla')!=-1&&ua.indexOf('MSIE')!=-1&&ua.substr(ua.indexOf('MSIE')+5,1)>=6)?true:false
+var u_ones=(ua.indexOf('windows ce')!=-1||ua.indexOf('phone')!=-1||ua.indexOf('palm')!=-1||ua.indexOf('playstation')!=-1)?true:false
+var s_ajax=null
+    try {
+      s_ajax = new ActiveXObject("Msxml2.XMLHTTP")
+    } catch(e) {
+      s_ajax = new XMLHttpRequest()
+    } s_ajax=s_ajax?true:false
+if ( !s_iphone&u_ones|!((s_moz|s_ie|s_safari|s_opera|s_other)&s_cookies&s_dom&s_ajax) ) {
+  window.location="/unsupported/unsupported.html"
+}
+-->
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<link rel="stylesheet" href="/i/themes/theme_9/theme.css" type="text/css" />
+</head>
+<body >
+<form action="wwv_flow.accept" method="post" name="wwv_flow" id="wwvFlowForm" novalidate >
+<input type="hidden" name="p_flow_id" value="110" id="pFlowId" /><input type="hidden" name="p_flow_step_id" value="101" id="pFlowStepId" /><input type="hidden" name="p_instance" value="12544307266727" id="pInstance" /><input type="hidden" name="p_page_submission_id" value="2958141303848" id="pPageSubmissionId" /><input type="hidden" name="p_request" value="" id="pRequest" /> 
+<table border="0" summary="" width="100%" style="margin-top:100px;margin-bottom:200px;">
+<tr>
+<td align="center"><table border="0" summary="">
+<tr><td></td></tr><tr><td><span id="pmmalert" style="position:absolute; visibility:visible; z-index:50;" onclick="pmm_alert_close()"></span>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function pmm_alert_open(m) {
+var alert_h='<div align="left">' +
+             '<table bgcolor="white" width="230px" border="2">' +
+              '<tr>' +
+               '<td valign="top">' +
+                '<table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" summary="">' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                  '<td valign="center" class="t9Body">' +
+                   '<img width="64px" height="64px" src="/i/pmmalert.png" alt="*" title="Attention: Management message!" id="alertlogo" border="0" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'wwv_flow_file_mgr.get_file?p_security_group_id=2151212307344091&p_fname=pmmalert.png\',sizingMethod=\'scale\');">' +
+                   '<script language="JavaScript">' +
+                    'if ( ((navigator.userAgent.toLowerCase().indexOf("msie") != -1) && ' +
+                    '(navigator.userAgent.toLowerCase().indexOf("opera") == -1)) ) ' +
+                    'document.getElementById("alertlogo").src="/i/blank.gif"' +
+                   '</script>' +
+                  '</td>' +
+                  '<td width="70%" valign="center" style="color:#de1510;font-weight:bold;font-size:18pt;font-style:italic">PMM Alert</td>' +
+                 '</tr>' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                  '<td class="t9Body" style="font-weight:normal;font-size:10pt;" colspan=2 >'
+var alert_t='      <br></td>' +
+                 '</tr>' +
+                '</table>' +
+               '</td>' +
+              '</tr>' +
+             '</table>' +
+            '</div>'
+    document.getElementById('pmmalert').innerHTML=alert_h+m+alert_t;
+    document.getElementById('pmmalert').style.visibility="visible";
+}
+function pmm_alert_close() {
+  document.getElementById('pmmalert').innerHTML="";
+  document.getElementById('pmmalert').style.visibility="hidden";
+}
+//-->
+</script><script language="JavaScript" type="text/javascript">
+<!--
+function pmm_ondemand_open(m) {
+var odalert='<div align="left">' +
+             '<table bgcolor="white" width="230px" border="2">' +
+              '<tr>' +
+               '<td valign="top">' +
+                '<table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" summary="">' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                  '<td valign="center" class="t9Body">' +
+                   '<img src="/i/oracle_ondemand.gif" alt="*" title="Attention: OnDemnand Management message!" id="ondemandlogo" border="0" >' +
+                  '</td>' +
+                 '</tr>' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                 '</tr>' +
+                '</table>' +
+               '</td>' +
+              '</tr>' +
+             '</table>' +
+            '</div>'
+    document.getElementById('pmmondemand').innerHTML=odalert;
+    document.getElementById('pmmondemand').style.visibility="visible";
+}
+function pmm_ondemand_close() {
+  document.getElementById('pmmondemand').innerHTML="";
+  document.getElementById('pmmdemand').style.visibility="hidden";
+}
+//-->
+</script><div align="center"><img alt="" src="/i/oracle.h2o.mark.gif"/><div align="center">
+<table cellpadding="0" cellspacing="0" border="2" summary="" class="t9GCCReportsStyle2" id="R8637769515263697">
+<tr>
+<td valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0" summary="">
+<tr>
+<td align="center" class="t9RegionHeader"><i>GDC PMM Request Login</i></td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td align="center" class="t9Body"><div align="center">
+<table width=580><tr><td><table id="apex_layout_8637769515263697" border="0" class="formlayout"  summary="" role="presentation"><tr><td  align="right"><label for="P101_USERNAME" tabindex="999"><img src="/i/themes/theme_9/required_icon.png" width="8" height="12"><span  class="t9RequiredwithHelp"><a href="javascript:popupFieldHelp('8637972351263698','12544307266727')" tabindex="999">Oracle Email ID</a><span></label></td><td  align="left"><input type="hidden" name="p_arg_names" value="8637972351263698" /><input type="text" id="P101_USERNAME" name="p_t01" class="text_field"  value="" size="41" maxlength="100"  /></td></tr><tr><td  align="right"><label for="P101_PASSWORD" tabindex="999"><span class="t9optionalwithhelp"><a href="javascript:popupFieldHelp('8638158430263698','12544307266727')" tabindex="999">Pbox Password</a><span></label></td><td  align="left"><input type="hidden" name="p_arg_names" value="8638158430263698" /><input type="password" name="p_t02" size="41" maxlength="100" value="" id="P101_PASSWORD" class="password"   onkeypress="return apex.submit({request:'P101_PASSWORD',submitIfEnter:event})"  /></td><td  align="left"><table class="t9StylizedButton" cellspacing="0" cellpadding="0" border="0"  summary=""><tr>
+<td class="t9L"><a href="javascript:apex.submit(&#x27;LOGIN&#x27;);"><img src="/i/themes/theme_9/but4_left.png" alt="" width="6" height="21" /></a></td>
+<td class="t9C"><a href="javascript:apex.submit(&#x27;LOGIN&#x27;);">Login</a></td>
+<td class="t9R"><a href="javascript:apex.submit(&#x27;LOGIN&#x27;);"><img src="/i/themes/theme_9/but4_right.png" width="6" height="21" alt="" /></a></td>
+</tr></table></td></tr></table></td></tr></table>
+
+This site requires proper <font color="red">authorization</font>. The authoritative list is maintained <a
+ class="moz-txt-link-freetext"
+ href="http://files.oraclecorp.com/content/MySharedFolders/GDC-OPS_SOP/Powerbroker/gdcops_root_distribution.xls">here</a>.<br>
+
+</div></td>
+</tr>
+<tr>
+<td class="t9RegionFooter"><img src="/i/themes/theme_9/spacer.gif" width="400" height="1"/></td></tr>
+</table>
+</div>
+<table bgcolor="white" width="100%" cellpadding="0" cellspacing="0" border="0" summary="">
+<tr>
+<td nowrap="nowrap" align="center"><img alt="" src="/i/dilbert2007305500614.gif"/>
+</td>
+</tr>
+</table><div align="center" class="t9GCCShowHide" id="R4303735205065251"><div><a href="javascript:hideShow('region14','shIMG14','/i/htmldb/builder/rollup_plus_dgray.gif','/i/htmldb/builder/rollup_minus_dgray.gif');" class="htmldbHideShowMinLink"><img src="/i/htmldb/builder/rollup_plus_dgray.gif" 
+  id="shIMG14" alt="" /></a>&nbsp;<b>Need help generating a password or getting started?</b></div>
+<div class="t9Hide" id="region14">
+  <div class="t9Body">
+  
+<table width="70%" cellpadding="0" cellspacing="0" border="2" summary="" class="" id="14">
+<tr><td align="right" valign="bottom" class="t9ButtonHolder"> &nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td valign="top" class="t9RegionHeader">&nbsp;</td></tr>
+<tr><td class="t9Body" ><html>
+<head>
+<title>OMCS PMM</title>
+<style type="text/css">
+T4 {
+font-size: 16pt; color: red;
+}
+span {font-weight: bold}
+</style>
+</head>
+<body lang=EN-US link=blue vlink=purple>
+
+<div align="center">
+<T4>Password Generation Assistance</T4>
+</div>
+<div class=Section1>
+
+<blockquote>
+<a href="https://acitpbox.us.oracle.com/cgi-bin/mkpasswd.cgi"><b>Click here to generate a secure password to use</b></a>
+<p></p>
+<hr></hr>
+<div align="center">
+<T4>Browser Assistance</T4>
+</div>
+<div class=Section1>
+<p class=MsoNormal>With a supported web browser, configured for HTTPS,
+</p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal> access the administrative host, <b>
+<a href="https://acitpbox.us.oracle.com/">https://acitpbox.us.oracle.com</a>
+</b>. 
+     You will be prompted to accept an SSL certificate.</li>
+ <li class=MsoNormal>Accept this certificate temporarily for this session and
+     click <b>OK</b>.</li>
+</ol>
+
+<p class=MsoNormal style='margin-left:.25in'><b>TIP</b>: The certificate will
+change at scheduled intervals, yet to be determined.</p>
+
+<p class=MsoNormal align=center style='text-align:center'><img border=0
+src="/i/Distribution_Procedure_files/CertAccept.gif"></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b>example 1</b>.
+accept the SSL certificate</p>
+
+<p class=MsoNormal>A login dialog is presented in your browser window (see
+example 2, below).</p>
+
+<ol style='margin-top:0in' start=3 type=1>
+ <li class=MsoNormal>Enter your Oracle email address in the <b>Login Name</b>
+     field.</li>
+ <li class=MsoNormal>Enter your Unix password for the acitpbox</li>
+ <li class=MsoNormal>Click <b>Login</b> (or type &lt;Enter&gt;).</li>
+</ol>
+
+
+</blockquote>
+</div>
+
+<div class=Section2>
+<blockquote>
+<p class=MsoNormal><b>TIP:</b>  Avoid saving your login credentials using your
+browser's password management features. </p>
+
+<p class=MsoNormal align=center style='text-align:center'><img border=0
+src="/i/Distribution_Procedure_files/Login.gif"></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b>example 2</b>. the
+HTTPS login dialog</p>
+
+<p class=MsoNormal>Once logged in, see the continued <b>Need Help</b> dialog.</p>
+<div align="center">
+<T4>Change Your Account Password</T4>
+</div>
+<p class=MsoNormal>To change your password on <b>acitpbox.us.oracle.com</b>, login to any Global Data Center managed host (for example, <b>globaldc1.us.oracle.com</b>) using your Unix id and
+password.  Use the remote PowerBroker policy, pmm-passwd, to change your
+password.  See a sample dialog in example 3.</p>
+<p class=MsoNormal align=center style='text-align:center'><img border=0
+src="/i/Distribution_Procedure_files/image007.gif"></p>
+
+
+
+</blockquote>
+</div>
+
+</body>
+
+</html></td></tr>
+<tr><td class="t9RegionFooter"><img src="/i/themes/theme_9/spacer.gif"  height="1"/></td></tr>
+</table>
+
+  </div>
+</div></div>
+
+</td></tr></table>
+</td>
+</tr>
+</table>
+<input type="hidden" name="p_md5_checksum" value=""  /><input type="hidden" name="p_page_checksum" value="B1C52E09CD4D9B4863D4AB71FBF1BE66" id="pPageChecksum" /></form>
+  
+
+<script type="text/javascript">
+apex.jQuery( document ).ready( function() {
+(function(){
+var lTimeoutField = document.getElementById("apex_login_throttle_sec"),
+    lTimeout      = lTimeoutField ? +lTimeoutField.innerHTML : 0;
+if (lTimeout) {
+    var lTimer = window.setInterval (
+        function() {
+            if (lTimeout > 0) {
+                lTimeoutField.innerHTML = lTimeout;
+                lTimeout--;
+            } else {
+                window.clearInterval(lTimer);
+                var lDiv = document.getElementById("apex_login_throttle_div");
+                if (lDiv) {
+                    lDiv.parentNode.removeChild(lDiv);
+                    return true;
+                }
+            }
+        },
+        1000 );
+}})();
+
+
+apex.item( 'P101_USERNAME' ).setFocus();
+});</script>
+
+</body>
+</html>
+òo3éÞ“      ]ïå–]ïå—A»]       >    :https://acitpbox.us.oracle.com/pmm/f?p=110:101:12544307266727 necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Tue, 10 Dec 2019 18:36:07 GMT
+Server: Oracle-Application-Server-11g
+X-Frame-Options: SAMEORIGIN
+Content-Length: 13443
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ original-response-headers Date: Tue, 10 Dec 2019 18:36:07 GMT
+Server: Oracle-Application-Server-11g
+X-Frame-Options: SAMEORIGIN
+Content-Length: 13443
+Keep-Alive: timeout=5, max=97
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ uncompressed-len 0 predictor::resource-count 15 predictor::https://acitpbox.us.oracle.com/i/css/apex.min.css?v=4.2.2.00.11 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/jquery-ui/1.8.22/themes/base/jquery-ui.min.css 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/apex/minified/desktop_all.min.js?v=4.2.2.00.11 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/apex/minified/legacy.min.js?v=4.2.2.00.11 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/theme.css 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/required_icon.png 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/but4_left.png 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/form_top2_bg.png 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/but4_center.png 1,1,1576002966,4096 net-response-time-onstart 317 net-response-time-onstop 589 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/but4_right.png 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/dilbert2007305500614.gif 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/CertAccept.gif 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/Login.gif 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/image007.gif 1,1,1576002966,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/form_bot_bg.png 1,1,1576002966,4096   4ƒ

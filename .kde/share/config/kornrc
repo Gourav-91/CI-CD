@@ -1,0 +1,17 @@
+[Korn]
+numboxes=1
+
+[box-0]
+bgcolour=invalid
+caption=Inbox
+displaystyle=0
+fgcolour=invalid
+file=/var/spool/mail/mpereira
+icon=
+newmailbgcolour=invalid
+newmailfgcolour=invalid
+newmailicon=
+onclick=
+onnewmail=
+poll=300
+type=mbox

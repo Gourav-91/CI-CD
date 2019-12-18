@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_math.xpm
+Type=MimeType
+Patterns=*.sdf
+MimeType=application/vnd.stardivision.math
+Comment=StarMath 5

@@ -1,0 +1,77 @@
+[History]
+ExtractTo History=file:/home
+
+[KFileDialog Settings]
+Automatic Preview=true
+Preview Size=60
+Recent Files=/opt/as3desktop/system_share_ver1_2f8.tar,/tmp,/home
+ShowPreviews=false
+ViewMode=SmallColumns
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[Lha]
+lhaGeneric=false
+
+[MainWindow]
+Height 1200=300
+Height 768=300
+MenuBar=Enabled
+StatusBar=Enabled
+Width 1024=640
+Width 1600=640
+
+[MainWindow Toolbar mainToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[Rar]
+rarRecurseSubdirs=true
+rarStoreSymlinks=true
+rarToLower=false
+rarToUpper=false
+
+[RecentFiles]
+File1=file:/opt/desktop/system_share_ver1_2f8.tar.gz
+File2=file:/home
+File3=file:/opt/as3desktop/system_share_ver1_2f8.tar
+
+[Tar]
+preservePerms=false
+tarUseAbsPathnames=false
+
+[Zip]
+convertLF2CRLF=false
+extractJunkPaths=false
+extractLowerCase=false
+forceMSDOS=false
+junkDirs=true
+recurseDirs=true
+zipStoreSymlinks=true
+
+[ark]
+ArchiveDirectory=/home/$HOME
+TarExe=tar
+addDir=/tmp
+addDirMode=8
+extractDir=/tmp
+extractDirMode=6
+fullPaths=false
+lastAddDir=
+lastExtractDir=file:/home/shaines/
+lastOpenDir=/opt/desktop
+openDir=
+openDirMode=3
+saveOnExit=true
+startDir=/home/$HOME
+startDirMode=2
+
+[generic]
+extractOverwrite=false
+replaceOnlyWithNewer=false

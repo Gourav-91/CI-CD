@@ -1,0 +1,35 @@
+[$Version]
+update_info=kaudiocreator-libkcddb.upd:kaudiocreator-libkcddb,kaudiocreator-meta.upd:3
+
+[Main Window]
+Height 768=440
+MenuBar=Enabled
+Width 1024=500
+
+[Main Window Toolbar Main ToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[cdconfig]
+autoRip=false
+performCDDBauto=false
+
+[encoderconfig]
+createPlaylist=false
+encoderCurrentItem=0
+fileFormat=~/%{extension}/%{albumartist}/%{albumtitle}/%{albumartist} - %{title}.%{extension}
+numberOfCpus=1
+playlistFileFormat=~/%{extension}/%{albumartist}/%{albumtitle}/%{albumartist} - %{albumtitle}.m3u
+saveWav=false
+useRelitivePath=false
+
+[ripconfig]
+autoEjectAfterRip=false
+autoEjectDelay=0
+beepAfterRip=true
+maxWavFiles=1

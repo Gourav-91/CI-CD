@@ -1,0 +1,12 @@
+[$Version]
+update_info=kioslave.upd:kde2.2/r1,kioslave.upd:kde2.2/r3
+
+[Proxy Settings]
+AuthMode=0
+NoProxyFor=
+Proxy Config Script=http://wpad/wpad.dat
+ProxyType=2
+ReversedException=false
+ftpProxy=
+httpProxy=
+httpsProxy=

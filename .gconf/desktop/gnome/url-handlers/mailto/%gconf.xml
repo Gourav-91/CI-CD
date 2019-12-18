@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<gconf>
+        <entry name="needs_terminal" mtime="1216222638" type="bool" value="false">
+        </entry>
+        <entry name="command" mtime="1216225704" type="string">
+                <stringvalue>thunderbird %s</stringvalue>
+        </entry>
+</gconf>

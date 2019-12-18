@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Microsoft Word document
+Hidden=false
+Icon=wordprocessing
+MimeType=application/msword
+Patterns=*.doc;*.rtf
+Type=MimeType
+X-KDE-AutoEmbed=false

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="mode" mtime="1575637864" type="string">
+		<stringvalue>auto</stringvalue>
+	</entry>
+	<entry name="autoconfig_url" mtime="1575637864" type="string">
+		<stringvalue>http://wpad/wpad.dat</stringvalue>
+	</entry>
+</gconf>

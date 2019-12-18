@@ -1,0 +1,23 @@
+[KFileDialog Settings]
+Automatic Preview=true
+Preview Size=60
+ShowPreviews=false
+ViewMode=SmallColumns
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[MainWindow]
+Height 768=213
+MenuBar=Enabled
+StatusBar=Enabled
+Width 1024=224
+
+[MainWindow Toolbar mainToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top

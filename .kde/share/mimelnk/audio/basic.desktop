@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=ULAW (Sun) Audio
+Hidden=false
+Icon=sound
+MimeType=audio/basic
+Patterns=*.au;*.AU;*.snd;*.SND
+Type=MimeType

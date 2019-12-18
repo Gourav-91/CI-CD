@@ -1,0 +1,100 @@
+[$Version]
+update_info=kfmclient_3_2.upd:kfmclient_3_2
+
+[FMSettings]
+AlwaysNewWin=false
+FileTipsItems=6
+HomeURL=~
+NormalTextColor=0,0,0
+ShowPreviewsInFileTips=true
+
+[HTML Settings]
+AutomaticDetectionLanguage=1
+
+[HistorySettings]
+Detailed Tooltips=true
+Font olderThan=Sans,10,-1,5,50,1,0,0,0,0
+Font youngerThan=Sans,10,-1,5,50,0,0,0,0,0
+Maximum age of History entries=90
+Maximum of History entries=500
+Metric olderThan=days
+Metric youngerThan=days
+OpenGroups=files.oraclecorp.com
+Value olderThan=2
+Value youngerThan=1
+
+[KFileDialog Settings]
+Automatic Preview=true
+Preview Size=60
+Recent Files=/usr/share/wallpapers/wallpaper_1280.jpg
+ShowPreviews=false
+ViewMode=SmallColumns
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[KonqMainWindow Toolbar bookmarkToolBar]
+Hidden=true
+IconText=IconTextRight
+Index=3
+Offset=-1
+
+[KonqMainWindow Toolbar extraToolBar]
+IconText=IconOnly
+Index=0
+Offset=-1
+
+[KonqMainWindow Toolbar locationToolBar]
+IconText=IconOnly
+Index=2
+Offset=-1
+
+[KonqMainWindow Toolbar mainToolBar]
+IconSize=16
+Index=1
+Offset=-1
+
+[KonqMainWindow Toolbar rellinksToolbar]
+Hidden=true
+Index=0
+Position=Left
+
+[ListView_webdav]
+SortBy=Date
+SortOrder=true
+
+[MainView Settings]
+HTMLAllowed=true
+SaveViewPropertiesLocally=1
+ToggableViewsShown=
+ViewMode=konq_detailedlistview
+
+[ModeToolBarServices]
+konq_listview=konq_detailedlistview
+
+[Open-with settings]
+CompletionMode=5
+History=acroread,xine,oowriter,oocalc
+
+[Reusing]
+SafeParts=SAFE
+
+[SearchBar]
+CompletionMode=5
+CurrentEngine=google
+History list=\\0
+Mode=1
+SuggestionEnabled=true
+
+[Settings]
+BgImage=
+SaveURLInProfile=true
+SaveWindowSizeInProfile=false
+
+[Trash]
+ConfirmDelete=true
+ConfirmShred=true
+ConfirmTrash=true
+
+[Undo]
+Number of Closed Windows=1

@@ -1,0 +1,70 @@
+LoopStyle=0
+Modules=excellent.plugin,splitplaylist.plugin,marquis.plugin,systray.plugin,metatag.plugin
+Version=2.2.1
+Volume=100
+
+[$Version]
+update_info=noatun.upd:noatun20
+
+[Equalizer]
+enabled=false
+
+[Excellent main]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=1
+NewLine=false
+Offset=-1
+Position=Top
+
+[SPL Window]
+Height 768=307
+MenuBar=Enabled
+Width 1024=512
+
+[SPL Window Toolbar mainToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[Tags]
+LoadAuto=true
+
+[excellent]
+Height 768=182
+MenuBar=Enabled
+StatusBar=Enabled
+Width 1024=300
+height=182
+mappingState=0
+menuShown=true
+volumeShown=false
+width=300
+
+[excellent Toolbar main]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=1
+NewLine=false
+Offset=-1
+Position=Top
+
+[excellent Toolbar mainToolBar]
+Hidden=true
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[splitplaylist]
+current=0
+file=
+modified=false

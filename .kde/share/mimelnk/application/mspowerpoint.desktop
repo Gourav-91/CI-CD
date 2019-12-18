@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Microsoft PowerPoint Document
+Hidden=false
+Icon=document
+MimeType=application/mspowerpoint
+Patterns=*.ppz;*.PPZ;*.ppt;*.PPT
+Type=MimeType
+X-KDE-AutoEmbed=false

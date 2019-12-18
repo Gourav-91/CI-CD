@@ -1,0 +1,12 @@
+[Desktop Entry]
+Comment=
+Exec=/opt/desktop/tools/sysreport/sysinfo.sh 2>&1
+GenericName=
+Icon=/usr/share/icons/gnome/32x32/actions/forward.png
+Name=System report
+Path=
+StartupNotify=true
+Terminal=true
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=root

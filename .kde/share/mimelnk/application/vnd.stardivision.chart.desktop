@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_chart.xpm
+Type=MimeType
+Patterns=*.sds
+MimeType=application/vnd.stardivision.chart
+Comment=StarChart 5

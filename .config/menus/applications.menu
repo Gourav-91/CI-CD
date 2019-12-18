@@ -1,0 +1,75 @@
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/applications.menu</MergeFile>
+	<Menu>
+		<Name>test</Name>
+		<Directory>test.directory</Directory>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<Include>
+			<Filename>test1.desktop</Filename>
+		</Include>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<Menu>
+			<Name>GDS Desktop Utilities</Name>
+			<Directory>GDS Desktop Utilities.directory</Directory>
+			<Include>
+				<Filename>Cisco VPN client.desktop</Filename>
+			</Include>
+			<Include>
+				<Filename>NFS-SAMBA Mount Utility.desktop</Filename>
+			</Include>
+			<Include>
+				<Filename>Files Online - WebDav-1.desktop</Filename>
+			</Include>
+			<Include>
+				<Filename>ClamScan-1.desktop</Filename>
+			</Include>
+			<Include>
+				<Filename>Global Printer Configuration-1.desktop</Filename>
+			</Include>
+			<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+			<AppDir>/home/vlupu/.local/share/applications</AppDir>
+			<AppDir>/home/vlupu/.local/share/applications</AppDir>
+			<AppDir>/home/vlupu/.local/share/applications</AppDir>
+			<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		</Menu>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<Include>
+			<Filename>Oracle Calendar-1.desktop</Filename>
+		</Include>
+		<Layout>
+			<Merge type="menus"/>
+			<Menuname>GDS Desktop Utilities</Menuname>
+			<Filename>Oracle Calendar-1.desktop</Filename>
+			<Filename>test1.desktop</Filename>
+			<Merge type="files"/>
+		</Layout>
+		<Include>
+			<Filename>Machine Information.desktop</Filename>
+		</Include>
+		<Include>
+			<Filename>OBI Configuration Center.desktop</Filename>
+		</Include>
+		<Include>
+			<Filename>System report.desktop</Filename>
+		</Include>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<DirectoryDir>/home/vlupu/.local/share/desktop-directories</DirectoryDir>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+		<AppDir>/home/vlupu/.local/share/applications</AppDir>
+	</Menu>
+</Menu>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Microsoft Excel spreadsheet
+Hidden=false
+Icon=spreadsheet
+MimeType=application/msexcel
+Patterns=*.xls;*.XLS;*.xlc;*.XLC;*.xll;*.XLL;*.xlm;*.XLM;*.xlw;*.XLW;*.csv
+Type=MimeType
+X-KDE-AutoEmbed=false

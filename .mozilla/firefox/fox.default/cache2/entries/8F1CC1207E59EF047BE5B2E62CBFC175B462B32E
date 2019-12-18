@@ -1,0 +1,418 @@
+#
+# MPCUI Core Resource Bundle 
+# Locale:   en_US
+
+# Date Formats
+#
+#   Y   Year.           * YY = 05, YYYY = 2005, YYYYY = 02005
+#   M   Month in year.  * M = 7, MM= 07, MMM=Jul, MMMM= July
+#   D   Day in month.   * D=4, DD=04, DD=10
+#   E   Day in week.    * E = 1, EE = 01, EEE = Mon, EEEE = Monday
+#   A   am/pm indicator.
+#   J   Hour in day (0-23).
+#   H   Hour in day (1-24).
+#   K   Hour in am/pm (0-11).
+#   L   Hour in am/pm (1-12).
+#   N   Minute in hour. * N = 3, NN = 03
+#   S   Second in min.  * SS = 30
+#   Q   Milli in sec    * QQ = 78, QQQ = 078
+
+DEFAULT_DATE_FORMAT         = MMM D J:NN:SS
+SHORT_DATE_FORMAT           = L:NN:SS:QQ A
+LOG_DATE_FORMAT             = YYYY-MM-DD HH:NN:SS
+
+# Number Formats
+
+DECIMAL_CHARACTER           = .
+THOUSANDS_SEPARATOR         = ,
+
+# Translated Strings
+
+GET_TARGET_AVAIL            = Getting Target Availability
+N_A                         = N/A
+# Last 24 Days, Last 12 Hours.
+AVAIL_HIST_TITLE            = Availability History (Last {0} {1})
+AVAIL_DAYS                  = Days
+AVAIL_HOURS                 = Hours
+AVAILABILITY                = Availability
+INVALID_Y_AXIS              = The Y axis minimum is greater than the Y axis maximum.
+INVALID_DATE_SETTINGS       = The start date is later than the end date for the X axis.
+INVALID_GROUP_BY            = Grouping setting must be either {0} or {1}.
+INVALID_SERIES_NAMES        = Series names array must match in length the metric column names array.
+CHART_DRAW_ERROR            = An error occurred drawing the chart.  Error Code: {0} Error Message: {1}
+TIMESTAMP                   = Timestamp
+INVALID_TARGET_SPECIFIED    = Invalid target instance.  Either target name was specified without a target type or target type specified without a target name.
+INVALID_METRIC_SPECIFIED    = Invalid metric name specified.
+INVALID_COLUMNS_SPECIFIED   = Invalid metric columns specified.
+INVALID_INTERVAL            = Value is not a valid polling interval.
+INVALID_LEGEND_DIR          = Value is not a valid legend direction.
+INVALID_LEGEND_LOC          = Value is not a valid legend location.
+INVALID_TIME_PERIOD         = Value is not a valid metric collection time period.
+CALL_SUC_NO_DATA            = The call succeeded but no data was returned.
+METRIC_SVC_ERR              = An error occurred calling the metric data service.
+SQL_SVC_ERR                 = An error occurred in SQL data service.
+X_AXIS                      = X Axis
+X_AXIS_LABEL                = X Axis Label
+Y_AXIS                      = Y Axis
+Y_AXIS_LABEL                = Y Axis Label
+LABEL                       = Label
+TOTAL                       = Total
+# Total Dogs, Total Cats    
+TOTAL_KEYS                  = Total {0}
+REFRESH_CHART_DATA          = Refresh Chart Data
+# Alert Line (##)
+ALERT_LINE                  = Alert Line ({0})
+WARNING_LINE                = Warning Line ({0})
+NO_DATA_AVAILABLE           = No data is available
+NAME                        = Name
+VALUE                       = Value
+CREDENTIAL_TYPE             = Credential Type
+CREDENTIAL_OWNER            = Credential Owner
+SCOPE                       = Scope
+LAST_MODIFIED_DATE          = Last Modified Date
+LAST_MODIFIED_BY            = Last Modified By
+NEW_CRED_SET_ERROR          = A credentials set name must be provided.
+MISSING_CRED_FIELD          = A value was not entered for credential field {0} 
+CRED_CONFIRM_ERROR          = The value for {0} does not match the value entered to confirm.
+MISSING_CRED_TYPE           = The Credentials Region can not be displayed without specifying a "target" and a "credentialType" property.
+INVALID_CRED_REGION         = Invalid Credentials Region
+CRED_TARGET_REF_ERR         = Unable to Locate Referenced Target
+CRED_META_DATA_ERR          = Unable to Locate Credentials Meta-Data
+# Confirm Password
+CONFIRM_VALUE               = Confirm {0} 
+SAVE_AS                     = Save As
+RUN_AS                      = Run As
+PROFILE                     = Profile
+CREDENTIAL                  = Credential
+PREF_CREDENTIAL             = Preferred Credential
+NAMED_CREDENTIAL            = Named Credential
+NEW_CREDENTIAL              = New Credential
+PREF_CRED_NAME              = Preferred Credential Name
+CREDENTIAL_DETAILS          = Credential Details
+ATTRIBUTE                   = Attribute
+MORE_DETAILS                = More Details
+CREDENTIAL_NAME             = Credential Name
+TARGET                      = Target
+CATEGORY                    = Category
+INCIDENTS_AND_PROBLEMS      = Incidents and Problems
+ALL                         = All
+CONFIGURATION               = Configuration
+CAPACITY                    = Capacity
+FAULT                       = Fault
+LOAD                        = Load
+PERFORMANCE                 = Performance
+SECURITY                    = Security
+JOBS                        = Jobs
+DIAGNOSTICS                 = Diagnostics
+ERROR                       = Error
+ERROR_DETAILS               = Error Details
+BUSINESS                    = Business
+LOCAL_AND_RELATED           = Local target and related targets
+LOCAL_ONLY                  = Local target only
+RELATED_ONLY                = Related targets only
+GET_INCIDENT_SUMMARY        = Get Incident Summary
+NEW                         = New
+MESSAGE                     = Message
+SEVERITY                    = Severity
+STATUS                      = Status
+ESCALATED                   = Escalated
+TYPE                        = Type
+TIME_SINCE_UPDATE           = Time Since Last Update
+INCIDENT                    = Incident
+PROBLEM                     = Problem
+SCHEDULED                   = Scheduled
+RUNNING                     = Running
+SUSPENDED                   = Suspended
+OTHER                       = Other
+FINISHED                    = Finished
+ACTION_REQUIRED             = Action Required
+JOB_ACTIVITY                = Job Activity
+GET_JOB_ACTIVITY            = Get Job Activity Summary
+# Scheduled Executions
+TYPE_OF_EXECUTION           = {0} Executions
+JOBS_SUMMARY_DESC           = For jobs whose start date is within the last {0} days.
+SUBMITTED_TO                = Submitted to
+GENERIC_SYSTEM              = Generic System
+ANY_MEMBER                  = Any Member
+KEY_MEMBER                  = Key Member
+ISSUES_OVERVIEW             = Issues Overview
+INCIDENTS                   = Incidents
+PROBLEMS                    = Problems
+OPEN                        = Open
+UPDATED_IN_THE_LAST         = Updated in the last 24 hours
+MEMBERS_SUB                 = {0} Members
+
+RELATED_LINKS               = Related Links
+LOADING_TABLE               = Loading Table Data...
+PRESS_FOR_RELATED_INFO      = Press button to access related information
+LAST_UPDATED                = Last Updated: {0}
+WARNING                     = Warning
+PROCESSING                  = Processing
+HELP                        = Help
+INFORMATION                 = Information
+COMMENT                     = Comment
+DELETE                      = Delete
+CONFIRMED                   = Confirmed
+HIDE                        = Hide
+SHOW                        = Show
+PROCESS_COMPLETE            = Process Complete
+IN_PROGRESS                 = In Progress
+CAN_NOT_CANCEL              = This operation can not be cancelled.  It will continue even if the browser window is closed.
+# Collapse Performance Chart
+COLLAPSE_ITEM               = Collapse {0}
+EXPAND_ITEM                 = Expand {0}
+ACTIVITY_TRACING            = Activity Tracing
+ITEM_LABEL                  = Item Name: {0}
+CALL_START_TIME             = Call Start Time: {0}
+TOTAL_TIME                  = Total Time: {0}
+PAGE_OR_SERVICE             = Page/Service
+START_TIME                  = Start Time
+TOTAL_TIME_MS               = Total Time (ms)
+SERVICE_TIME_MS             = Service Time (ms)
+SHOW_TRACE_DETAILS          = Show Trace Details
+SHOW_ITEM_DETAILS           = Show Item Details
+END_TIME                    = End Time
+NO_TRACE_DETAILS            = No trace details are available
+UNEXPECTED_ERROR_LONG       = An unexpected error has occurred while processing the page or dialog "{0}". \
+                              The user interface item "{1}" has reported the error: {2}
+UNEXPECTED_ERROR            = Unexpected Error 
+UNEXPECTED_COMP_ERROR       = An unexpected error has occurred in the user interface item "{0}".
+# Note: do not translate "String" or "InputParam"
+INVALID_PARAM_TYPE          = Parameter definitions must be arrays of String or InputParam
+INVALID_PARAM_TYPE_URLEM    = Invalid parameter type passed to UrlEm.homepageUrl.  Additional parameters must be InputParam.
+UNKNOWN                     = Unknown
+# Oracle Enterprise Manager - MyTarget Homepage
+EM_PAGE_TITLE               = Oracle Enterprise Manager - {0}
+YES                         = Yes
+NO                          = No
+OK                          = OK
+CANCEL                      = Cancel
+CLOSE                       = Close
+FINISH                      = Finish
+SHOWING_DIALOG              = Showing Dialog {0}
+INITIALIZING_INTEGRATION    = Initialization Application Integration
+# Note: do not translate "RSL"
+VERSION_INCOMPATIBLE_ERR    = The application version {0} is incompatible with the shared library (RSL) version {1}
+MANAGEMENT_SERVER_LOGIN     = Management Server Login
+UNAUTHENTICATED_SESSION     = This application can only be accessed from a properly authenticated session
+UNAUTHENTICATED_SESS_ERR    = Unauthenticated Session Error
+LOGIN_TO_MGMT_SERVER        = Logging in to Management Server
+NO_PAGE_LOADED              = No page loaded. Unable to verify server connection or managed target.
+NO_CONNECTION_ERR           = A severe error has occurred. Unable to establish a connection to the Management Server.
+INITIALIZE_TARGET           = Loading target information
+REFRESHED_AT_TIME           = Refreshed at {0}
+SHOWING_PAGE                = Showing Page {0}
+NO_DEFAULT_PAGE             = No default page was specified
+SERVICE_REQUEST_TRACE_ON    = Turn Service Request Tracing On
+SERVICE_REQUEST_TRACE_OFF   = Turn Service Request Tracing Off
+DEVELOPMENT_TOOLS           = Development Tools
+DUMP_BUSY_CURSORS           = Dump Busy Cursors
+# Step 2 of 10
+STEP_OF_TOTAL               = Step {0} of {1}
+BACK                        = Back
+NEXT                        = Next
+TRAIN_STEP_ERROR            = Unable to display train step {0}
+URL_GEN_ERROR               = An error occurred attempting to generate the requested URL.
+URL_GEN                     = Generating the requested URL
+COLLECTION_TIME             = Collection Time
+NO_METRIC_DATA_RETURNED     = No results were returned for the selected metrics.
+TARGET_LOAD_ERROR           = Unable to load definition of target {0}.  An error occurred: {1}
+METRIC_LOAD_ERROR           = Unable to load metric definitions for target {0}. An error occurred: {1}
+CRITICAL                    = Critical
+FATAL                       = Fatal
+# Target was DOWN from 11AM until 3PM
+TARGET_STATUS_DURATION      = Target was {0} from {1} until {2}
+ERROR_CHECKING_CREDS        = Unable to check for preferred credentials
+TIME_SINCE_1                = {0} days {1} hours
+TIME_SINCE_2                = {0} day {1} hours
+TIME_SINCE_3                = {0} days {1} hour
+TIME_SINCE_4                = {0} day {1} hour
+LOGIN_ERROR                 = Error attempting to login to Management Server: {0}
+LOGIN_FAILED                = Login failed
+LOGIN                       = Login
+MANAGEMENT_SERVER_CONN      = Management Server Connection
+PROTOCOL                    = Protocol
+MANAGEMENT_SERVER_HOST      = Management Server Host
+MANAGEMENT_SERVER_PORT      = Management Server Port
+ADMIN_USERNAME              = Administrator Username
+ADMIN_PASSWORD              = Administrator Password
+TARGET_TO_MANAGE            = Target to Manage
+TARGET_NAME                 = Target Name
+TARGET_TYPE                 = Target Type
+INVALID_POLLING_INTERVAL    = Invalid polling interval {0}
+REMOTE_OP_NO_RESPONSE       = No response was returned for a request sent to the remote operation service
+SQL_SERVICE_NO_RESPONSE     = No response was returned for a request sent to the SQL query service
+SQL_EXEC_FAILED             = Execution of the SQL query failed: {0}
+UNSPECIFIED_ERROR           = Unspecified Error
+INVALID_DAY_NUM             = Invalid number of days
+INVALID_DAY_NUM_LONG        = Invalid number of days specified: {0}.  Availability data is available for 1, 7 or 31 days.
+LOADING_AVAIL_DATA          = Loading Availability Data
+# Up Since, Down Since
+STATUS_SINCE                = {0} Since
+UNKNOWN_STATUS              = Unknown Status
+CURRENT_STATUS              = Current Status
+NULL                        = null
+INVALID_ROW_INDEX           = The row number specified {0} is invalid.  The data set contains {1} rows.
+NO_SUCH_COLUMN              = The result set does not include a column with the name {0}.
+INVALID_TYPE_CONVERSTION    = Unable to convert column of data type {0} to requested data type {1}.
+# Error during operation: target load
+ERROR_DURING_OPERATION      = Error during operation: {0}
+STACK_TRACE                 = Stack Trace
+SUMMARY                     = Summary
+LOAD_PAGE_DEF_ERR           = An error occurred attempting to load the homepage definition.  
+
+# ------------------------------------------------------------------------
+# Items missing from MpcuiMsg.properties...
+
+AVAIL_DOWN                      = Down
+AVAIL_UP                        = Up
+AVAIL_ERROR                     = Unknown
+AVAIL_AGENT_DOWN                = Agent Down
+AVAIL_UNREACHABLE               = Agent Unreachable
+AVAIL_BLACKOUT                  = Blacked Out
+AVAIL_STATUS_PENDING            = Status Pending
+
+SEV_WARNING                     = Warning
+SEV_CRITICAL                    = Critical
+SEV_INFO                        = Information
+SEV_FATAL                       = Fatal
+SEV_ESCALATED                   = Escalated            
+                                                                                                     
+JOB_SCHEDULED_STATUS            = Scheduled
+JOB_EXECUTING_STATUS            = Running            
+JOB_ABORTED_STATUS              = Error             
+JOB_FAILED_STATUS               = Failed               
+JOB_COMPLETED_STATUS            = Succeeded          
+JOB_SUSPENDED_USER_STATUS       = Suspended By User       
+JOB_SUSPENDED_AGENT_DOWN_STATUS = Suspended Agent Unreachable 
+JOB_STOPPED_STATUS              = Stopped             
+JOB_SUSPENDED_LOCK_STATUS       = Suspended on Lock       
+JOB_SUSPENDED_EVENT_STATUS      = Suspended on Event      
+JOB_SUSPENDED_BLACKOUT_STATUS   = Suspended on Blackout   
+JOB_STOP_PENDING_STATUS         = Stop Pending         
+JOB_SUSPEND_PENDING_STATUS      = Suspend Pending     
+JOB_INACTIVE_STATUS             = Inactive            
+JOB_QUEUED_STATUS               = Queued               
+JOB_FAILURE_RETRIED_STATUS      = Failed Retried     
+JOB_WAITING_STATUS              = Waiting            
+JOB_SKIPPED_STATUS              = Skipped             
+JOB_DELETE_PENDING_STATUS       = Delete Pending       
+JOB_REASSIGNED_STATUS           = Reassigned          
+JOB_MISSING_CREDS_STATUS        = Missing Credentials       
+JOB_ACTION_REQUIRED_STATUS      = Action Required     
+JOB_RTL_EXCEEDED_STATUS         = Runtime Limit Exceeded        
+JOB_STOP_PROCESSING_STATUS      = Stop Processing     
+JOB_NON_STOPPABLE_STATUS        = Non_Stoppable       
+JOB_BROKEN_TARGET_STATUS        = Target Broken       
+JOB_IGNORED_STATUS              = Ignored    
+  
+# -----------------------------------------------------------------------
+
+# The following strings were added to the MPCUI Core bundle as part of
+# the 12.1 MLR's and as such were not part of the bundle that was translated.
+# When the 12.1.0.2 release is translated they should be added to the MpcuiMsg.properties
+# file that is shipped with the product.
+
+VIEW_ACC_TABLE                  = View table contents
+VIEW_ACC_TABLE_NAME             = View contents for table {0}
+NO_ROWS                         = No rows available
+TABLE_DATA_ACC_ERR              = Unable to get data from row for column: {0}
+TABLE_DATA                      = Table Data
+SHOW_TABLE_DATA                 = Attempting to display accessible table data.
+
+# -----------------------------------------------------------------------
+
+# The following strings were added to the MPCUI Core bundle as part of
+# the 12.1.0.2 release and as such were not part of the bundle that was translated.
+# When the 12.1.0.2 release is translated they should be added to the MpcuiMsg.properties
+# file that is shipped with the product.          
+
+GETTING_AGENTS                  = Getting agent targets
+UNEXPECTED_ERROR_PARAM          = Unexpected Error {0}
+CREATING_TARGETS                = Creating targets
+GETTING_TARGETS                 = Getting Targets
+NO_MEMBERS                      = No Members
+MOST_AFFECTED_MEMBERS           = Most Affected Members (Last {0} {1})
+HOURS                           = Hours
+DAYS                            = Days
+AVAIL_PENDING                   = Status Pending
+AVAIL_UNMONITORED               = Unmonitored
+CRED_CONFIRM_ERR                = The value for {0} does not match the value entered to confirm.
+WITHOUT_SR                      = Without Service Request          
+OTHERS                          = Others
+UNCLASSIFIED                    = Unclassified
+# Constants for TargetStatusIcons.as
+TARGET_DOWN                     = Target Down
+TARGET_UP                       = Target Up
+METRIC_ERROR                    = Metric Error
+AGENT_DOWN                      = Agent Down
+UNREACHABLE                     = Unreachable
+BLACKOUT                        = Blackout
+PENDING_UNKNOWN                 = Pending/Unknown
+# Discovery related constants
+DISCOVERY_COMPLETE_NOPAGE       = Discovery process is complete, however no return page was provided.
+DISCOVERY_COMPLETE              = Discovery Complete
+
+# -----------------------------------------------------------------------
+
+# The following strings were added to the MPCUI Core bundle as part of
+# the 12.1.0.3 release and as such were not part of the bundle that was translated.
+# When the 12.1.0.3 release is translated they should be added to the MpcuiMsg.properties
+# file that is shipped with the product.          
+
+METRIC_VALUES_COLUMN_TYPE_ERROR = No numeric columns specified. Column type is defined in target metadata file on the agent.
+METRIC_MD_NO_TARGET             = Error getting meta-data
+METRIC_MD_NO_METRIC             = Error getting meta-data
+METRIC_FILTER_PSE               = Error filtering metric data
+METRIC_FILTER_NFE               = Error filtering metric data
+METRIC_AGENT_COMM_ERROR         = Agent communication error  
+
+COMPDS_NO_SOURCE_COL            = No columns specified for source of historical data.  Unable to create the computed data source.
+COMPDS_NO_COUNTER_COL           = No columns specified for source of counter data.  Unable to create the computed data source.
+COMPDS_GETRT_ERROR              = Error getting realtime data for computed data source
+COMPDS_GETHIST_ERROR            = Error getting historical data for computed data source
+COMPDS_CREATE_ERROR             = Error creating computed data source
+COMPDS_NO_COMPUTE_FUNCTION      = No compute function specified.  Unable to create the computed data source.
+COMPDS_NO_ACTIVITY              = No page or dialog activity specified.  Unable to create the computed data source.
+COMPDS_NO_INTERVAL              = No collection interval specified.  Unable to create the computed data source.
+
+# -----------------------------------------------------------------------
+
+# The following strings were added to the MPCUI Core bundle as part of
+# the 12.1.0.4 release and as such were not part of the bundle that was translated.
+# When the 12.1.0.4 release is translated they should be added to the MpcuiMsg.properties
+# file that is shipped with the product.
+
+ADVISORY                        = Advisory          
+METRIC_AGENT_METGET_ERROR       = Error getting metric from Agent
+ESCALATION_LEVEL                = Escalation level
+# TIME_SINCE_UPDATE was changed, see aboveAí^¾Å      ]ïøÍ]ïøÍAª¥]ö‹Ø   8    :https://odem3.oracle.com/em/emx/rsc/MpcuiMsg.properties necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Sun, 08 Dec 2019 19:39:04 GMT
+Server: Oracle-HTTP-Server-12c
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Accept-Ranges: bytes
+Last-Modified: Sat, 04 Jan 2014 16:09:16 GMT
+X-ORACLE-DMS-ECID: 005aJPiU6xr5YbPqucj8EH0003Tj000007
+X-ORCL-EMOA: true
+Content-Type: text/plain
+Content-Language: en
+ original-response-headers Date: Sun, 08 Dec 2019 19:39:04 GMT
+Server: Oracle-HTTP-Server-12c
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Accept-Ranges: bytes
+Last-Modified: Sat, 04 Jan 2014 16:09:16 GMT
+X-ORACLE-DMS-ECID: 005aJPiU6xr5YbPqucj8EH0003Tj000007
+X-ORCL-EMOA: true
+Keep-Alive: timeout=5, max=99
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/plain
+Content-Language: en
+Set-Cookie: BIGipServer~Private~odem3_oracle_com_new7778=rd2o00000000000000000000ffff8c556b68o7778; expires=Mon, 09-Dec-2019 03:39:04 GMT; path=/; Httponly; Secure
+ uncompressed-len 0 net-response-time-onstart 334 net-response-time-onstop 608   N4

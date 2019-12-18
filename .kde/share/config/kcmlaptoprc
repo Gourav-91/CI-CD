@@ -1,0 +1,5 @@
+[BatteryDefault]
+Enable=true
+
+[BatteryLow]
+HaveTime=1

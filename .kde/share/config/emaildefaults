@@ -1,0 +1,15 @@
+[Defaults]
+Profile=Default
+
+[PROFILE_Default]
+EmailAddress=
+EmailClient=/usr/bin/mozilla -mail
+FullName=
+IncomingServer=/var/mail/mpereira
+IncomingServerType=localbox
+Organization=
+OutgoingCommand=/usr/sbin/sendmail
+OutgoingServer=
+OutgoingServerType=local
+ReplyAddr=
+TerminalClient=false

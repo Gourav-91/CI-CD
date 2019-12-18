@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Windows Media Video Files
+Hidden=false
+Icon=gf
+MimeType=video/wmv
+Patterns=*.wmv;*.WMV
+Type=MimeType
+X-KDE-AutoEmbed=false

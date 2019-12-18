@@ -1,0 +1,322 @@
+//TODO - get the proper version of custom jQuery UI core to be used for the sliding effect - now we use the full core, not needing
+// every feature there
+$(window).resize(function(){
+    var containerW = $("#pt1\\:pgl2").width(), 
+    containerH = $("#pt1\\:ph10").height(), 
+    announcements = $("#pt1\\:pgl2").children('div'),
+    titleH = $("#pt1\\:ph10").children('div').children('table').height();
+    
+    if(-1 == ITAS_HOMEPAGE.announceTitleH)
+        ITAS_HOMEPAGE.announceTitleH = $("#pt1\\:pgl2").children('div:first').children('div').children('table').height();
+    
+    $.each(announcements, function(){
+      $(this).children('div').children('div').height(containerH-titleH-ITAS_HOMEPAGE.announceTitleH-12);
+      $(this).children('div').children('div').width(containerW-10);
+    });
+    
+});
+ITAS_HOMEPAGE = {
+  maxAnnounceDisplayed: 20,
+  currentAnnounce: 0,
+  timeToFlash: 1000,
+  timeToShow: 10000,
+  nrAnnounce: null,
+  timer:null,
+  announceTitleH: -1,
+  prepareContainer: function(){
+    var containerH, 
+        titleH, 
+        //announceTitleH,
+        announcements,
+        timeToSlide = 1000,
+        flash;
+    
+    //get the container height
+    containerH = $("#pt1\\:ph10").height();
+    containerW = $("#pt1\\:pgl2").width();
+    
+    //do not display overflow
+    $("#pt1\\:pgl2").css('overflow','hidden');
+    
+    //get title height
+    titleH = $("#pt1\\:ph10").children('div').children('table').height();
+    
+    //get announcement title height
+    if(-1 == ITAS_HOMEPAGE.announceTitleH)
+        ITAS_HOMEPAGE.announceTitleH = $("#pt1\\:pgl2").children('div:first').children('div').children('table').height();
+    
+    //get the number of announcements
+    ITAS_HOMEPAGE.nrAnnounce = $("#pt1\\:pgl2").children().length;
+    ITAS_HOMEPAGE.nrAnnounce = ITAS_HOMEPAGE.nrAnnounce - 1; //substract 1, last children is the script calling this functionality from itasHome.jspx
+    
+    //set proper height to announcement divs, so they fill the container
+    announcements = $("#pt1\\:pgl2").children('div');
+//    console.log("containerH = " + containerH);
+//    console.log("titleH = " + titleH);
+//    console.log("announceTitleH = " + ITAS_HOMEPAGE.announceTitleH);
+    $.each(announcements, function(){
+      //console.log($(this).children('div').children('div'));
+      $(this).children('div').children('div').height(containerH-titleH-ITAS_HOMEPAGE.announceTitleH-12);
+      $(this).children('div').children('div').width(containerW-10);
+      //hide divs containing the announcements
+      $(this).attr('style','position:absolute;').hide();
+    });
+    
+    ITAS_HOMEPAGE.attachNav(ITAS_HOMEPAGE.nrAnnounce);
+    ITAS_HOMEPAGE.highlightCurrentNav(0);
+    //starting from first announcement, show each a few seconds then slide to next one
+    $("#pt1\\:pgl2").children('div:eq(0)').show();
+    
+    if(ITAS_HOMEPAGE.nrAnnounce > ITAS_HOMEPAGE.maxAnnounceDisplayed) 
+      ITAS_HOMEPAGE.nrAnnounce = ITAS_HOMEPAGE.maxAnnounceDisplayed;
+    
+    flash = true;
+    ITAS_HOMEPAGE.timer = setInterval( ITAS_HOMEPAGE.doSlideAnimation
+//        function(){
+//          if(flash){
+//            ITAS_HOMEPAGE.flashAnnouncement(false, ITAS_HOMEPAGE.currentAnnounce, ITAS_HOMEPAGE.timeToFlash);
+//            if(ITAS_HOMEPAGE.currentAnnounce < ITAS_HOMEPAGE.nrAnnounce-1) ITAS_HOMEPAGE.currentAnnounce++;
+//            else { ITAS_HOMEPAGE.currentAnnounce = 0; /*flash = false;*/ }
+//            ITAS_HOMEPAGE.flashAnnouncement(true, ITAS_HOMEPAGE.currentAnnounce, ITAS_HOMEPAGE.timeToFlash);
+//          }
+//          else{
+//            ITAS_HOMEPAGE.slideAnnouncement(false, "left", ITAS_HOMEPAGE.currentAnnounce, timeToSlide);
+//            if(ITAS_HOMEPAGE.currentAnnounce < ITAS_HOMEPAGE.nrAnnounce-1) ITAS_HOMEPAGE.currentAnnounce++;
+//            else { ITAS_HOMEPAGE.currentAnnounce = 0; flash = true; }
+//            ITAS_HOMEPAGE.slideAnnouncement(true, "right", ITAS_HOMEPAGE.currentAnnounce, timeToSlide);
+//          }
+//        }
+        ,ITAS_HOMEPAGE.timeToShow + ITAS_HOMEPAGE.timeToFlash
+      );
+      
+      ITAS_HOMEPAGE.attachClickToNav();
+      //ITAS_HOMEPAGE.attachSVGImage();
+      //ITAS_HOMEPAGE.checkBrowserPlugins();
+  },
+  
+  doSlideAnimation: function(){
+    ITAS_HOMEPAGE.flashAnnouncement(false, ITAS_HOMEPAGE.currentAnnounce, ITAS_HOMEPAGE.timeToFlash);
+    if(ITAS_HOMEPAGE.currentAnnounce < ITAS_HOMEPAGE.nrAnnounce-1) ITAS_HOMEPAGE.currentAnnounce++;
+    else { ITAS_HOMEPAGE.currentAnnounce = 0; /*flash = false;*/ }
+    ITAS_HOMEPAGE.flashAnnouncement(true, ITAS_HOMEPAGE.currentAnnounce, ITAS_HOMEPAGE.timeToFlash);
+  },
+  
+  hideAnnouncements: function(){
+    //will hide announcement
+  },
+  
+  showAnnouncement: function(i){
+    //will show the announcement
+  },
+  
+  slideAnnouncement: function(show, dir, i, tToSlide){
+    //will slide the i announcement in required direction
+    if(!show)
+      $("#pt1\\:pgl2").children('div:eq(' + i + ')').hide("slide", { direction: dir }, tToSlide);
+    else
+      $("#pt1\\:pgl2").children('div:eq(' + i + ')').show("slide", { direction: dir }, tToSlide);
+    ITAS_HOMEPAGE.highlightCurrentNav(i);
+  },
+  
+  flashAnnouncement: function(show, i, tToFade){
+    if(!show)
+      $("#pt1\\:pgl2").children('div:eq(' + i + ')').fadeOut(tToFade);
+    else
+      $("#pt1\\:pgl2").children('div:eq(' + i + ')').fadeIn(tToFade);
+    ITAS_HOMEPAGE.highlightCurrentNav(i);  
+  },
+  
+  attachNav: function(nrAnnounce){
+    var navBar = '<div id="announceNav">', i, nrA;
+    
+    nrA = nrAnnounce;
+    if(nrAnnounce > ITAS_HOMEPAGE.maxAnnounceDisplayed) 
+      nrA = ITAS_HOMEPAGE.maxAnnounceDisplayed;
+    
+    for(i=1; i<=nrA; i++){
+      navBar = navBar+'<a class="" href="#">' + i + '<\/a>';
+    }
+    
+    if(nrAnnounce > ITAS_HOMEPAGE.maxAnnounceDisplayed)
+      navBar = navBar + '<a class="more" href="#">more...<\/a>';
+    
+    navBar = navBar + '<\/div>';
+    if(1 == $('#pt1\\:ph10').size()){
+        $('#pt1\\:ph10').append(navBar);
+    } else {
+        $('#pt1\\:db1').append(navBar);
+    }
+  },
+  
+  highlightCurrentNav: function(i){
+    $("#announceNav").children('a').removeClass('activeSlide');
+    $("#announceNav").children('a:eq(' + i + ')').addClass('activeSlide');
+  },
+  
+  attachClickToNav: function(){
+    var elemIndex;
+    $("#announceNav").children('a').click(function(){
+      elemIndex = $(this).index();
+      
+        //clear timer
+      clearInterval(ITAS_HOMEPAGE.timer);
+      
+        //switch to next announcement
+      ITAS_HOMEPAGE.flashAnnouncement(false, ITAS_HOMEPAGE.currentAnnounce, ITAS_HOMEPAGE.timeToFlash);
+      ITAS_HOMEPAGE.flashAnnouncement(true, elemIndex, ITAS_HOMEPAGE.timeToFlash);
+      ITAS_HOMEPAGE.currentAnnounce = elemIndex;
+      
+        //restart timer
+      ITAS_HOMEPAGE.timer = setInterval(ITAS_HOMEPAGE.doSlideAnimation, ITAS_HOMEPAGE.timeToShow + ITAS_HOMEPAGE.timeToFlash);
+    });
+  },
+  
+  attachSVGImage: function(){
+    var svg = "<div id='announceSVG'><embed width='100' height='90' src='\/itas\/resources\/images\/captureProcessNorm.svg' type='image\/svg+xml' \/><\/div>";
+//    $('#pt1\\:ph10').append(svg);
+    $("#pt1\\:pgl2").children('div:eq(3)').children('div').append(svg);
+  },
+  
+  setLegendTopProperty: function(){
+    $("#pt1\\:pgl11").css("top", function(){ 
+        return 10;
+    });
+  },
+  
+  setLinksTopProperty: function(){
+    $("#pt1\\:ph7").css("top", function(){ 
+        return 10;
+    });
+    $("#pt1\\:ph7").css("position", function(){ 
+        return "relative";
+    });
+  },
+  
+  checkBrowserPlugins: function(){
+      $("#pt1\\:ph1").children('div:eq(1)').css("top", function(){ 
+           return 0;
+      });
+      
+      var warnMsgNoFlash = 'Your browser doesn\'t support Flash. Some features may not work as intended. ',
+          warnMsgNotSupportedBrowser1 = 'Your (',
+          warnMsgNotSupportedBrowser2 = ') browser is not fully supported. Some features may not work as intended.',
+          warnMsgNotSupportedVersion1 = 'Your browser version (',
+          warnMsgNotSupportedVersion2 = ') is behind supported version.',
+          //warningDiv = "<div id='browserPluginWarningDiv' style='position:absolute;top:3px;left:0px;right:0px;height:25px;z-index:5;'><div id='browserPluginWarningInnerDiv' style='margin:auto;' >" +
+          //"<img id='browserPluginWarningIcon' src='resources/images/warning.png' width='18px' height='18px' style='vertical-align: middle; padding-right: 5px; display:none;' \/>" +
+          //"<span style='font-size:12px; vertical-align: middle; color: red;'>",
+          warningDiv = "<div id='browserPluginWarningDiv'><div id='browserPluginWarningInnerDiv' style='margin:auto;' >" +
+          "<img id='browserPluginWarningIcon' src='resources/images/warning.png' width='18px' height='18px' style='vertical-align: middle; padding-right: 5px; display:none;' \/>" +
+          "<span style='font-size:12px; vertical-align: middle; color: red;'>",
+          warning = false,
+          browserVersion;
+     var isOpera = false;
+     if("undefined" != typeof(navigator.vendor)){
+        isOpera = (navigator.vendor.indexOf("Opera") > -1);//!!(window.opera && window.opera.version);  // Opera 8.0+
+     }
+     var isFirefox = ITAS_HOMEPAGE.testCSS('MozBoxSizing');                 // FF 0.8+
+     var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+        // At least Safari 3+: "[object HTMLElementConstructor]"
+     var isChrome = !isSafari && ITAS_HOMEPAGE.testCSS('WebkitTransform');  // Chrome 1+
+     var isIE = /*@cc_on!@*/false || ITAS_HOMEPAGE.testCSS('msTransform');  // At least IE6
+
+    browserVersion = jQuery.browser.version;
+
+    if("undefined" == typeof(window.navigator.msPointerEnabled)){
+        if(true == jQuery.browser.msie && "9.0" == jQuery.browser.version){
+            isIE = true; // Internet Explorer 9
+            browserVersion = 9;
+        }
+    } else if (true == window.navigator.msPointerEnabled){
+        if(true == jQuery.browser.mozilla && "11.0" == jQuery.browser.version){
+            isIE = true; // Internet Explorer 11
+            browserVersion = 11;
+        }
+    }
+
+      //check for flash
+      if(!jQuery.browser.flash){
+          warningDiv = warningDiv + warnMsgNoFlash;
+          warning = true;
+      }
+        //IE < 8
+      //if(jQuery.browser.msie){
+      if(isIE){
+            //version behind 8
+          /*if(jQuery.browser.version < 8){
+              warningDiv = warningDiv + warnMsgNotSupportedVersion1 + "Internet Explorer " + browserVersion + warnMsgNotSupportedVersion2;
+              warning = true;
+          }*/
+          warningDiv = warningDiv + warnMsgNotSupportedBrowser1 + "Internet Explorer " + browserVersion + warnMsgNotSupportedBrowser2;
+          warning = true;
+      }
+        //FireFox < 10.0
+      //else if(jQuery.browser.mozilla){
+      else if(isFirefox){
+          if(jQuery.browser.version.slice(0,2) < 10){
+              warningDiv = warningDiv + warnMsgNotSupportedVersion1 + "Mozilla Firefox " + browserVersion + warnMsgNotSupportedVersion2;
+              warning = true;
+          }
+      }
+        //not supported browsers
+      else {
+          warningDiv = warningDiv + warnMsgNotSupportedBrowser1;
+          //if(jQuery.browser.webkit){
+          if(isChrome && !isOpera){
+              warningDiv = warningDiv + "Chrome";
+          }
+          //else if(jQuery.browser.opera){
+          else if(isOpera){
+              warningDiv = warningDiv + "Opera";
+          }
+          else if(isSafari){
+              warningDiv = warningDiv + "Safari";
+          }
+          
+          warningDiv = warningDiv + warnMsgNotSupportedBrowser2;
+          warning = true;
+      }
+      warningDiv = warningDiv + "<\/span><\/div><\/div>";
+      //$("#pt1\\:ph1").append(warningDiv);
+      
+      var warnTextWidth = $("#browserPluginWarningDiv").find('span').width();
+      warnTextWidth+=30;
+      $("#browserPluginWarningInnerDiv").width(warnTextWidth);
+      
+      //if(warning) $("img#browserPluginWarningIcon").css('display','inline');
+      if(warning) {
+         $("#pt1\\:pgl12").after(function() {//instead of pgl52, now not rendered
+            return warningDiv;
+         });
+         $("img#browserPluginWarningIcon").css('display','inline');
+      }
+  },
+  
+  testCSS: function(prop) {
+        return prop in document.documentElement.style;
+  }
+}
+
+$(document).ready(function(){
+ //ITAS_HOMEPAGE.prepareContainer();
+ ITAS_HOMEPAGE.checkBrowserPlugins();
+});
+Œê$kÆ@      ]îÆ4]îÆ8Aô*]ø ´   7    :https://itas.oraclecorp.com/itas/resources/itasHome.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Mon, 09 Dec 2019 22:10:00 GMT
+Server: Oracle-Application-Server-11g
+Accept-Ranges: bytes
+Last-Modified: Tue, 02 Jul 2019 13:43:30 GMT
+X-ORACLE-DMS-ECID: 005aKmc7uLl6iKQqu^n3EH0002rj001Xro
+Content-Type: application/javascript
+Content-Language: en
+ original-response-headers Date: Mon, 09 Dec 2019 22:10:00 GMT
+Server: Oracle-Application-Server-11g
+Accept-Ranges: bytes
+Last-Modified: Tue, 02 Jul 2019 13:43:30 GMT
+X-ORACLE-DMS-ECID: 005aKmc7uLl6iKQqu^n3EH0002rj001Xro
+Keep-Alive: timeout=5, max=99
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: application/javascript
+Content-Language: en
+ uncompressed-len 0 net-response-time-onstart 3994 net-response-time-onstop 4003   1»

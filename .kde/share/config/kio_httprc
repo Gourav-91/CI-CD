@@ -1,0 +1,6 @@
+MaxCacheSize=5120
+UseCache=true
+cache=Refresh
+
+[$Version]
+update_info=kioslave.upd:kde2.2/r1,kioslave.upd:kde2.2/r2

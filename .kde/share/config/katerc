@@ -1,0 +1,60 @@
+[General]
+Opaque Resize=true
+Show Console=false
+Show Full Path in Title=false
+Show Toolbar=true
+Sync Konsole=true
+size=600,400
+
+[Kate Document]
+Color Background=255,255,255
+Color Selected=76,89,166
+ConfigFlags=11043891
+Font=Monospace,10,-1,5,50,0,0,0,1,0
+PrintFont=Monospace,10,-1,5,50,0,0,0,1,0
+SearchFlags=32
+TabWidth=8
+UndoSteps=256
+Word Wrap At=80
+Word Wrap On=false
+
+[dock_setting_default]
+Main:Geometry=0,0,600,400
+Main:dock=mainDock
+Main:view=filelistDock,fileselectorDock,mainDock
+Main:visible=true
+NameList=mainDock,filelistDock,fileselectorDock,filelistDock\\,fileselectorDock,filelistDock\\,fileselectorDock\\,mainDock
+Version=0.0.5
+filelistDock,fileselectorDock,mainDock:first_name=filelistDock,fileselectorDock
+filelistDock,fileselectorDock,mainDock:last_name=mainDock
+filelistDock,fileselectorDock,mainDock:orientation=1
+filelistDock,fileselectorDock,mainDock:parent=yes
+filelistDock,fileselectorDock,mainDock:sepPos=20
+filelistDock,fileselectorDock,mainDock:stayButton=false
+filelistDock,fileselectorDock,mainDock:type=GROUP
+filelistDock,fileselectorDock:curTab=0
+filelistDock,fileselectorDock:parent=yes
+filelistDock,fileselectorDock:stayButton=false
+filelistDock,fileselectorDock:tabNames=filelistDock,fileselectorDock
+filelistDock,fileselectorDock:type=TAB_GROUP
+filelistDock:stayButton=false
+filelistDock:type=DOCK
+fileselectorDock:stayButton=false
+fileselectorDock:type=DOCK
+mainDock:stayButton=false
+mainDock:type=DOCK
+
+[fileselector]
+current filter=0
+dir history=
+filter history=
+
+[fileselector:dir]
+Separate Directories=false
+Show Preview=false
+Show hidden files=false
+Sort by=Name
+Sort case insensitively=false
+Sort directories first=true
+Sort reversed=false
+View Style=Simple

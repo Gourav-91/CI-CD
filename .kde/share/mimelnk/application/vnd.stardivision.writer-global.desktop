@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_global.xpm
+Type=MimeType
+Patterns=*.sgl
+MimeType=application/vnd.stardivision.writer-global
+Comment=StarWriter 5.0 Master Document

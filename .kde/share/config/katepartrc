@@ -1,0 +1,24 @@
+[Kate Document]
+Color Background=255,255,255
+Color Bracket Highlight=255,255,153
+Color Current Line=240,240,240
+Color Selected=76,89,166
+ConfigFlags=11043889
+Font=Monospace,10,-1,5,50,0,0,0,1,0
+PrintFont=Monospace,10,-1,5,50,0,0,0,1,0
+TabWidth=8
+UndoSteps=256
+Word Wrap At=80
+Word Wrap On=false
+
+[Kate Plugins]
+ktexteditor_insertfile=false
+ktexteditor_isearch=false
+ktexteditor_kdatatool=false
+
+[Kate View]
+Bookmark Menu Sorting=0
+DynamicWordWrap=false
+FoldingMarkers=true
+Iconbar=false
+LineNumbers=false

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=ASF Files
+Hidden=false
+Icon=video
+MimeType=video/asf
+Patterns=*.asf;*.ASF
+Type=MimeType
+X-KDE-AutoEmbed=false

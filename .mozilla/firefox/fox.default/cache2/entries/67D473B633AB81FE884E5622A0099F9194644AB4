@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- Copyright (c) 2012, 2016, Oracle and/or its affiliates. All rights reserved. -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>System Log</title>
+<script type="text/javascript" src="/Extensions/ajax.js"></script>
+<script type="text/javascript" src="/Extensions/session.js"></script>
+<script type="text/javascript" src="/Extensions/browserVersion.js"></script>
+<script type="text/javascript" src="/Extensions/cssPicker.js"></script>
+<script type="text/javascript" src="/Extensions/luapi.js"></script>
+<script type="text/javascript" src="/Extensions/htui.js"></script>
+<script type="text/javascript" src="/Extensions/sdm.js"></script>
+<script type="text/javascript" src="/Extensions/platform.jasp"></script>
+<script type="text/javascript">
+var buttonArray = new Array();
+
+buttonArray.push({value:'Clear Log', onClick:'clearSystemLog(this);'});
+function clearSystemLog(elem) {
+    if (confirm("Are you sure you want to clear the entire system log?")) {
+        values = new Array();
+        values.push({luapiPath:"/System/Log/clear", value:"true"});
+        doAjaxSet({values:values, elem:elem});
+    }
+}
+
+onload = function()
+{
+    
+}
+</script>
+</head>
+<body class="body">
+<script type="text/javascript">
+var helpText = "Displays the system log for the SP";
+    helpText += ".";
+
+    helpText += " Click the <i>Clear Log<\/i> button to delete all current system log entries.";
+
+helpText += MiniHelpHtml("Logs_System.asp");
+ht_writePageHeader({helpText:helpText});
+UpdateActivity();
+var jary = new Array();
+var pageactions = new Array();
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'9', obj_name:'9', timestamp:'Mon Dec 16 15:00:47 2019', eventtype:'System Power On', subsystem:'System', component:'/System (Host System)', description:'Power to /System (Host System) has been turned on by Web session, Username:root.'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'8', obj_name:'8', timestamp:'Mon Dec 16 14:48:45 2019', eventtype:'System Power Off', subsystem:'System', component:'/System (Host System)', description:'Power to /System (Host System) has been turned off by Web session, Username:root.'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'7', obj_name:'7', timestamp:'Fri May 18 04:44:23 2018', eventtype:'System Warning', subsystem:'System', component:'SP (Service Processor)', description:'(Part Number:AST2100, Serial Number:N/A, Reference Document:http://support.oracle.com/msg/)'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'6', obj_name:'6', timestamp:'Wed May 16 08:20:24 2018', eventtype:'System Warning', subsystem:'System', component:'SP (Service Processor)', description:'(Part Number:AST2100, Serial Number:N/A, Reference Document:http://support.oracle.com/msg/)'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'5', obj_name:'5', timestamp:'Tue May 15 07:03:53 2018', eventtype:'System Warning', subsystem:'System', component:'SP (Service Processor)', description:'(Part Number:AST2100, Serial Number:N/A, Reference Document:http://support.oracle.com/msg/)'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'4', obj_name:'4', timestamp:'Sat May 12 12:48:10 2018', eventtype:'Power Supply OK', subsystem:'Power', component:'PS1 (Power Supply 1)', description:'(UUID:06682c21-a7a2-6db0-9918-e0ce2152c217, Resource:/SYS/PS1, Part Number:300-2233-02, Serial Number:B59414, Reference Document:http://support.oracle.com/msg/SPX86-8000-55)'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'3', obj_name:'3', timestamp:'Sat May 12 12:41:21 2018', eventtype:'Power Supply Service Required', subsystem:'Power', component:'PS1 (Power Supply 1)', description:'A power supply AC input voltage failure has occurred. (Probability:100, UUID:06682c21-a7a2-6db0-9918-e0ce2152c217, Resource:/SYS/PS1, Part Number:300-2233-02, Serial Number:B59414, Reference Document:http://support.oracle.com/msg/SPX86-8000-55)'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'2', obj_name:'2', timestamp:'Sat May 12 11:42:16 2018', eventtype:'System Power Off', subsystem:'System', component:'/System (Host System)', description:'Power to /System (Host System) has been turned off by SP, Reason: Cold boot.'} } );
+jary.push( { meta: { nolink:'nolink' }, data: { row_index:'1', obj_name:'1', timestamp:'Sat May 12 11:42:11 2018', eventtype:'System Power On', subsystem:'System', component:'/System (Host System)', description:'Power to /System (Host System) has been turned on by SP, Reason: Cold boot.'} } );
+var pageactions = new Array();
+pageactions.showsingle = "document.location.href='/iPages/i_systemLog.asp?nrows=all';";
+document.write('<div style="display:hidden;">');
+pageactions.next = "none";
+pageactions.last = "none";
+pageactions.first = "none";
+pageactions.prev = "none";
+document.write('<\/div>');
+
+for (i = 0; i < jary.length; i++) {
+    var s = jary[i].data.description.replace(/\n/g, "");
+    jary[i].data.description = s.linkify();
+    jary[i].data.subsystem = sdmHealthSubsystemToLink(jary[i].data.subsystem);
+}
+function reloadTbl() {
+    return reloadFilteredTable(custom_filter_ary,
+                        document.getElementById("NumRows"),
+                        document.getElementById("ht_TblSystemLogfiltermenu"),
+                        "/iPages/i_systemLog.asp");
+}
+function predefinedFilterAction(field, value) {
+    clearFilters(custom_filter_ary);
+    if (typeof(field) != 'undefined' &&
+        typeof(value) != 'undefined') {
+        ht_set_field_value(field, value);
+    }
+    reloadTbl();
+}
+var subsystemList   = ' , System, Processors, Memory, Power, Cooling, Storage, Networking, PCI Devices';
+fltr_ary = new Array();
+fltr_ary.push({name:"All Events",
+               action:'predefinedFilterAction();'});
+var subsystemArray = subsystemList.split(",");
+for (i = 0; i < subsystemArray.length; i++) {
+    var temp = subsystemArray[i].trim();
+    if (temp.length != 0) {
+        fltr_ary.push({name:"Subsystem: " + temp,
+                       action:'predefinedFilterAction("fltr_subsystem", "' + temp + '");'});
+    }
+}
+fltr_ary.push({name:"Type: Service Required",
+               action:'predefinedFilterAction("fltr_type", "*Service Required*");'});
+fltr_ary.push({name:"Type: Warning",
+               action:'predefinedFilterAction("fltr_type", "*Warning*");'});
+fltr_ary.push({name:"Type: OK",
+               action:'predefinedFilterAction("fltr_type", "*OK*");'});
+custom_filter_ary = new Array();
+custom_filter_ary.push({name:"Component", type:"text", id:"fltr_component",
+                value:decodeURIComponent('')});
+custom_filter_ary.push({name:"Event Type", type:"text", id:"fltr_type",
+                value:decodeURIComponent('')});
+custom_filter_ary.push({name:"Subsystem", type:"select", id:"fltr_subsystem",
+               value:decodeURIComponent(''),
+               csv:subsystemList});
+var filterSelIdx = '';
+if (filterSelIdx == "") { filterSelIdx = "0"; }
+showAsTable({title:"System Log",
+             ary:jary,
+             columnnames:{obj_name:'ID',
+                          timestamp:'Date/Time',
+                          eventtype:'Event Type',
+                          subsystem:'Subsystem',
+                          component:'Component'},
+             usecolnameorder:true,
+             summaryRow:'description',
+             stripe:'rows',
+             buttons:buttonArray,
+             prefs:{numrows:'',
+                    action:'reloadTbl();'},
+             paged:pageactions,
+             filter:{predefined:fltr_ary, custom:{inputs:custom_filter_ary,
+                     action:'reloadTbl();'}, sel:filterSelIdx},
+             summary:'The System Log table describes each system event with two rows. The first row contains the ID, date and time of occurrence, and the relevant subsystem and component; the second row contains the log message. The system events are sorted from most recent to least recent.'
+            });
+</script>
+</body>
+</html>
+ææz2u      ]÷Ä–]÷Ä˜A"0       A    :https://adc-mgmt-1146fmm0lu.us.oracle.com/iPages/i_systemLog.asp necko:classified 1 strongly-framed 0 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeBAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAASNMIIEiTCCA3GgAwIBAgIJAOJ0rN3uRWu+MA0GCSqGSIb3DQEBCwUAMIGJMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEXMBUGA1UEBxMOUmVkd29vZCBTaG9yZXMxHTAbBgNVBAoTFE9yYWNsZSBBbWVyaWNhLCBJbmMuMS0wKwYDVQQDEyRPcmFjbGUgSW50ZWdyYXRlZCBMaWdodHMgT3V0IE1hbmFnZXIwHhcNMTQwNjEyMTUyOTAxWhcNMzQwNjA3MTUyOTAxWjCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvMQXO6DUOUnSJ7IXLCR0E9iAmJtQlyO10sds8ZERf08FVsjWvE5D5s9dFeDTSGNJLmiSM/TmkC1aCcHi+YZI92yREcUPJP8oAYs1kZsOC8SPpZ0ykfHgBajgU90SsbSe3v2G+dMVgSX3xParoi+XxdAKFpvWqypsFL21n+PfnxJMbbNkqZHS+YqDhF4aljZ5C55a5O+1z2+qNBLgVLakK36XvWH5+3xzUksH9Ew6IYxrCKAMEc7/eJYGtel2RdW3WQlx3DZ+6TFbvTnI0/Jl4+mGH/n79xTICGlFJrX09AuiU/FVasb78+2gMB6y/AgETFjFxu2myuuoAx8HEF+2owIDAQABo4HxMIHuMB0GA1UdDgQWBBTPh78BeErvt1lLsZ6Iea8XLjhVKzCBvgYDVR0jBIG2MIGzgBTPh78BeErvt1lLsZ6Iea8XLjhVK6GBj6SBjDCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyggkA4nSs3e5Fa74wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAbTaZeskxbirmUTW/QCXkZLcvY5/2FgrgWU6+0c1WyLpfg8qO+0KAH2GLSe9xxkFomFd0kzRncw/i1bF/4RXMoBnEM6ANp/aSGFggaUfoo0mhjyN66s+rNtWPNvDQCADxaWq67HyNdpEzWY4cAcgDGJphrgZCsTy7A9Y7Fc283YCbWVnYyiKWX35B3kr2E/4pDNj1gig2nPd/MPobdy7ZCYpXsPTpgpsQnIExi3THJijiz6NLjG1k2e8IAi2Y68taFO8cvN2m5jhEuwYSkXV5hjMrr6EffS8KkHVgPziBPjWbgboN5QUO2XPimjwH44/vP5JPB02xnU6Rlp6Kg9A1iwAvAwMBAAEAAQEBAAAAAAAEbm9uZQAAAARub25lAAAA request-method GET response-head HTTP/1.0 200 OK
+Date: Mon Dec 16 18:29:56 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ original-response-headers Date: Mon Dec 16 18:29:56 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ uncompressed-len 0 predictor::resource-count 17 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/ajax.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/session.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/browserVersion.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/cssPicker.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/luapi.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/htui.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/sdm.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/platform.jasp 1,1,1576518806,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Styles/oracle.css 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/domTT/domLib.js 1,1,1576518806,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/domTT/domTT.js 1,1,1576518806,4096 net-response-time-onstart 889 net-response-time-onstop 1223 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/table/table_actions_divLine.png 1,1,1576518806,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/view_prefs_icon.png 1,1,1576518806,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/table_start_icon_dis.png 1,1,1576518806,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/table_back_icon_dis.png 1,1,1576518806,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/table_next_icon_dis.png 1,1,1576518806,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/table_end_icon_dis.png 1,1,1576518806,4097    

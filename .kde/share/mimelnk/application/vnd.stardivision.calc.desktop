@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_calc.xpm
+Type=MimeType
+Patterns=*.sdc
+MimeType=application/vnd.stardivision.calc
+Comment=StarCalc 5

@@ -1,0 +1,4 @@
+[ListenerConfig]
+enable_srvreg_krfb=false
+enabled_expiration_krfb=2935093,2,28,0,0,0
+enabled_krfb=false

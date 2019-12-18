@@ -1,0 +1,18 @@
+[General]
+Height=693
+SplitterSizes=451,553
+Width=1012
+
+[KFileDialog Settings]
+Automatic Preview=true
+Preview Size=60
+Recent Files=/opt/desktop/tools/oracle_database/oracle_icon9i.xpm,/opt/desktop/tools/oracle_database/oracle_icon9i.xpm,/opt/desktop/tools/mount_tool/mount_util_gui.sh,/opt/desktop/tools/oracle_database/oracle_icon.xpm,/opt/desktop/tools/oracle_database/oracle_database_prep_gui.sh,/usr/bin/tsclient,/opt/desktop/tools/wireless.sh,/opt/desktop/icons/filesync_icon.gif,/opt/desktop/tools/file_wd.sh,/opt/desktop/tools/fire_start.sh,/usr/bin/scribus,/etc/firestarter/firewall.sh,/usr/lib/RealPlayer9/realplay.xpm,/opt/lobi/.easter/prboom,/opt/lobi/its/itsus.sh
+ShowPreviews=false
+ViewMode=SmallColumns
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[MainWindow]
+Height 768=769
+Width 1024=1012

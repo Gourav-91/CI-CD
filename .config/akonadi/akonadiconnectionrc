@@ -1,0 +1,6 @@
+[Data]
+Method=UnixPath
+UnixPath=/home/gosarkar/.local/share/akonadi/socket-gosarkar-linux/akonadiserver.socket
+
+[DBUS]
+Address="unix:abstract=/tmp/dbus-CcQFDcvUAL,guid=4d0916c61788fe2c23040db35df8e97b"

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="icon_theme" mtime="1575637862" type="string">
+		<stringvalue>OSX</stringvalue>
+	</entry>
+	<entry name="gtk_theme" mtime="1575637862" type="string">
+		<stringvalue>T-ish-Brushed-bright</stringvalue>
+	</entry>
+</gconf>

@@ -1,0 +1,220 @@
+if(!dojo._hasResource["srmdojoc.layout.LazyLoadMetricsStore"]){ //_hasResource checks added by build. Do not use _hasResource directly in your code.
+dojo._hasResource["srmdojoc.layout.LazyLoadMetricsStore"] = true;
+dojo.provide("srmdojoc.layout.LazyLoadMetricsStore");
+dojo.require("dojo.data.ItemFileWriteStore");
+
+dojo.declare("srmdojoc.layout.LazyLoadMetricsStore", dojo.data.ItemFileWriteStore, {	
+        constructor: function(/* object */ keywordParameters){                
+		// LazyLoadMetricsStore extends ItemFileWriteStore to implement an 
+		// of lazy-loading/faulting in items on-demand.		
+	},
+	
+       isItemLoaded: function(/*object*/ item) {//alert('isItemLoaded');
+       //    summary:
+       //        Overload of the isItemLoaded function to look for items of type 'stub', which indicate
+       //        the data hasn't been loaded in yet.
+       //
+       //    item:
+       //        The item to examine.
+             //For this store, if it has the value of stub for its type attribute,
+       //then the item basn't been fully loaded yet.  It's just a placeholder.
+       if(this.getValue(item, "type") == "stub"){
+           return false;
+       }
+       return true;
+       },
+       
+       loadItem: function(keywordArgs){
+       //    summary:
+       //        Overload of the loadItem function to fault in items.  This assumes the data for an item is laid out
+       //        in a RESTful sort of pattern name0/name1/data.json and so on and uses that to load the data.
+       //        It will also detect stub items in the newly loaded item and insert the stubs into the ItemFileReadStore
+       //        list so they can also be loaded in on-demand.
+       //
+       //    item:
+       //        The item to examine.
+
+           var item = keywordArgs.item;
+           this._assertIsItem(item);
+    
+           //Build the path to the data.json for this item
+           //The path consists of where its parent was loaded from
+           //plus the item name.
+           var type = this.getValue(item, "type");   
+//           alert('type...'+type);
+           var parentName = this.getValue(item, "parentName");  
+//           alert('parentName...'+parentName);
+           var srNo   = this.getValue(item, "srNo");
+//           alert('srNo...'+srNo);
+           var parentId   = this.getValue(item, "parentId");
+//           alert('parentId...'+parentId);
+           var id   = this.getValue(item, "id");
+//           alert('id...'+id);
+           //alert('calling buildThisSRDetailsURL()');
+           var url = this.getValue(item, "url");
+//           alert('url>>>'+url);
+           var dataUrl;
+           if(url != null && url != 'undefined')
+           {
+             dataUrl = url+"&"+buildThisSRDetailsURL();             
+           }
+           else
+           {
+             dataUrl = id+"&"+buildThisSRDetailsURL();
+//             alert('dataUrl>>>'+dataUrl);
+             id = dataUrl.substring(dataUrl.indexOf("&id=")+4, dataUrl.indexOf("&parentId="));
+//             alert('id>>>'+id);
+             parentId = dataUrl.substring(dataUrl.indexOf("&parentId=")+10, dataUrl.indexOf("&val="));
+//             alert('parentId>>>'+parentId);
+           }
+           
+
+           //Need a reference to the store to call back to its structures.
+           var self = this;                                    // Callback for handling a successful load.
+           var gotData = function(data){
+               //Now we need to modify the existing item a bit to take it out of stub state
+               //Since we extend the store and have knowledge of the internal
+               //structure, this can be done here.  Now, is we extended
+               //a write store, we could call the write APIs to do this too
+               //But for a simple demo the diretc modification in the store function
+               //is sufficient.                       
+               //Clear off the stub indicators.
+           delete item.type;
+//           delete item.srNo;
+//           delete item.parentName;
+//           delete item.parentId;
+//            delete item.parent;
+
+
+           //Set up the loaded values in the format ItemFileReadStore uses for attributes.
+           for (i in data) {
+               if (dojo.isArray(data[i])) {                                      
+                   item[i] = data[i];
+//                   alert('Array...'+item[i]);
+               }else{
+                   item[i] = [data[i]];
+//                   alert('Not Array...'+item[i]);
+               }
+           }
+
+           //Reset the item in the reference.
+           self._arrayOfAllItems[item[self._itemNumPropName]] = item;
+
+           //Scan the new values in the item for extra stub items we need to
+           //add to the items array of the store so they can be lazy-loaded later...
+           var attributes = self.getAttributes(item);
+           for(i in attributes){
+//            alert('attributes.length...'+attributes.length);
+            if(i < attributes.length)
+             { //alert('i..'+i);
+//               alert('attribute..'+attributes[i]);
+               var values = self.getValues(item, attributes[i]);
+
+               for (var j = 0; j < values.length; j++) {
+                   var value = values[j];
+//                   alert('attribute..'+attributes[i]);
+//                   alert('value..'+value);
+                 if(attributes[i] == 'childCount')
+                 {
+                   addMoreChildren(value,item.peerUrl);
+                 }
+                 if(typeof value === "object"){
+                       if(value["stub"] ){
+//                           alert('stub..'+value["stub"]);
+                           //We have a stub reference here, we need to create the stub item
+                           var stub = {
+                               type: ["stub"],
+                               id: [value["stub"]],    //
+                               parent: [id]        //The child stub item is parented by this item name...
+                           };
+                           if (parent) {
+                               //Add in any parents to your parent so URL construstruction is accurate.
+                              stub.parent[0] = parent + "/" + stub.parent[0];
+                            }
+                           //Finalize the addition of the new stub item into the ItemFileReadStore list.
+                           self._arrayOfAllItems.push(stub);
+                           stub[self._storeRefPropName] = self;
+                           stub[self._itemNumPropName] = (self._arrayOfAllItems.length - 1); //Last one pushed in should be the item
+                           values[j] = stub; //Set the stub item back in its place and replace the stub notation.
+                       }
+                   }
+               }
+            }
+           }
+
+           //Done processing!  Call the onItem, if any.
+           if(keywordArgs.onItem){
+//                                alert('last function');
+               var scope = keywordArgs.scope ? keywordArgs.scope : dojo.global;
+               keywordArgs.onItem.call(scope, item);
+           }
+       };
+
+       //Callback for any errors that occur during load.
+       var gotError = function(error){
+           //Call the onComplete, if any
+           if(keywordArgs.onError){
+               var scope = keywordArgs.scope ? keywordArgs.scope : dojo.global;
+               keywordArgs.onError.call(scope, error);
+           }
+       };
+             
+       function addMoreChildren(childCount,peerUrl)
+       {
+//                   alert('childCount..'+childCount);
+//                   alert('parentId...'+parentId);
+                    var upperNode;
+                    for(i = 0; i < self._arrayOfTopLevelItems.length; ++i){
+                      upperNode = self._arrayOfTopLevelItems[i];
+                        if(upperNode.id == parentId)
+                        {
+//                          alert('match found...name='+upperNode.name+'id...'+upperNode.id); 
+//                          alert('childCount...'+childCount);
+                          for (var x = 1; x < childCount; x++)
+                          {
+                           self.newItem({id:parentId+'-'+x,type:'stub',url:peerUrl+'&id='+parentId+'-'+x},{parent:upperNode,attribute:'children'});
+//                           alert('id>>>>'+parentId+'-'+x);
+                          }
+                        }          
+//                   }
+                 }
+//                    alert('after childCount');
+        }              
+       if(type == "stub")
+       {   
+          //Fire the get and pass the proper callbacks to the deferred.
+//                   alert('before callllll');
+           var xhrArgs = {
+                   url: dataUrl,
+                   handleAs: "json-comment-optional"
+           };
+           var d = dojo.xhrGet(xhrArgs);
+//                   alert('after callllll');
+           d.addCallback(gotData);
+           d.addErrback(gotError);
+       }
+   }
+        
+});
+
+
+}}0Ã]¨.      ]÷·+]÷·+A"+_Î¿Ñ   ^    :https://support.us.oracle.com/oip/faces/secure/srm/js/srmdojoc/layout/LazyLoadMetricsStore.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Sun, 08 Dec 2019 23:50:42 GMT
+Server: Oracle-Application-Server-10g
+Cache-Control: public, max-age=31536000
+Expires: Mon, 07 Dec 2020 23:50:42 GMT
+Content-Location: /secure/srm/js/srmdojoc/layout/LazyLoadMetricsStore.js
+Last-Modified: Sat, 19 Oct 2019 05:24:10 GMT
+Content-Type: application/x-javascript
+ original-response-headers Date: Sun, 08 Dec 2019 23:50:42 GMT
+Server: Oracle-Application-Server-10g
+Cache-Control: public, max-age=31536000
+Expires: Mon, 07 Dec 2020 23:50:42 GMT
+Set-Cookie: JSESSIONID=febb8df2c2c1e38f945bfc47f235eabf2d33a5217e799a85fce3955bbf5cb5d9.e34NchyKaheMai0TbNmPbxaObNv0; path=/oip; secure
+Content-Location: /secure/srm/js/srmdojoc/layout/LazyLoadMetricsStore.js
+Last-Modified: Sat, 19 Oct 2019 05:24:10 GMT
+Keep-Alive: timeout=2, max=1008
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript
+ uncompressed-len 0 net-response-time-onstart 308 net-response-time-onstop 572   $

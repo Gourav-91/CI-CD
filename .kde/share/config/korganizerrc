@@ -1,0 +1,132 @@
+[$Version]
+update_info=korganizer.upd:korganizer_3.4_GroupwareCleanup,korganizer.upd:korganizer_3.4_WebExport,korganizer.upd:korganizer_3.4_FilterAction,korganizer.upd:korganizer_3.4_HolidayPlugin,korganizer.upd:korganizer_4.3_ShowTodos
+
+[Calendar]
+Default Calendar Format=1
+
+[Category Colors]
+Appointment=196,196,196
+Birthday=196,196,196
+Business=196,196,196
+Education=196,196,196
+Holiday=196,196,196
+Meeting=196,196,196
+Miscellaneous=196,196,196
+Personal=196,196,196
+Phone Call=196,196,196
+Special Occasion=196,196,196
+Travel=196,196,196
+Vacation=196,196,196
+
+[Colors]
+Agenda Background Color=128,128,128
+Event Color=196,196,196
+Highlight Color=0,0,255
+Holiday Color=255,0,0
+WorkingHours Color=160,160,160
+
+[Filter_Default]
+CategoryList=
+Criteria=135196736
+
+[Fonts]
+AgendaView Font=helvetica,12,-1,5,50,0,0,0,0,0
+MarcusBains Font=helvetica,12,-1,5,50,0,0,0,0,0
+MonthView Font=helvetica,12,-1,5,50,0,0,0,0,0
+TimeBar Font=helvetica,18,-1,5,75,0,0,0,0,0
+
+[General]
+Archive File=
+Auto Save Interval=10
+CalendarFilters=Default
+Current View=Agenda
+Custom Categories=Appointment,Business,Meeting,Phone Call,Education,Holiday,Vacation,Special Occasion,Personal,Travel,Miscellaneous,Birthday
+Enable Group Scheduling=false
+Enable Project View=false
+Html Export File=/home/mpereira/calendar.html
+
+[Group Scheduling]
+AdditionalMails=
+IMIPScheduler=1
+
+[KOrganizer Geometry]
+Height=400
+Separator1=225,300
+Separator2=144,30,122
+Width=600
+
+[KOrganizer MainWindow Toolbar style]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[KOrganizer MainWindow korganizer_toolbar Toolbar style]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=1
+NewLine=false
+Offset=-1
+Position=Top
+
+[KOrganizer MainWindow schedule_toolbar Toolbar style]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=2
+NewLine=false
+Offset=-1
+Position=Top
+
+[KOrganizer Plugins]
+SelectedPlugins=
+
+[Layout]
+CompactDialogs=false
+Preview=kghostview
+VerticalScreen=false
+
+[Personal Settings]
+Bcc=false
+Mail Client=0
+Use Control Center Email=false
+user_email=nobody@nowhere
+user_name=Anonymous
+
+[Settings]
+Filter Visible=false
+Height 768=400
+MenuBar=Enabled
+StatusBar=Enabled
+Width 1024=600
+
+[Time & Date]
+Daylight Savings=0
+Default Alarm Time=0
+Default Duration=2
+Default Start Time=10
+Time Zone=+0000
+TimeZoneId=EST
+
+[TipOfDay]
+RunOnStart=true
+
+[Views]
+Day Begins=7
+Enable MonthView ScrollBars=false
+Enable ToolTips=false
+Exclude Holidays=true
+Exclude Saturdays=true
+Full View Month=false
+Full View Todo=true
+Hour Size=10
+Marcus Bains shows seconds=false
+Separator AgendaView=30,997
+Show Marcus Bains=true
+Show Weekly Recurrences=true
+Working Hours End=17
+Working Hours Start=8

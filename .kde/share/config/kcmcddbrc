@@ -1,0 +1,6 @@
+[$Version]
+update_info=kaudiocreator-libkcddb.upd:kaudiocreator-libkcddb,kcmcddb-emailsettings.upd:kcmcddb_emailsettings
+
+[Lookup]
+hostname=freedb.freedb.org
+port=8880

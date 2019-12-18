@@ -1,0 +1,55 @@
+[Desktop Icons]
+Preview=
+ShowHidden=false
+VertAlign=true
+
+[Desktop0]
+Pattern=
+Program=
+Wallpaper=/opt/desktop/wallpaper/wallpaper.jpg
+WallpaperList=
+
+[Devices]
+exclude=kdedevice/hdd_mounted,kdedevice/zip_mounted,print/printer,kdedevice/floppy5_unmounted,kdedevice/cdrom_unmounted,kdedevice/cdwriter_unmounted,kdedevice/dvd_unmounted,kdedevice/floppy_unmounted,kdedevice/hdd_unmounted,kdedevice/nfs_unmounted,kdedevice/smb_unmounted,kdedevice/zip_unmounted
+
+[General]
+AutoLineUpIcons=false
+Enabled=true
+SetVRoot=true
+
+[KFileDialog Settings]
+Automatic Preview=true
+Preview Size=60
+Recent Files=
+ShowPreviews=false
+ViewMode=SmallColumns
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[Menubar]
+ShowMenubar=false
+
+[MiniCli]
+CompletionItems=
+CompletionMode=5
+History=
+TerminalApps=ls
+
+[Mouse Buttons]
+Left=
+Middle=WindowListMenu
+Right=DesktopMenu
+
+[ScreenSaver]
+DPMS-dependent=false
+Lock=true
+LockGrace=60000
+Saver=KBlankscreen.desktop
+Enabled=true
+Timeout=300
+
+[Version]
+KDEVersionMajor=3
+KDEVersionMinor=3
+KDEVersionRelease=1

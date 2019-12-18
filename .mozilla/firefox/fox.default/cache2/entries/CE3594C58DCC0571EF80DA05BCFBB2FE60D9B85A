@@ -1,0 +1,340 @@
+/* globals define */
+
+define(["knockout", "jquery", "text!./template.html", "overlayScrollbars"], function(ko, $, template) {
+	"use strict";
+
+	// Format the date for display
+	function formatDate(date) {
+		var options = { month: "short", day: "numeric" };
+		return new Date(date.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/, "$1 $2 $4 $3 UTC")).toLocaleDateString(
+			"en-US",
+			options
+		);
+	}
+
+	// This function gets passed either retweet or tweet entities for link replacement in tweet bodies
+	var processTweetLinks = function(entities) {
+		var links = [];
+
+		entities.hashtags.forEach(function(item) {
+			links.push({
+				start: item.indices[0],
+				end: item.indices[1],
+				replacement: '<a href="https://twitter.com/hashtag/' + item.text + '">#' + item.text + "</a>"
+			});
+		});
+
+		entities.user_mentions.forEach(function(item) {
+			links.push({
+				start: item.indices[0],
+				end: item.indices[1],
+				replacement: '<a href="https://twitter.com/' + item.screen_name + '">@' + item.screen_name + "</a>"
+			});
+		});
+
+		entities.urls.forEach(function(item) {
+			links.push({
+				start: item.indices[0],
+				end: item.indices[1],
+				replacement: '<a href="' + item.expanded_url + '">' + item.url + "</a>"
+			});
+		});
+
+		// Return it with it ordered from last reference to first since we don't want to mess up with the
+		// letter count in areas we still have to change
+		return links.sort(function(a, b) {
+			return b.end - a.end;
+		});
+	};
+
+	// Data type for the links we query and end up displaying
+	function twitterFeedItem(tweetObject) {
+		// Set our scope for this object
+		var returnValue = {},
+			linkItems = [],
+			mediaObject = null;
+
+		returnValue.tweetID = tweetObject.id_str;
+
+		returnValue.userName = tweetObject.user.name;
+		returnValue.userScreenName = tweetObject.user.screen_name;
+		returnValue.userUrl = "https://twitter.com/" + returnValue.userScreenName;
+
+		// If this is a retweet we need to display the original tweet's text and set the retweet information
+		if (typeof tweetObject.retweeted_status == "object") {
+			// This is a retweet so use the original information for display
+			returnValue.createdDate = formatDate(tweetObject.retweeted_status.created_at);
+			returnValue.textBody = tweetObject.retweeted_status.full_text;
+
+			returnValue.retweet = true; // Used for quick checking on displaying the retweet header
+
+			// We will display this retweeted information in the template to give the proper credit
+			// In the retweet header we set the information for OUR account
+			returnValue.retweetUserName = tweetObject.retweeted_status.user.name;
+			returnValue.retweetUserScreenName = tweetObject.retweeted_status.user.screen_name;
+			returnValue.retweetUserUrl = "https://twitter.com/" + returnValue.retweetUserScreenName;
+
+			linkItems = processTweetLinks(tweetObject.retweeted_status.entities);
+
+			if (
+				typeof tweetObject.retweeted_status.extended_entities != "undefined" &&
+				typeof tweetObject.retweeted_status.extended_entities.media != "undefined"
+			)
+				mediaObject = tweetObject.retweeted_status.extended_entities.media[0];
+		} else {
+			// We want to use the main body for all of the information since this isn't a retweet
+			returnValue.createdDate = formatDate(tweetObject.created_at);
+			returnValue.textBody = tweetObject.full_text;
+			returnValue.retweet = false; // Used for quick checking on displaying the retweet header
+
+			linkItems = processTweetLinks(tweetObject.entities);
+
+			if (
+				typeof tweetObject.extended_entities != "undefined" &&
+				typeof tweetObject.extended_entities.media != "undefined"
+			)
+				mediaObject = tweetObject.extended_entities.media[0];
+		}
+
+		// Now we will update our body with the links we made
+		linkItems.forEach(function(currentLink) {
+			returnValue.textBody =
+				returnValue.textBody.substr(0, currentLink.start) +
+				currentLink.replacement +
+				returnValue.textBody.substr(currentLink.end);
+		});
+
+		// Now that we have replaced most of the links with <a> we have to check for a trailing, unreplaced link.
+		// Some tweets have a link to the original tweet that does not show up in the entities.
+		var regex = /(?:http([s]?):\/\/)?((\w+[.])+\w+(\/\w*)*(\?[^\s]*)*)(?![^\s]*>)/gi,
+			replacementString = '<a href="http$1://$2">$2</a>';
+		returnValue.textBody = returnValue.textBody.replace(regex, replacementString);
+
+		returnValue.likeUrl = "https://twitter.com/intent/like?tweet_id=" + returnValue.tweetID;
+		returnValue.retweetUrl = "https://twitter.com/intent/retweet?tweet_id=" + returnValue.tweetID;
+		returnValue.replyUrl = "https://twitter.com/intent/tweet?in_reply_to=" + returnValue.tweetID;
+
+		returnValue.likeCount = tweetObject.favorite_count;
+		returnValue.retweetCount = tweetObject.retweet_count;
+
+		returnValue.videoFormats = "";
+		returnValue.imageSrc = "";
+
+		if (mediaObject != null) {
+			if (mediaObject.type == "photo") {
+				// Add the url for the image
+				returnValue.imageSrc = mediaObject.media_url_https;
+			} else if (mediaObject.type == "video" || mediaObject.type == "animated_gif") {
+				// Loop over all the video formats to add them as options for the video HTML5 element
+				mediaObject.video_info.variants.forEach(function(format) {
+					returnValue.videoFormats += '<source src="' + format.url + '" type="' + format.content_type + '" />';
+				});
+			}
+		}
+
+		return returnValue;
+	}
+
+	self.initScroll = function() {
+		OverlayScrollbars(document.querySelectorAll(".oraTwitterFeed .myo-desc"), {});
+	};
+	// Capture the HTML element in question
+	ko.bindingHandlers.element = {
+		init: function(element, valueAccessor) {
+			var value = valueAccessor();
+			value($(element));
+		}
+	};
+
+	// ----------------------------------------------
+	// Define a Knockout ViewModel for your template
+	// ----------------------------------------------
+	var OraTwitterFeedViewModel = function(args) {
+		var self = this,
+			SitesSDK = args.SitesSDK;
+
+		// store the args
+		self.mode = args.viewMode;
+		self.id = args.id;
+
+		self.element = ko.observable(); // HTML element
+		self.twitterFeedResults = ko.observableArray([]); // Array of twitterFeedItems
+
+		//TBD replace by default
+		self.jsonUrl = ko.observable("https://www.oracle.com/feeds/twitterfeed-oracle-media.json");
+
+		// handle initialization
+		self.componentLayoutInitialized = ko.observable(false);
+		self.customSettingsDataInitialized = ko.observable(false);
+		self.initialized = ko.computed(function() {
+			return self.componentLayoutInitialized() && self.customSettingsDataInitialized();
+		}, self);
+
+		//
+		// Handle property changes
+		//
+		self.updateComponentLayout = $.proxy(function(componentLayout) {
+			self.componentLayoutInitialized(true);
+		}, self);
+
+		self.updateCustomSettingsData = $.proxy(function(customData) {
+			self.jsonUrl(customData && customData.jsonUrl);
+			self.customSettingsDataInitialized(true);
+		}, self);
+
+		self.loadJSON = ko.computed(function() {
+			// Request our cached twitter feed
+			$.getJSON(self.jsonUrl(), { _: new Date().getTime() }, function(data) {
+				// If we have results and there are items in the feed
+				if (data && data.length > 0) {
+					// Much better performance if we work with a local array and then assign the whole thing to the observable
+					var localTweetArray = [];
+
+					// We only want the tweets put out by Oracle, and only 20 at most
+					var tweets = data
+						.filter(function(currentTweet) {
+							// Filter out all of the ones without a user name specified
+							// Some of them just don't have it defined at all
+							if (typeof currentTweet.user == "undefined") return false;
+
+							// Now test to see if they have the correct user name
+							return currentTweet.user.name == "Oracle";
+						})
+						.slice(0, 20); // The slice makes sure we get 20 filtered results at most
+
+					$.each(tweets, function(i) {
+						// Add the transformed object to our local array
+						localTweetArray.push(twitterFeedItem(tweets[i]));
+					});
+
+					// Assign the local array to our observable
+					self.twitterFeedResults(localTweetArray);
+				}
+			});
+		}, self);
+
+		self.updateSettings = function(settings) {
+			if (settings.property === "componentLayout") {
+				self.updateComponentLayout(settings.value);
+			} else if (settings.property === "customSettingsData") {
+				self.updateCustomSettingsData(settings.value);
+			}
+		};
+
+		// listen for the EXECUTE ACTION request to handle custom actions
+		//SitesSDK.subscribe(SitesSDK.MESSAGE_TYPES.EXECUTE_ACTION, $.proxy(self.executeActionsListener, self));
+		// listen for settings update
+		SitesSDK.subscribe(SitesSDK.MESSAGE_TYPES.SETTINGS_UPDATED, $.proxy(self.updateSettings, self));
+
+		//
+		// Initialize the componentLayout & customSettingsData values
+		//
+		SitesSDK.getProperty("componentLayout", self.updateComponentLayout);
+		SitesSDK.getProperty("customSettingsData", self.updateCustomSettingsData);
+	};
+
+	// ----------------------------------------------
+	// Create a knockout based component implemention
+	// ----------------------------------------------
+	var OraTwitterFeedImpl = function(args) {
+		// Initialze the custom component
+		this.init(args);
+	};
+
+	// initialize all the values within the component from the given argument values
+	OraTwitterFeedImpl.prototype.init = function(args) {
+		this.createViewModel(args);
+		this.createTemplate(args);
+		this.setupCallbacks(args);
+	};
+
+	// create the viewModel from the initial values
+	OraTwitterFeedImpl.prototype.createViewModel = function(args) {
+		// create the viewModel
+		this.viewModel = new OraTwitterFeedViewModel(args);
+	};
+
+	// create the template based on the initial values
+	OraTwitterFeedImpl.prototype.createTemplate = function(args) {
+		// create a unique ID for the div to add, this will be passed to the callback
+		this.contentId = args.id + "_content_" + args.viewMode;
+		// create a hidden custom component template that can be added to the DOM
+		this.template = '<div id="' + this.contentId + '">' + template + "</div>";
+	};
+
+	//
+	// SDK Callbacks
+	// setup the callbacks expected by the SDK API
+	//
+	OraTwitterFeedImpl.prototype.setupCallbacks = function(args) {
+		//
+		// callback - render: add the component into the page
+		//
+		this.render = $.proxy(function(container) {
+			var $container = $(container);
+			// add the custom component template to the DOM
+			$container.append(this.template);
+			// apply the bindings
+			ko.applyBindings(this.viewModel, $("#" + this.contentId)[0]);
+			SCSRenderAPI.onComponentRenderComplete(args.id);
+		}, this);
+		//
+		// callback - update: handle property change event
+		//
+		this.update = $.proxy(function(args) {
+			var self = this;
+			// deal with each property changed
+			$.each(args.properties, function(index, property) {
+				if (property) {
+					if (property.name === "customSettingsData") {
+						self.viewModel.updateComponentData(property.value);
+					} else if (property.name === "componentLayout") {
+						self.viewModel.updateLayout(property.value);
+					}
+				}
+			});
+		}, this);
+		//
+		// callback - dispose: cleanup after component when it is removed from the page
+		//
+		this.dispose = $.proxy(function() {
+			// nothing required for this sample since knockout disposal will automatically clean up the node
+		}, this);
+	};
+
+	// ----------------------------------------------
+	// Create the factory object for your component
+	// ----------------------------------------------
+	var OraTwitterFeedFactory = {
+		createComponent: function(args, callback) {
+			// return a new instance of the component
+			return callback(new OraTwitterFeedImpl(args));
+		}
+	};
+
+	return OraTwitterFeedFactory;
+});
+∆Òç˝BG      ]Ìw]ÌwAØÚ^ ÕX   y    :https://oradocs-corp.sites.us2.oraclecloud.com/authsite/home/_cache_a1c6/_compdelivery/Ora-Twitter-Feed/assets/render.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Sun, 08 Dec 2019 14:21:13 GMT
+Server: Oracle-Application-Server-11g
+Cache-Control: max-age=1296000
+Accept-Ranges: bytes
+Content-Length: 11862
+Last-Modified: Thu, 12 Sep 2019 11:13:49 GMT
+X-ORACLE-DMS-ECID: 005aJ7xjh984qm4_rTXBiY00009k0006ii
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/javascript
+Content-Language: en
+ original-response-headers Date: Sun, 08 Dec 2019 14:21:13 GMT
+Server: Oracle-Application-Server-11g
+Cache-Control: max-age=1296000
+Accept-Ranges: bytes
+Content-Length: 11862
+Last-Modified: Thu, 12 Sep 2019 11:13:49 GMT
+X-ORACLE-DMS-ECID: 005aJ7xjh984qm4_rTXBiY00009k0006ii
+X-Frame-Options: SAMEORIGIN
+Keep-Alive: timeout=5, max=498
+Connection: Keep-Alive
+Content-Type: application/javascript
+Content-Language: en
+ uncompressed-len 0 net-response-time-onstart 528 net-response-time-onstop 818   .V

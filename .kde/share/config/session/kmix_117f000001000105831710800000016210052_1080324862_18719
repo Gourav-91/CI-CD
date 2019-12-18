@@ -1,0 +1,9 @@
+[Number]
+NumberOfWindows=1
+
+[WindowProperties1]
+ClassName=KMixWindow
+Height 600=215
+MenuBar=Enabled
+ObjectName=kmix-mainwindow#1
+Width 800=272

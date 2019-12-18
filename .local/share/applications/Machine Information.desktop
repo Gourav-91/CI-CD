@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Exec=/opt/desktop/obi_cc_script/desktopinfo
+Icon=/usr/share/icons/gnome/32x32/devices/computer.png
+Icon[en_US]=/usr/share/icons/gnome/32x32/devices/computer.png
+Name=Machine Information
+Name[en_US]=Machine Information
+Terminal=false
+Type=Application

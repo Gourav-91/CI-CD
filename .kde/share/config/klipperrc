@@ -1,0 +1,14 @@
+[$Version]
+update_info=klipperrc.upd:25082001,klipperrc.upd:kde3.1,klipper-kconfigxt.upd:KlipperNoSpacesInKeyNames
+
+[General]
+AutoStart=true
+ClipboardData=Terminal
+IgnoreSelection=false
+MaxClipItems=7
+NoEmptyClipboard=true
+Number of Actions=0
+ReplayActionInHistory=false
+TimeoutForActionPopups=8
+UseGUIRegExpEditor=true
+Version=0.9.7

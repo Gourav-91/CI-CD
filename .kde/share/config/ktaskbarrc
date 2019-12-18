@@ -1,0 +1,9 @@
+[General]
+GroupTasks=true
+LeftButtonAction=Show Task List
+MiddleButtonAction=Activate, Raise or Minimize Task
+RightButtonAction=Show Operations Menu
+ShowAllWindows=true
+ShowIcon=true
+ShowWindowListBtn=true
+SortByDesktop=true

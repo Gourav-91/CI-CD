@@ -1,0 +1,31 @@
+[Desktop Entry]
+FullScreen=false
+
+[General]
+Antialiasing=true
+Interpreter=
+Messages=false
+Palette=color
+Platform fonts=false
+ShowPageList=true
+ShowPageNames=false
+ShowScrollBars=true
+WatchFile=false
+
+[Ghostscript]
+Antialiasing arguments=
+GS Version=
+Interpreter=
+Non-antialiasing arguments=
+Redetection Counter=2
+
+[MainWindow]
+Height 768=400
+Width 1024=640
+
+[MainWindow Toolbar mainToolBar]
+Offset=-1
+
+[RecentFiles]
+File1=file:$HOME/RHEL WS3 OBI Installation and Configuration Guide v1.9.1.pdf
+File2=file:/usr/lib/Acrobat5/Reader/help/reader.pdf

@@ -1,0 +1,33 @@
+[General Options]
+Height 1200=538
+Height 768=696
+MenuBar=Enabled
+ShowPath=false
+StatusBar=Enabled
+Width 1024=1012
+Width 1600=1116
+
+[General Options Toolbar mainToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[KFileDialog Settings]
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[KPrinter Settings]
+ApplicationOptions=app-kate-boxcolor,#000000,app-kate-boxmargin,6,app-kate-boxwidth,1,app-kate-footerbg,#d3d3d3,app-kate-footerfg,#000000,app-kate-footerformat,||%U,app-kate-footerusebg,true,app-kate-headerbg,#d3d3d3,app-kate-headerfg,#000000,app-kate-headerformat,%y|%f|%p,app-kate-headerusebg,true,app-kate-hffont,,app-kate-printguide,false,app-kate-printlinenumbers,false,app-kate-printselection,false,app-kate-usebackground,false,app-kate-usebox,false,app-kate-usefooter,true,app-kate-useheader,true
+DialogReduced=true
+PrintCommand=
+Printer=printeval-3.us.oracle.com
+
+[Recent Files]
+File1=file:/home/shaines/software/Qarbon/ViewletBuilder  - Linux/linux license key.txt
+File2=file:/home/shaines/OracleCalendar_inst/ocal_conf/silent.properties
+File3=webdav://files.oraclecorp.com/content/MyWorkspaces/LOBI/documents/alpha_7bugs.txt

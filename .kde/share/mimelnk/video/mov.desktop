@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Quicktime Movies Files
+Hidden=false
+Icon=video
+MimeType=video/mov
+Patterns=*.mov;*.MOV
+Type=MimeType
+X-KDE-AutoEmbed=false

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="cursor_theme" mtime="1575637861" type="string">
+		<stringvalue>default</stringvalue>
+	</entry>
+</gconf>

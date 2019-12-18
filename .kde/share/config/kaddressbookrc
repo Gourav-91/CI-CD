@@ -1,0 +1,35 @@
+[Browser]
+fieldWidths=96,20,20,236
+fields=X-FileAs,EMAIL,X-BusinessPhone,X-HomePhone
+
+[ContactListView]
+ColumnOrder=0,1,2,3
+ColumnWidths=96,20,20,236
+SortAscending=true
+SortColumn=0
+
+[Geometry]
+Browser=380,281
+Height 768=281
+MenuBar=Enabled
+StatusBar=Enabled
+Width 1024=380
+
+[ListView]
+autUnderline=true
+backPixmap=
+backPixmapOn=false
+cUnderline=230,230,230
+sortColumn=0
+sortDirection=true
+tooltips=true
+underline=true
+
+[kaddressbook-mainwindow#1 Toolbar style]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Open Connect
+Categories=Utility;System;
+Comment=OpenConnect Desktop
+Comment[en_CA]=OpenConnect Desktop
+Exec=konsole -e sudo /usr/sbin/openconnect https://myaccess.oraclevpn.com
+Icon=/opt/desktop/icons/network-vpn.png
+Hidden=false
+Terminal=false
+Type=Application
+GenericName[en_CA]=

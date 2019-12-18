@@ -1,0 +1,45 @@
+[Desktop Entry]
+ActiveSession=0
+Args0=/bin/bash
+Cwd0=/home/test
+DefaultSession=shell.desktop
+Font0=6
+Fullscreen=false
+Icon0=openterm
+KeyTab0=default
+MasterMode0=false
+MonitorActivity0=false
+MonitorSilence0=false
+Pgm0=/bin/bash
+Schema0=
+Term0=xterm
+Title0=Shell
+bellmode=1
+class=konsole-mainwindow#1
+defaultfont=Monospace,10,-1,5,50,0,0,0,1,0
+font=6
+history=1000
+historyenabled=true
+keytab=default
+numSes=1
+schema=
+scrollbar=2
+
+[Number]
+NumberOfWindows=1
+
+[WindowProperties1]
+ClassName=Konsole
+Height 768=451
+MenuBar=Enabled
+ObjectName=konsole-mainwindow#1
+Width 1024=661
+
+[konsole-mainwindow#1 Toolbar style]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top

@@ -1,0 +1,309 @@
+[all/MOV - 1]
+AllowAsDefault=true
+Application=Extras/Multimedia/Xine.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=all/MOV
+
+[application/msexcel - 1]
+AllowAsDefault=true
+Application=Office/redhat-spreadsheet.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=application/msexcel
+
+[application/mspowerpoint - 1]
+AllowAsDefault=true
+Application=Office/redhat-presentations.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=application/mspowerpoint
+
+[application/msword - 1]
+AllowAsDefault=true
+Application=Office/redhat-word-processor.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=application/msword
+
+[application/pdf - 1]
+Application=AdobeReader.desktop
+Preference=1
+
+[application/pdf - 2]
+Application=kpdf_part.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=1
+
+[application/pdf - 3]
+AllowAsDefault[$d]
+Application[$d]
+GenericServiceType[$d]
+Preference[$d]
+ServiceType[$d]
+
+[application/pdf - 4]
+AllowAsDefault[$d]
+Application[$d]
+GenericServiceType[$d]
+Preference[$d]
+ServiceType[$d]
+
+[application/pdf - 5]
+Application=kde-kghostview.desktop
+GenericServiceType[$d]
+Preference=0
+
+[application/vnd.ms-excel - 1]
+AllowAsDefault=true
+Application=redhat-spreadsheet.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=application/vnd.ms-excel
+
+[application/vnd.ms-word - 1]
+AllowAsDefault=true
+Application=Office/redhat-word-processor.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=application/vnd.ms-word
+
+[audio/basic - 1]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/realplay.desktop
+GenericServiceType=Application
+Preference=3
+ServiceType=audio/basic
+
+[audio/basic - 2]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-kaboodle.desktop
+GenericServiceType=Application
+Preference=2
+ServiceType=audio/basic
+
+[audio/basic - 3]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-noatun.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=audio/basic
+
+[audio/basic - 4]
+AllowAsDefault=true
+Application=kaboodle_component.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=1
+ServiceType=audio/basic
+
+[audio/x-mp3 - 1]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/xmms.desktop
+GenericServiceType=Application
+Preference=6
+ServiceType=audio/x-mp3
+
+[audio/x-mp3 - 2]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/realplay.desktop
+GenericServiceType=Application
+Preference=5
+ServiceType=audio/x-mp3
+
+[audio/x-mp3 - 3]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-kaboodle.desktop
+GenericServiceType=Application
+Preference=4
+ServiceType=audio/x-mp3
+
+[audio/x-mp3 - 4]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-noatun.desktop
+GenericServiceType=Application
+Preference=3
+ServiceType=audio/x-mp3
+
+[audio/x-mp3 - 5]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/freshrpms-xine.desktop
+GenericServiceType=Application
+Preference=2
+ServiceType=audio/x-mp3
+
+[audio/x-mp3 - 6]
+AllowAsDefault=true
+Application=Extras/Multimedia/redhat-audio-player.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=audio/x-mp3
+
+[audio/x-mp3 - 7]
+AllowAsDefault=true
+Application=kaboodle_component.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=1
+ServiceType=audio/x-mp3
+
+[audio/x-mpegurl - 1]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/realplay.desktop
+GenericServiceType=Application
+Preference=4
+ServiceType=audio/x-mpegurl
+
+[audio/x-mpegurl - 2]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/xmms.desktop
+GenericServiceType=Application
+Preference=3
+ServiceType=audio/x-mpegurl
+
+[audio/x-mpegurl - 3]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-noatun.desktop
+GenericServiceType=Application
+Preference=2
+ServiceType=audio/x-mpegurl
+
+[audio/x-mpegurl - 4]
+AllowAsDefault=true
+Application=Extras/Multimedia/redhat-audio-player.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=audio/x-mpegurl
+
+[audio/x-wav - 1]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/realplay.desktop
+GenericServiceType=Application
+Preference=5
+ServiceType=audio/x-wav
+
+[audio/x-wav - 2]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/xmms.desktop
+GenericServiceType=Application
+Preference=4
+ServiceType=audio/x-wav
+
+[audio/x-wav - 3]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-kaboodle.desktop
+GenericServiceType=Application
+Preference=3
+ServiceType=audio/x-wav
+
+[audio/x-wav - 4]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-noatun.desktop
+GenericServiceType=Application
+Preference=2
+ServiceType=audio/x-wav
+
+[audio/x-wav - 5]
+AllowAsDefault=true
+Application=Extras/Multimedia/redhat-audio-player.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=audio/x-wav
+
+[audio/x-wav - 6]
+AllowAsDefault=true
+Application=kaboodle_component.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=1
+ServiceType=audio/x-wav
+
+[text/html - 1]
+AllowAsDefault=true
+Application=Internet/More Internet/fedora-firefox.desktop
+GenericServiceType=Application
+Preference=2
+ServiceType=text/html
+
+[text/html - 2]
+AllowAsDefault=true
+Application=System/MoreSystem/kfmclient_html.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=text/html
+
+[text/html - 3]
+AllowAsDefault=true
+Application=khtml.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=2
+ServiceType=text/html
+
+[text/html - 4]
+AllowAsDefault=true
+Application=katepart.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=1
+ServiceType=text/html
+
+[video/asf - 1]
+AllowAsDefault=true
+Application=Extras/Multimedia/Xine.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=video/asf
+
+[video/mov - 1]
+AllowAsDefault=true
+Application=Extras/Multimedia/Xine.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=video/mov
+
+[video/mpeg - 1]
+Application=Multimedia/MoreMultimedia/freshrpms-xine.desktop
+Preference=3
+
+[video/mpeg - 2]
+Application=Multimedia/MoreMultimedia/kde-kaboodle.desktop
+Preference=2
+
+[video/mpeg - 3]
+Application=Multimedia/MoreMultimedia/kde-noatun.desktop
+Preference=1
+
+[video/mpeg - 4]
+Application=kaboodle_component.desktop
+GenericServiceType=KParts/ReadOnlyPart
+
+[video/quicktime - 1]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/freshrpms-xine.desktop
+GenericServiceType=Application
+Preference=3
+ServiceType=video/quicktime
+
+[video/quicktime - 2]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-kaboodle.desktop
+GenericServiceType=Application
+Preference=2
+ServiceType=video/quicktime
+
+[video/quicktime - 3]
+AllowAsDefault=true
+Application=Multimedia/MoreMultimedia/kde-noatun.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=video/quicktime
+
+[video/quicktime - 4]
+AllowAsDefault=true
+Application=kaboodle_component.desktop
+GenericServiceType=KParts/ReadOnlyPart
+Preference=1
+ServiceType=video/quicktime
+
+[video/wmv - 1]
+AllowAsDefault=true
+Application=Extras/Multimedia/Xine.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=video/wmv

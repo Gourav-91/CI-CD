@@ -1,0 +1,547 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN" "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+<Menu>
+ <Menu>
+  <Name>Edutainment</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Documentation</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>OpenOffice.org 1.1.0</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Other</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Oracle</Name>
+  <Directory>Oracle-2.directory</Directory>
+  <Include>
+   <Filename>Desktop Configuration Center-2.desktop</Filename>
+   <Filename>Desktop Machine Information-2.desktop</Filename>
+  </Include>
+  <Layout>
+   <Merge type="files" />
+   <Filename>Desktop Machine Information-2.desktop</Filename>
+   <Filename>Desktop Configuration Center-2.desktop</Filename>
+  </Layout>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Oracle-2</Name>
+  <NotDeleted/>
+  <Include>
+   <Filename>Oracle Calendar.desktop</Filename>
+   <Filename>System report.desktop</Filename>
+  </Include>
+  <Menu>
+   <Name>ITS</Name>
+   <Directory>ITS.directory</Directory>
+   <Include>
+    <Filename>its - U.K.desktop</Filename>
+    <Filename>its - U.K-2.desktop</Filename>
+   </Include>
+   <Layout>
+    <Merge type="files" />
+    <Filename>its - U.K.desktop</Filename>
+    <Filename>its - U.K-2.desktop</Filename>
+   </Layout>
+   <Deleted/>
+   <Menu>
+    <Name>Oracle Tools</Name>
+    <Directory>Oracle Tools.directory</Directory>
+    <Deleted/>
+   </Menu>
+  </Menu>
+  <Menu>
+   <Name>Desktop Utilities</Name>
+   <Directory>Desktop Utilities.directory</Directory>
+   <Include>
+    <Filename>Cisco VPN Client.desktop</Filename>
+    <Filename>ATT Dialer.desktop</Filename>
+    <Filename>NFS - SAMBA Mount Utility.desktop</Filename>
+    <Filename>ClamScan.desktop</Filename>
+    <Filename>Files Online - WebDav.desktop</Filename>
+    <Filename>Global Printer Configuration.desktop</Filename>
+   </Include>
+   <Exclude/>
+   <Layout>
+    <Merge type="files" />
+    <Filename>ATT Dialer.desktop</Filename>
+    <Filename>Cisco VPN Client.desktop</Filename>
+    <Filename>ClamScan.desktop</Filename>
+    <Filename>Files Online - WebDav.desktop</Filename>
+    <Filename>NFS - SAMBA Mount Utility.desktop</Filename>
+    <Filename>Global Printer Configuration.desktop</Filename>
+   </Layout>
+  </Menu>
+  <Menu>
+   <Name>Oracle Tools</Name>
+   <Directory>Oracle Tools-2.directory</Directory>
+   <Include>
+    <Filename>Oracle 9i Database Prep.desktop</Filename>
+    <Filename>Oracle 9i AS Prep.desktop</Filename>
+    <Filename>Oracle 10g Database Prep.desktop</Filename>
+    <Filename>Oracle 10g Grid Control Prep.desktop</Filename>
+    <Filename>Oracle 10g AS Prep.desktop</Filename>
+   </Include>
+   <Layout>
+    <Merge type="files" />
+    <Filename>Oracle 9i Database Prep.desktop</Filename>
+    <Filename>Oracle 9i AS Prep.desktop</Filename>
+    <Filename>Oracle 10g Database Prep.desktop</Filename>
+    <Filename>Oracle 10g Grid Control Prep.desktop</Filename>
+    <Filename>Oracle 10g AS Prep.desktop</Filename>
+   </Layout>
+   <Deleted/>
+  </Menu>
+  <Menu>
+   <Name>Oracle Tools-2</Name>
+   <NotDeleted/>
+   <Include>
+    <Filename>README for Oracle Scripts.desktop</Filename>
+    <Filename>Oracle 11i Applications Prep.desktop</Filename>
+   </Include>
+   <Layout>
+    <Merge type="files" />
+    <Filename>Oracle 9i Database Prep.desktop</Filename>
+    <Filename>Oracle 9i AS Prep.desktop</Filename>
+    <Filename>Oracle 10g Database Prep.desktop</Filename>
+    <Filename>Oracle 10g Grid Control Prep.desktop</Filename>
+    <Filename>Oracle 10g AS Prep.desktop</Filename>
+    <Filename>Oracle 11i Applications Prep.desktop</Filename>
+    <Filename>README for Oracle Scripts.desktop</Filename>
+   </Layout>
+   <Exclude/>
+   <Deleted/>
+  </Menu>
+  <Move>
+   <Old>Oracle Tools</Old>
+   <New>Oracle Tools-2</New>
+  </Move>
+  <Exclude>
+   <Filename>Tarantella Webtop Client.desktop</Filename>
+  </Exclude>
+  <Layout>
+   <Merge type="files" />
+   <Filename>System report.desktop</Filename>
+   <Filename>Oracle Calendar.desktop</Filename>
+   <Filename>Desktop Machine Information-2.desktop</Filename>
+   <Filename>Desktop Configuration Center-2.desktop</Filename>
+   <Merge type="menus" />
+   <Menuname>Desktop Utilities</Menuname>
+   <Menuname>Oracle Tools-2</Menuname>
+  </Layout>
+ </Menu>
+ <Move>
+  <Old>Oracle</Old>
+  <New>Oracle-2</New>
+ </Move>
+ <Menu>
+  <Name>Accessories</Name>
+  <Exclude>
+   <Filename>redhat-Autorun.desktop</Filename>
+   <Filename>kde-kalarm.desktop</Filename>
+   <Filename>kde-kandy.desktop</Filename>
+   <Filename>kde-karm.desktop</Filename>
+   <Filename>kde-KCharSelect.desktop</Filename>
+   <Filename>kde-kdict.desktop</Filename>
+   <Filename>kde-Kjots.desktop</Filename>
+   <Filename>kde-kpager.desktop</Filename>
+   <Filename>kde-kregexpeditor.desktop</Filename>
+   <Filename>kde-ksig.desktop</Filename>
+   <Filename>kde-ktimer.desktop</Filename>
+   <Filename>kde-ktnef.desktop</Filename>
+   <Filename>kde-lnkforward.desktop</Filename>
+   <Filename>kde-klipper.desktop</Filename>
+   <Filename>KWrite.desktop</Filename>
+  </Exclude>
+  <Include/>
+  <Layout/>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Graphics</Name>
+  <Exclude>
+   <Filename>kde-kcolorchooser.desktop</Filename>
+   <Filename>kde-kcoloredit.desktop</Filename>
+   <Filename>kde-kfax.desktop</Filename>
+   <Filename>kde-kghostview.desktop</Filename>
+   <Filename>kde-kruler.desktop</Filename>
+   <Filename>kde-kview.desktop</Filename>
+   <Filename>gnome-gpdf.desktop</Filename>
+   <Filename>gthumb.desktop</Filename>
+   <Filename>gnome-ggv.desktop</Filename>
+   <Filename>kde-kpdf.desktop</Filename>
+  </Exclude>
+  <Layout>
+   <Merge type="files" />
+   <Filename>gimp-2.0.desktop</Filename>
+   <Filename>kde-kdvi.desktop</Filename>
+   <Filename>kde-kiconedit.desktop</Filename>
+   <Filename>kde-kolourpaint.desktop</Filename>
+   <Filename>kde-kooka.desktop</Filename>
+   <Filename>kde-ksnapshot.desktop</Filename>
+   <Filename>kde-kuickshow.desktop</Filename>
+  </Layout>
+ </Menu>
+ <Menu>
+  <Name>Office</Name>
+  <Include>
+   <Filename>redhat-diagrams.desktop</Filename>
+   <Filename>fedora-scribus.desktop</Filename>
+   <Filename>redhat-drawing.desktop</Filename>
+   <Filename>redhat-word-processor.desktop</Filename>
+  </Include>
+  <Exclude>
+   <Filename>kde-kaddressbook.desktop</Filename>
+   <Filename>kde-Kontact.desktop</Filename>
+   <Filename>kde-korganizer.desktop</Filename>
+   <Filename>fedora-dia.desktop</Filename>
+  </Exclude>
+  <Layout>
+   <Merge type="menus" />
+   <Menuname>Oracle</Menuname>
+   <Merge type="files" />
+   <Filename>openoffice.org2.3-base.desktop</Filename>
+   <Filename>openoffice.org2.3-draw.desktop</Filename>
+   <Filename>openoffice.org2.3-math.desktop</Filename>
+   <Filename>openoffice.org2.3-printeradmin.desktop</Filename>
+   <Filename>openoffice.org2.3-impress.desktop</Filename>
+   <Filename>openoffice.org2.3-calc.desktop</Filename>
+   <Filename>openoffice.org2.3-writer.desktop</Filename>
+   <Filename>rpmforge-scribus.desktop</Filename>
+  </Layout>
+  <Menu>
+   <Name>Oracle</Name>
+   <NotDeleted/>
+  </Menu>
+ </Menu>
+ <Menu>
+  <Name>Applications</Name>
+  <Exclude>
+  </Exclude>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>.hidden</Name>
+  <Include>
+   <Filename>redhat-Autorun.desktop</Filename>
+   <Filename>kde-kalarm.desktop</Filename>
+   <Filename>kde-kandy.desktop</Filename>
+   <Filename>kde-karm.desktop</Filename>
+   <Filename>kde-KCharSelect.desktop</Filename>
+   <Filename>kde-kdict.desktop</Filename>
+   <Filename>kde-Kjots.desktop</Filename>
+   <Filename>kde-kpager.desktop</Filename>
+   <Filename>kde-kregexpeditor.desktop</Filename>
+   <Filename>kde-ksig.desktop</Filename>
+   <Filename>kde-ktimer.desktop</Filename>
+   <Filename>kde-ktnef.desktop</Filename>
+   <Filename>kde-kcolorchooser.desktop</Filename>
+   <Filename>kde-kcoloredit.desktop</Filename>
+   <Filename>kde-kfax.desktop</Filename>
+   <Filename>kde-kruler.desktop</Filename>
+   <Filename>kde-kview.desktop</Filename>
+   <Filename>gnome-gpdf.desktop</Filename>
+   <Filename>gthumb.desktop</Filename>
+   <Filename>gnome-ggv.desktop</Filename>
+   <Filename>kde-KMail.desktop</Filename>
+   <Filename>kde-knewsticker-standalone.desktop</Filename>
+   <Filename>kde-kopete.desktop</Filename>
+   <Filename>kde-KOrn.desktop</Filename>
+   <Filename>redhat-gnomemeeting.desktop</Filename>
+   <Filename>kde-kaddressbook.desktop</Filename>
+   <Filename>kde-Kontact.desktop</Filename>
+   <Filename>kde-korganizer.desktop</Filename>
+   <Filename>kde-catalogmanager.desktop</Filename>
+   <Filename>kde-kbabeldict.desktop</Filename>
+   <Filename>kde-kbabel.desktop</Filename>
+   <Filename>gnome-keyring-manager.desktop</Filename>
+   <Filename>kde-kwikdisk.desktop</Filename>
+   <Filename>kde-lnkforward.desktop</Filename>
+   <Filename>kde-klipper.desktop</Filename>
+   <Filename>KWrite.desktop</Filename>
+   <Filename>fedora-dia.desktop</Filename>
+   <Filename>Tarantella Webtop Client.desktop</Filename>
+  </Include>
+ </Menu>
+ <Menu>
+  <Name>Internet</Name>
+  <Exclude>
+   <Filename>kde-KMail.desktop</Filename>
+   <Filename>kde-knewsticker-standalone.desktop</Filename>
+   <Filename>kde-kopete.desktop</Filename>
+   <Filename>kde-KOrn.desktop</Filename>
+   <Filename>redhat-gnomemeeting.desktop</Filename>
+  </Exclude>
+  <Layout>
+   <Merge type="files" />
+   <Filename>redhat-evolution.desktop</Filename>
+   <Filename>mozilla-firefox.desktop</Filename>
+   <Filename>mozilla-thunderbird.desktop</Filename>
+   <Filename>gaim.desktop</Filename>
+   <Filename>kde-krdc.desktop</Filename>
+   <Filename>net-gftp.desktop</Filename>
+   <Filename>tsclient.desktop</Filename>
+   <Filename>kde-kwifimanager.desktop</Filename>
+   <Filename>kssh.desktop</Filename>
+   <Filename>kde-gflashplayer.desktop</Filename>
+   <Filename>xchat.desktop</Filename>
+   <Filename>kde-kget.desktop</Filename>
+   <Filename>kde-KNode.desktop</Filename>
+   <Filename>kde-konqbrowser.desktop</Filename>
+   <Filename>kde-Kppp.desktop</Filename>
+   <Filename>kde-kppplogview.desktop</Filename>
+   <Filename>kde-ksirc.desktop</Filename>
+  </Layout>
+  <Include>
+   <Filename>mozilla-thunderbird.desktop</Filename>
+   <Filename>gaim.desktop</Filename>
+   <Filename>kde-krdc.desktop</Filename>
+   <Filename>kde-kwifimanager.desktop</Filename>
+   <Filename>tsclient.desktop</Filename>
+   <Filename>kde-gflashplayer.desktop</Filename>
+   <Filename>kssh.desktop</Filename>
+  </Include>
+ </Menu>
+ <Menu>
+  <Name>Preferences</Name>
+  <Layout>
+   <Merge type="menus" />
+   <Menuname>Accessibility</Menuname>
+   <Menuname>MorePreferences</Menuname>
+   <Menuname>Multimedia</Menuname>
+   <Menuname>System</Menuname>
+   <Merge type="files" />
+   <Filename>redhat-userpasswd.desktop</Filename>
+  </Layout>
+  <Menu>
+   <Name>Applications</Name>
+   <Deleted/>
+  </Menu>
+ </Menu>
+ <Menu>
+  <Name>Development</Name>
+  <Layout>
+   <Merge type="files" />
+   <Filename>gnome-bug-buddy.desktop</Filename>
+   <Filename>kde-cervisia.desktop</Filename>
+   <Filename>kde-kdbg.desktop</Filename>
+   <Filename>gnome-devhelp.desktop</Filename>
+   <Filename>gnu-emacs.desktop</Filename>
+   <Filename>gnome-glade-2.desktop</Filename>
+   <Filename>kde-kbugbuster.desktop</Filename>
+   <Filename>kde-kcachegrind.desktop</Filename>
+   <Filename>kde-kdevassistant.desktop</Filename>
+   <Filename>kde-kdevdesigner.desktop</Filename>
+   <Filename>kde-kdevelop.desktop</Filename>
+   <Filename>kde-kompare.desktop</Filename>
+   <Filename>kde-kuiviewer.desktop</Filename>
+   <Filename>qt-designer.desktop</Filename>
+   <Filename>kde-umbrello.desktop</Filename>
+  </Layout>
+  <Exclude>
+   <Filename>kde-catalogmanager.desktop</Filename>
+   <Filename>kde-kbabeldict.desktop</Filename>
+   <Filename>kde-kbabel.desktop</Filename>
+  </Exclude>
+ </Menu>
+ <Menu>
+  <Name>System Settings</Name>
+  <Menu>
+   <Name>Server</Name>
+   <Layout>
+    <Merge type="menus" />
+    <Menuname>MoreServer</Menuname>
+    <Menuname>Multimedia</Menuname>
+    <Menuname>System</Menuname>
+    <Merge type="files" />
+    <Filename>system-config-services.desktop</Filename>
+   </Layout>
+   <Menu>
+    <Name>Applications</Name>
+    <Deleted/>
+   </Menu>
+  </Menu>
+  <Menu>
+   <Name>Applications</Name>
+   <Deleted/>
+  </Menu>
+  <Layout>
+   <Merge type="menus" />
+   <Menuname>Oracle</Menuname>
+   <Menuname>MoreSystemSettings</Menuname>
+   <Menuname>Server</Menuname>
+   <Menuname>System</Menuname>
+   <Merge type="files" />
+   <Filename>redhat-hwbrowser.desktop</Filename>
+   <Filename>system-config-lvm.desktop</Filename>
+   <Filename>redhat-system-config-printer.desktop</Filename>
+   <Filename>fedora-system-config-selinux.desktop</Filename>
+   <Filename>esc.desktop</Filename>
+   <Filename>redhat-authconfig.desktop</Filename>
+   <Filename>system-config-date.desktop</Filename>
+   <Filename>system-config-display.desktop</Filename>
+   <Filename>system-config-keyboard.desktop</Filename>
+   <Filename>system-config-language.desktop</Filename>
+   <Filename>gnome-gdmsetup.desktop</Filename>
+   <Filename>redhat-neat.desktop</Filename>
+   <Filename>redhat-rhn-up2date-config.desktop</Filename>
+   <Filename>system-config-rootpassword.desktop</Filename>
+   <Filename>system-config-securitylevel.desktop</Filename>
+   <Filename>system-config-soundcard.desktop</Filename>
+   <Filename>system-config-users.desktop</Filename>
+  </Layout>
+  <Menu>
+   <Name>Oracle</Name>
+   <NotDeleted/>
+  </Menu>
+ </Menu>
+ <Menu>
+  <Name>System</Name>
+  <Exclude>
+   <Filename>gnome-keyring-manager.desktop</Filename>
+   <Filename>kde-kwikdisk.desktop</Filename>
+  </Exclude>
+  <Include>
+   <Filename>xcdroast.desktop</Filename>
+   <Filename>redhat-rhn-up2date.desktop</Filename>
+   <Filename>ClamAV.desktop</Filename>
+   <Filename>kde-krfb.desktop</Filename>
+   <Filename>fedora-firestarter.desktop</Filename>
+  </Include>
+  <Layout>
+   <Merge type="files" />
+   <Filename>redhat-rhn-up2date.desktop</Filename>
+   <Filename>ClamAV.desktop</Filename>
+   <Filename>kde-krfb.desktop</Filename>
+   <Filename>fedora-firestarter.desktop</Filename>
+   <Filename>gnome-gconf-editor.desktop</Filename>
+   <Filename>redhat-usermount.desktop</Filename>
+   <Filename>kde-konquerorsu.desktop</Filename>
+   <Filename>redhat-hwbrowser.desktop</Filename>
+   <Filename>kde-kinfocenter.desktop</Filename>
+   <Filename>redhat-internet-druid.desktop</Filename>
+   <Filename>kde-ksysguard.desktop</Filename>
+   <Filename>kde-kdf.desktop</Filename>
+   <Filename>redhat-neat-control.desktop</Filename>
+   <Filename>rhn-applet.desktop</Filename>
+   <Filename>kde-krandrtray.desktop</Filename>
+   <Filename>system-logviewer.desktop</Filename>
+   <Filename>xcdroast.desktop</Filename>
+   <Filename>kde-konsole.desktop</Filename>
+   <Filename>kde-konsolesu.desktop</Filename>
+  </Layout>
+ </Menu>
+ <Include>
+  <Filename>Shutdown.desktop</Filename>
+  <Filename>REboot.desktop</Filename>
+ </Include>
+ <Exclude/>
+ <Menu>
+  <Name>Multimedia</Name>
+  <Layout>
+   <Merge type="files" />
+   <Filename>realplay.desktop</Filename>
+   <Filename>rpmforge-xine.desktop</Filename>
+   <Filename>kde-k3b.desktop</Filename>
+   <Merge type="menus" />
+   <Menuname>Jack and More</Menuname>
+   <Filename>kde-artsbuilder.desktop</Filename>
+   <Filename>kde-artscontrol.desktop</Filename>
+   <Filename>redhat-audio-player.desktop</Filename>
+   <Filename>kde-kaboodle.desktop</Filename>
+   <Filename>kde-kaudiocreator.desktop</Filename>
+   <Filename>kde-kmid.desktop</Filename>
+   <Filename>kde-kmix.desktop</Filename>
+   <Filename>kde-krec.desktop</Filename>
+   <Filename>kde-kscd.desktop</Filename>
+   <Filename>rhythmbox.desktop</Filename>
+   <Filename>kde-noatun.desktop</Filename>
+   <Filename>sound-juicer.desktop</Filename>
+   <Filename>gnome-sound-recorder.desktop</Filename>
+  </Layout>
+  <Menu>
+   <Name>Jack and More</Name>
+   <Layout/>
+   <Include/>
+   <Exclude>
+    <Filename>realplay.desktop</Filename>
+   </Exclude>
+  </Menu>
+  <Exclude/>
+  <Include>
+   <Filename>realplay.desktop</Filename>
+   <Filename>rpmforge-xine.desktop</Filename>
+   <Filename>kde-k3b.desktop</Filename>
+  </Include>
+ </Menu>
+ <Move>
+  <Old>Oracle-2</Old>
+  <New>System Settings/Oracle</New>
+ </Move>
+ <Menu>
+  <Name>Oracle-3</Name>
+  <NotDeleted/>
+ </Menu>
+ <Move>
+  <Old>System Settings/Oracle</Old>
+  <New>Oracle-3</New>
+ </Move>
+ <Move>
+  <Old>Oracle-3</Old>
+  <New>Office/Oracle</New>
+ </Move>
+ <Menu>
+  <Name>Oracle-4</Name>
+  <Layout>
+   <Merge type="files" />
+   <Filename>System report.desktop</Filename>
+   <Filename>Oracle Calendar.desktop</Filename>
+   <Filename>Desktop Machine Information-2.desktop</Filename>
+   <Filename>Desktop Configuration Center-2.desktop</Filename>
+   <Merge type="menus" />
+   <Menuname>Desktop Utilities</Menuname>
+  </Layout>
+  <Menu>
+   <Name>Desktop Utilities</Name>
+   <Layout>
+    <Merge type="files" />
+    <Filename>ATT Dialer.desktop</Filename>
+    <Filename>Cisco VPN Client.desktop</Filename>
+    <Filename>ClamScan.desktop</Filename>
+    <Filename>Files Online - WebDav.desktop</Filename>
+    <Filename>NFS - SAMBA Mount Utility.desktop</Filename>
+    <Filename>Global Printer Configuration.desktop</Filename>
+   </Layout>
+  </Menu>
+  <Deleted/>
+ </Menu>
+ <Move>
+  <Old>Office/Oracle</Old>
+  <New>Oracle-4</New>
+ </Move>
+ <Layout>
+  <Merge type="menus" />
+  <Menuname>System Tools</Menuname>
+  <Menuname>test</Menuname>
+  <Menuname>Utilities</Menuname>
+  <Menuname>Games</Menuname>
+  <Menuname>Graphics</Menuname>
+  <Menuname>Internet</Menuname>
+  <Menuname>Office</Menuname>
+  <Menuname>Preferences</Menuname>
+  <Menuname>Development</Menuname>
+  <Menuname>Multimedia</Menuname>
+  <Menuname>System Settings</Menuname>
+  <Menuname>System</Menuname>
+  <Merge type="files" />
+  <Filename>pirut.desktop</Filename>
+  <Filename>REboot.desktop</Filename>
+  <Filename>Shutdown.desktop</Filename>
+ </Layout>
+</Menu>

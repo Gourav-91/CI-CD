@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=LUKS Key Escrow
+Categories=Utility;System;
+Comment=LUKS Key Escrow Desktop
+Comment[en_CA]=LUKS Key Escrow Desktop
+Exec=konsole -e sudo /opt/desktop/obi_cc_script/luks-escrow
+Icon=/opt/desktop/icons/oracle_2.png
+Hidden=false
+Terminal=false
+Type=Application
+GenericName[en_CA]=

@@ -1,0 +1,12 @@
+allowDesktopControl=false
+allowUninvited=false
+confirmUninvitedConnection=true
+enableSLP=true
+preferredPort=-1
+uninvitedPasswordCrypted=
+
+[invitations]
+creation0=2003,11,26,18,4,3
+expiration0=2003,11,26,19,4,3
+invitation_num=1
+password0=￝ﾲﾪ￲ￗﾩﾸ

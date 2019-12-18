@@ -1,0 +1,466 @@
+/*
+jQuery.msgBox plugin 
+Copyright 2011, Halil ƒ∞brahim Kalyoncu
+License: BSD
+modified by Oliver Kopp, 2012.
+ * added support for configurable image paths
+ * a new msgBox can be shown within an existing msgBox
+*/
+
+/*
+contact :
+
+halil@ibrahimkalyoncu.com
+koppdev@googlemail.com
+
+*/
+
+// users may change this variable to fit their needs
+var msgBoxImagePath = "images/";
+var countdownTimer = null,
+    globalTimeout = null,
+    remainingMS, 
+    remainingCurrentSecondMS;
+
+jQuery.msgBox = msg;
+function msg (options) {
+    var isShown = false;
+    var typeOfValue = typeof options;
+    var pxForTop = 90;
+    var defaults = {
+        content: (typeOfValue == "string" ? options : "Message"),
+        title: "Warning",
+        showTitle: true,
+        type: "alert",
+        autoClose: false,
+        timeOut: 0,
+        showButtons: true,
+        buttons: [{ value: "Ok"}],
+        inputs: [{ type: "text", name:"userName", header: "User Name" }, { type: "password",name:"password", header: "Password"}],
+        success: function (result) { },
+        beforeShow: function () { },
+        afterShow: function () { },
+        beforeClose: function () { },
+        afterClose: function () { },
+        opacity: 0.1,
+        loadOrder: 0,
+        bgColor: "#D9E4FA",
+        showCountdown: false,
+        displayOnTop: false,
+        verticalShift: 0,
+        displayOnTopOfPopup: false
+    };
+    options = typeOfValue == "string" ? defaults : options;
+    if (options.type != null && options.showTitle == true) {
+        switch (options.type) {
+            case "alert":
+                options.title = options.title == null ? "Warning" : options.title;
+                break;
+            case "info":
+                options.title = options.title == null ? "Information" : options.title;
+                break;
+            case "error":
+                options.title = options.title == null ? "Error" : options.title;
+                break;
+            case "confirm":
+                options.title = options.title == null ? "Confirmation" : options.title;
+                options.buttons = options.buttons == null ? [{ value: "Yes" }, { value: "No" }, { value: "Cancel"}] : options.buttons;
+                break;
+            case "prompt":
+                options.title = options.title == null ? "Log In" : options.title;
+                options.buttons = options.buttons == null ? [{ value: "Login" }, { value: "Cancel"}] : options.buttons;
+                break;
+            default:
+                image = "alert.png";
+        }
+    }
+    options.timeOut = options.timeOut == null ? (options.content == null ? 500 : options.content.length * 70) : options.timeOut;
+    options = $.extend(defaults, options);
+//    if (options.autoClose) {
+//        if(options.timeOut != 0 && options.timeOut != -1)
+//            globalTimeout = new TimerTimeout(hide,options.timeOut);//setTimeout(hide, options.timeOut);
+//    }
+    if(options.displayOnTop){
+        pxForTop = 3;
+    }
+    var image = "";
+    switch (options.type) {
+        case "alert":
+            image = "alert.png";
+            //image = "warning.png";
+            break;
+        case "info":
+            image = "info_ena.png";
+            break;
+        case "error":
+            image = "error.png";
+            //options.bgColor = "#FF0000";
+            break;
+        case "confirm":
+            //image = "confirm.png";
+            image = "confirmation_qualifier.png";
+            break;
+        case "confirmation":
+            image = "confirmation_qualifier.png";
+            break;
+        default:
+            image = "alert.png";
+    }
+    
+    var divId = "msgBox" + new Date().getTime();
+    
+    var divMsgBoxId = divId; 
+    var divMsgBoxContentId = divId+"Content"; 
+    var divMsgBoxImageId = divId+"Image";
+    var divMsgBoxButtonsId = divId+"Buttons";
+    var divMsgBoxBackGroundId = divId+"BackGround";
+    
+    var buttons = "";
+    $(options.buttons).each(function (index, button) {
+        buttons += "<input class=\"msgButton\" type=\"button\" name=\"" + button.value + "\" value=\"" + button.value + "\" />";
+    });
+
+    var inputs = "";
+    $(options.inputs).each(function (index, input) {
+        var type = input.type;
+        if (type=="checkbox" || type =="radiobutton") {
+            inputs += "<div class=\"msgInput\">" +
+            "<input type=\"" + input.type + "\" name=\"" + input.name + "\" "+(input.checked == null ? "" : "checked ='"+input.checked+"'")+" value=\"" + (typeof input.value == "undefined" ? "" : input.value) + "\" />" +
+            "<text>"+input.header +"</text>"+
+            "</div>";
+        }
+        else {
+            inputs += "<div class=\"msgInput\">" +
+            "<span class=\"msgInputHeader\">" + input.header + "<span>" +
+            "<input type=\"" + input.type + "\" name=\"" + input.name + "\" value=\"" + (typeof input.value == "undefined" ? "" : input.value) + "\" />" +
+            "</div>";
+        }
+    });
+
+    var divBackGround = "<div id=" + divMsgBoxBackGroundId + " class=\"msgBoxBackGround\"></div>";
+    var divTitle = options.showTitle == true ? "<div class=\"msgBoxTitle\">" + options.title + "</div>" : "";
+    //var divContainer = "<div class=\"msgBoxContainer\"><div id=" + divMsgBoxImageId + " class=\"msgBoxImage\"><img class=\"msgBoxImg\" src=\"" + msgBoxImagePath + image + "\"/></div><div id=" + divMsgBoxContentId + " class=\"msgBoxContent\"><p><span>" + options.content + "</span></p></div></div>";
+    var divContainer = "<div class=\"msgBoxContainer\"><div id=" + divMsgBoxContentId + " class=\"msgBoxContent\"><p><span><img class=\"msgBoxImg\" src=\"" + msgBoxImagePath + image + "\"/>" + options.content + "</span></p></div></div>";
+    var divButtons = "<div id=" + divMsgBoxButtonsId + " class=\"msgBoxButtons\">" + buttons + "</div>";
+    var divInputs = "<div class=\"msgBoxInputs\">" + inputs + "</div>";
+
+    var divMsgBox; 
+    var divMsgBoxContent; 
+    var divMsgBoxImage;
+    var divMsgBoxButtons;
+    var divMsgBoxBackGround;
+
+    if (options.type == "prompt") {
+        $("html").append(divBackGround + "<div id=" + divMsgBoxId + " class=\"msgBox\">" + divTitle + "<div>" + divContainer + (options.showButtons ? divButtons + "</div>" : "</div>") + "</div>");
+        divMsgBox = $("#"+divMsgBoxId); 
+        divMsgBoxContent = $("#"+divMsgBoxContentId); 
+        divMsgBoxImage = $("#"+divMsgBoxImageId);
+        divMsgBoxButtons = $("#"+divMsgBoxButtonsId);
+        divMsgBoxBackGround = $("#"+divMsgBoxBackGroundId);
+
+        divMsgBoxImage.remove();
+        divMsgBoxButtons.css({"text-align":"center","margin-top":"5px"});
+        divMsgBoxContent.css({"width":"100%","height":"100%"});
+        divMsgBoxContent.html(divInputs);
+    }
+    else {
+        var okToDisplayOnTop = false;
+        if(options.displayOnTop){
+            var popupContainer = $("#__af_Z_window");
+            if(popupContainer.size() == 1){
+                okToDisplayOnTop = true;
+                $("#__af_Z_window").parent().append(divBackGround + "<div id=" + divMsgBoxId + " class=\"msgBox\">" + divTitle + "<div>" + divContainer + (options.showButtons ? divButtons + "</div>" : "</div>") + "</div>");
+                divMsgBox= $("#"+divMsgBoxId); 
+                divMsgBoxContent = $("#"+divMsgBoxContentId); 
+                divMsgBoxImage = $("#"+divMsgBoxImageId);
+                divMsgBoxButtons = $("#"+divMsgBoxButtonsId);
+                divMsgBoxBackGround = $("#"+divMsgBoxBackGroundId);
+            }
+        } 
+        if(!okToDisplayOnTop) {
+            $("html").append(divBackGround + "<div id=" + divMsgBoxId + " class=\"msgBox\">" + divTitle + "<div>" + divContainer + (options.showButtons ? divButtons + "</div>" : "</div>") + "</div>");
+            divMsgBox= $("#"+divMsgBoxId); 
+            divMsgBoxContent = $("#"+divMsgBoxContentId); 
+            divMsgBoxImage = $("#"+divMsgBoxImageId);
+            divMsgBoxButtons = $("#"+divMsgBoxButtonsId);
+            divMsgBoxBackGround = $("#"+divMsgBoxBackGroundId);
+        }
+    }
+
+    var width = divMsgBox.width();
+    var height = divMsgBox.height();
+    var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+    
+    //set messageBox width to 30% of window width
+    width = windowWidth*0.3;
+    divMsgBox.width(width);
+    
+    var top = windowHeight / 2 - height / 2;
+    top = pxForTop + 7*options.loadOrder + options.verticalShift;
+    var left = windowWidth / 2 - width / 2;
+    left = left + 7*options.loadOrder;
+    
+    //if message is only one row, center align
+    var msgBoxContentHeight = divMsgBoxContent.height();
+    //if(msgBoxContentHeight <= 20){
+        var msgBoxContentWidth = divMsgBoxContent.children('p').children('span').width(), marginLeft;
+        marginLeft = (width - msgBoxContentWidth)/2;
+        divMsgBoxContent.css("margin-left",marginLeft);
+    //}
+    
+    show();
+
+    function show() {
+        if (isShown) {
+            return;
+        }
+
+        if("true" == options.displayOnTopOfPopup){
+            divMsgBoxBackGround.css("z-index","2147483646");
+            divMsgBox.css("z-index","2147483646");
+        }
+        
+        divMsgBox.css({ opacity: 0, top: top - 50, left: left });
+        //divMsgBox.css("background-image", "url('"+msgBoxImagePath+"msgBoxBackGround.png')");
+        //divMsgBox.css("background-color","#D9E4FA");
+        
+        
+        if( options.type == "error"){
+            //divMsgBox.addClass("msgBoxError");
+            divMsgBoxContent.find('span').css("color","#E42217"); //set color to white if error type, along with the red background
+        } 
+        divMsgBox.css("background-color",options.bgColor);
+        
+        
+            //if message will not disappear, hide the background to allow user interaction with the page contents
+        if(options.timeOut == -1){
+            divMsgBoxBackGround.hide();
+        } else {
+            divMsgBoxBackGround.css({ opacity: options.opacity });
+        }
+        options.beforeShow();
+        divMsgBoxBackGround.css({ "width": $(document).width(), "height": getDocHeight() });
+        $(divMsgBoxId+","+divMsgBoxBackGroundId).fadeIn(0);
+        divMsgBox.animate({ opacity: 1, "top": top, "left": left }, 200);
+        setTimeout(options.afterShow, 200);
+        isShown = true;
+        $(window).bind("resize", function (e) {
+            var width = divMsgBox.width();
+            var height = divMsgBox.height();
+            var windowHeight = $(window).height();
+            var windowWidth = $(window).width();
+
+            //adjust the background also
+            divMsgBoxBackGround.css({ "width": windowWidth, "height": windowHeight });
+
+            var top = windowHeight / 2 - height / 2;
+            top = pxForTop + 7*options.loadOrder + options.verticalShift;
+            var left = windowWidth / 2 - width / 2;
+            left = left + 7*options.loadOrder;
+            
+            divMsgBox.css({ "top": top, "left": left });
+        });
+        //if showCountdown, display the seconds until the message hides, only if autoClose option is enabled
+        if (options.autoClose && options.showCountdown) {
+            if(options.timeOut > 0 ){
+                //get number of seconds message will be displayed
+                var secs = options.timeOut / 1000,
+                    span = divMsgBoxContent.find('span'),
+                    spanText = span.html(),
+                    countdownText = "<br />Message closing in <strong>",
+                    seconds = "<\/strong> seconds. ",
+                    second = "<\/strong> second. ",
+                    pauseText = "Pause",
+                    resumeText = "Resume",
+                    pauseLink = "<a href='#' id='" + divId + "pauseLink'>" + pauseText + "<\/a>";
+                function doCountdown(){
+                    countdownTimer = setInterval(
+                        function(){
+                            if(secs >= 0){
+                                if(secs != 1){
+                                    span.html(spanText + countdownText + secs + seconds + pauseLink);
+                                } else {
+                                    span.html(spanText + countdownText + secs + second + pauseLink);
+                                }
+                            } secs--;
+                        },1000
+                    );
+                }
+                    
+                    //add click handler to the close link
+                //span.delegate("#__messageCloseLink", "click", function(){
+                //    hide(true);
+                //});
+                
+                    //add click handler to the pause/resume link
+                span.delegate("#"+divId+"pauseLink","click",function(){
+                    var linkText = $("#"+divId+"pauseLink").text();
+                    
+                        //if it is Pause link
+                    if(linkText == pauseText){
+                            //change link text to resume
+                        $("#"+divId+"pauseLink").text(resumeText);
+                            //pause globalTimeout
+                        globalTimeout.pause();
+                            //end countdown
+                        if(countdownTimer != null){
+                            clearInterval(countdownTimer);
+                        }
+                            //get remaining ms
+                        remainingMS = globalTimeout.getRemaining();
+                            //get remaining ms from the current second
+                        remainingCurrentSecondMS = remainingMS % 1000;
+                        globalTimeout.setRemaining(secs*1000 + remainingCurrentSecondMS);
+                    }
+                    
+                        //if it is Resume link
+                    if(linkText == resumeText){
+                            //change link text to pause
+                        $("#"+divId+"pauseLink").text(pauseText);                        
+                            //start the globalTimeout
+                        globalTimeout.resume();
+                            //start the countdown after the remaining ms of the current second have passed
+                        setTimeout(
+                            function(){
+                                doCountdown();
+                            },remainingCurrentSecondMS
+                        );
+                    }
+                });
+                
+                doCountdown();
+            }
+        }
+        
+        //start the countdown
+        if (options.autoClose) {
+            if(options.timeOut != 0 && options.timeOut != -1 && options.timeOut != -2)
+                globalTimeout = new TimerTimeout(hide,options.timeOut);//setTimeout(hide, options.timeOut);
+        }
+    }
+
+    jQuery.msgBoxHide = hide;
+
+    function hide(forceHide) {
+        //forceHide - true, when user clicked outside the message box forcing the message to hide.
+        if (!isShown) {
+            return;
+        }
+        var _forceHide = false;
+        if(typeof(forceHide) == 'undefined') _forceHide = false;
+        else _forceHide = forceHide;
+        options.beforeClose();
+        divMsgBox.animate({ opacity: 0, "top": top - 50, "left": left }, 200);
+        divMsgBoxBackGround.fadeOut(300);
+        setTimeout(function () { divMsgBox.remove(); divMsgBoxBackGround.remove(); }, 300);
+        
+        
+        //execute afterClose method only if the message box was closing by itself (timeout expired)
+        //this prevents running of 'afterClose' method and also prevents
+        //auto returning to previous page after user closes the popup before contdown or timeout expires and message box auto-closes
+        //NOTE: if in this case any functionality should be called and overwrite this behavior, use 'beforeClose'
+        
+        if(options.autoClose && !_forceHide){
+            setTimeout(options.afterClose, 300);
+        }
+        
+        isShown = false;
+        ITAS_CUSTOM_MESSAGE.loadOrder--;
+        if(countdownTimer != null){
+            clearInterval(countdownTimer);
+        }
+    }
+
+    function getDocHeight() {
+        var D = document;
+        return Math.max(
+        Math.max(D.body.scrollHeight, D.documentElement.scrollHeight),
+        Math.max(D.body.offsetHeight, D.documentElement.offsetHeight),
+        Math.max(D.body.clientHeight, D.documentElement.clientHeight));
+    }
+
+    function getFocus() {
+    	divMsgBox.fadeOut(200).fadeIn(200);
+    }
+
+    $("input.msgButton").click(function (e) {
+        e.preventDefault();
+        var value = $(this).val();
+        if (options.type != "prompt") {
+            options.success(value);
+        }
+        else {
+            var inputValues = [];
+            $("div.msgInput input").each(function (index, domEle) {
+                var name = $(this).attr("name");
+                var value = $(this).val();
+                var type = $(this).attr("type");
+                if (type == "checkbox" || type == "radiobutton") {
+                    inputValues.push({ name: name, value: value,checked: $(this).attr("checked")});
+                }
+                else {
+                    inputValues.push({ name: name, value: value });
+                }
+            });
+            options.success(value,inputValues);
+        }
+        hide(false);
+    });
+
+    divMsgBoxBackGround.click(function (e) {
+        if(options.timeOut != -1){
+            if (!options.showButtons || options.autoClose) {
+                hide(true);
+            }
+            else {
+                getFocus();
+            }
+        }
+    });
+    
+    
+    
+    function TimerTimeout(callback, delay) {
+        var timerId, start, remaining = delay;
+    
+        this.pause = function() {
+            window.clearTimeout(timerId);
+            remaining -= new Date() - start;
+        };
+    
+        this.resume = function() {
+            start = new Date();
+            timerId = window.setTimeout(callback, remaining);
+        };
+        
+        this.getRemaining = function(){
+            return remaining;
+        }
+        
+        this.setRemaining = function(r){
+            remaining = r;
+        }
+    
+        this.resume();
+    }
+};
+ò∆Qç∞      ]Ó∆4]Ó∆9AÙ*]¯ ¥   C    :https://itas.oraclecorp.com/itas/resources/jQuery/jquery.msgBox.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Mon, 09 Dec 2019 22:10:01 GMT
+Server: Oracle-Application-Server-11g
+Accept-Ranges: bytes
+Last-Modified: Tue, 02 Jul 2019 13:43:30 GMT
+X-ORACLE-DMS-ECID: 005aKmc92ww6iKQqu^n3EH0002rj001Xrq
+Content-Type: application/javascript
+Content-Language: en
+ original-response-headers Date: Mon, 09 Dec 2019 22:10:01 GMT
+Server: Oracle-Application-Server-11g
+Accept-Ranges: bytes
+Last-Modified: Tue, 02 Jul 2019 13:43:30 GMT
+X-ORACLE-DMS-ECID: 005aKmc92ww6iKQqu^n3EH0002rj001Xrq
+Keep-Alive: timeout=5, max=98
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: application/javascript
+Content-Language: en
+ uncompressed-len 0 net-response-time-onstart 4281 net-response-time-onstop 4291   Hò

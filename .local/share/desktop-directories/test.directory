@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=GDS Applications
+Comment[en_US]=GDS Applications
+Encoding=UTF-8
+GenericName=
+Icon=/opt/desktop/icons/oracle_2.png
+Name=Oracle GDS
+Name[en_US]=Oracle GDS
+NoDisplay=false
+Type=Directory

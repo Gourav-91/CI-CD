@@ -1,0 +1,693 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- Copyright (c) 2011, 2016, Oracle and/or its affiliates. All rights reserved. -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Summary</title>
+<script type="text/javascript" src="/Extensions/ajax.js"></script>
+<script type="text/javascript" src="/Extensions/session.js"></script>
+<script type="text/javascript" src="/Extensions/luapi.js"></script>
+<script type="text/javascript" src="/Extensions/browserVersion.js"></script>
+<script type="text/javascript" src="/Extensions/cssPicker.js"></script>
+<script type="text/javascript" src="/Extensions/htui.js"></script>
+<script type="text/javascript" src="/Extensions/sdm.js"></script>
+<script type="text/javascript" src="/Extensions/platform.jasp"></script>
+<script type="text/javascript">
+var treeframe = parent.treeFrame;
+var enableILOMSettings = ht_enableILOMSettings();
+var enableHostSettings = ht_enableHostSettings();
+
+onload = function()
+{
+    
+}
+onunload = function()
+{
+    closeGenWindow();
+}
+var javawsInstalled = 0;
+isIE = "false";
+if (navigator.mimeTypes && navigator.mimeTypes.length) {
+    x = navigator.mimeTypes['application/x-java-jnlp-file'];
+    if (x) {
+        javawsInstalled = 1;
+    }
+} else {
+    isIE = "true";
+}
+</script>
+<script type="text/vbscript">
+on error resume next
+If isIE = "true" Then
+    If Not(IsObject(CreateObject("JavaWebStart.isInstalled"))) Then
+        javawsInstalled = 0
+    Else
+       javawsInstalled = 1
+    End If
+End If
+</script>
+<script type="text/javascript">
+function loadIntoHiddenIframe(src)
+{
+    document.getElementById("RedirHidden").src = src;
+}
+function clearHiddenIframe()
+{
+    loadIntoHiddenIframe("/iPages/blank.htm");
+}
+var mode;
+checkJavaWS = function() {
+    var minVersion;
+
+    minVersion = "5.0";
+
+    if (!javawsInstalled) {
+        if (!confirm("The remote console application requires Java " + minVersion + ".\nPlease download Java from http://www.java.com.\n\nDo you wish to continue?")) {
+            return false;
+        }
+    }
+    return true;
+}
+doLaunchJava = function()
+{
+
+    mode = "16";
+
+    if (checkJavaWS()) {
+        loadIntoHiddenIframe("/iPages/i_redlaunch.asp");
+    }
+}
+</script>
+</head>
+<body class="body">
+<script type="text/javascript">
+var helpText;
+var helpAry = new Array();
+
+
+helpText = "change";
+
+helpAry.push(helpText + " power state");
+
+
+helpAry.push("view system status and fault information");
+
+helpText = "View system summary information.";
+if (helpAry.length > 0) {
+    helpText += " You may also " + helpAry.join(" and ") + ".";
+}
+
+helpText += MiniHelpHtml("Sysinfo_Summary.asp");
+
+ht_writePageHeader({helpText:helpText});
+UpdateActivity();
+</script>
+<div class="noTitleSpace"></div>
+<table width="100%" role="presentation">
+  <tr valign="top">
+    <td style="padding-right:19px;">
+<script type="text/javascript">
+
+var info = new Array();
+function AddInfo(row, name, value) {
+    if (typeof(value) != "undefined") {
+        info.push({meta:{settable:'false'}, data:{row_index:row, name:name, value:value}});
+    }
+}
+function AddInfoDetail(row, name, value, detail) {
+    if (typeof(name) != "undefined"  &&  typeof(value) != "undefined") {
+        var valueStr = value;
+        if (typeof(detail) != "undefined"  &&  ! detail.strcasecmp("-")) {
+            var mouseoverStr = "sdmDisplayTooltip(this, event, \"" + name + "\", \"" + value + "\", \"" + detail + "\"); return false;";
+            var a_id = name.make_html_id().toLowerCase() + "_lnk";
+            var valueStr = "<a id='" + a_id + "' href='#' onmouseover='" + mouseoverStr + "' onClick='" + mouseoverStr + "'>" + value + "<\/a>\n";
+        }
+        info.push({meta:{settable:'false'}, data:{row_index:row, name:name, value:valueStr}});
+    }
+}
+var sysinfo = new Array();
+sysinfo[0] = { meta: { settable:'false' }, data: { row_index:'/System', obj_name:'System', 'health':'OK', 'health_details':'-', 'open_problems_count':'0', 'type':'Rack Mount', 'model':'SUN FIRE X4170 M2 SERVER', 'qpart_id':'urn:uuid:3158f092-cb2e-11de-9e65-080020a9ed93', 'part_number':'30127125+1+1', 'serial_number':'1146FMM0LU', 'system_identifier':'', 'system_fw_version':'3.2.7.30.a', 'primary_operating_system':'Oracle Linux Server release 5.11', 'primary_operating_system_detail':'-', 'host_primary_mac_address':'00:21:28:d7:4d:7a', 'ilom_address':'10.225.132.27', 'ilom_mac_address':'00:21:28:D7:4D:7E', 'locator_indicator':'Off', 'power_state':'On', 'actual_power_consumption':'178 watts' } };
+sysinfo[1] = { meta: { settable:'false' }, data: { row_index:'/System/Processors', obj_name:'Processors', 'health':'OK', 'health_details':'-', 'architecture':'x86 64-bit', 'summary_description':'Two Intel Xeon Processor 5600 Series', 'installed_cpus':'2', 'max_cpus':'2' } };
+sysinfo[2] = { meta: { settable:'false' }, data: { row_index:'/System/Memory', obj_name:'Memory', 'health':'OK', 'health_details':'-', 'installed_memory':'144 GB', 'installed_dimms':'18', 'max_dimms':'18' } };
+sysinfo[3] = { meta: { settable:'false' }, data: { row_index:'/System/Power', obj_name:'Power', 'health':'OK', 'health_details':'-', 'actual_power_consumption':'178 watts', 'max_permitted_power':'680 watts', 'installed_power_supplies':'2', 'max_power_supplies':'2' } };
+sysinfo[4] = { meta: { settable:'false' }, data: { row_index:'/System/Cooling', obj_name:'Cooling', 'health':'OK', 'health_details':'-', 'installed_chassis_fans':'16', 'max_chassis_fans':'16', 'installed_power_supply_fans':'2', 'max_power_supply_fans':'2', 'inlet_temp':'19 degrees C', 'exhaust_temp':'37 degrees C' } };
+sysinfo[5] = { meta: { settable:'false' }, data: { row_index:'/System/Storage', obj_name:'Storage', 'health':'OK', 'health_details':'-', 'installed_disks':'2', 'max_disks':'8', 'installed_disk_size':'558 GB', 'add_on_disks':'0', 'add_on_disk_size':'0 GB', 'logical_volumes':'0', 'disk_controllers':'1' } };
+sysinfo[6] = { meta: { settable:'false' }, data: { row_index:'/System/Networking', obj_name:'Networking', 'health':'OK', 'health_details':'-', 'installed_eth_nics':'4', 'installed_infiniband_hcas':'0' } };
+sysinfo[7] = { meta: { settable:'false' }, data: { row_index:'/System/PCI_Devices', obj_name:'PCI_Devices', 'installed_add_ons':'2', 'add_on_start_slot':'0', 'max_add_ons':'3' } };
+sysinfo[8] = { meta: { settable:'false' }, data: { row_index:'/System/Firmware', obj_name:'Firmware', 'system_fw_version':'3.2.7.30.a' } };
+
+var sysinfoIndex = new Array();
+for (i = 0; i <sysinfo.length; i++) {
+    sysinfoIndex[sysinfo[i].data.obj_name] = i;
+}
+var sysinfoData;
+if (sysinfo.length > 0) {
+    sysinfoData = sysinfo[0].data;
+} else {
+    sysinfoData = new Array();
+}
+AddInfo("type", "System Type", sysinfoData.type);
+AddInfo("model", "Model", sysinfoData.model);
+AddInfo("qpart_id", "QPart ID", sysinfoData.qpart_id);
+AddInfo("part", "Part Number", sysinfoData.part_number);
+AddInfo("serial", "Serial Number", sysinfoData.serial_number);
+AddInfo('component_model', 'Component Model', sysinfoData.component_model);
+AddInfo('component_part_number', 'Component Part Number', sysinfoData.component_part_number);
+AddInfo('component_serial_number', 'Component Serial Number', sysinfoData.component_serial_number);
+AddInfo('chassis_model', 'Chassis Model', sysinfoData.chassis_model);
+AddInfo('chassis_part', 'Chassis Part Number', sysinfoData.chassis_part_number);
+AddInfo('chassis_serial', 'Chassis Serial Number', sysinfoData.chassis_serial_number);
+AddInfo('chassisaddress', 'Chassis Address', sysinfoData.chassis_address);
+AddInfo('chassisipv6address', 'Chassis IPv6 Address', sysinfoData.chassis_ipv6_address);
+AddInfo('chassisdesc', 'Chassis Description', sysinfoData.chassis_custom_description);
+AddInfo('systemid', 'System Identifier', sysinfoData.system_identifier);
+AddInfo('ilomversion', 'System Firmware Version', sysinfoData.system_fw_version);
+
+AddInfoDetail('hostos', 'Primary Operating System', sysinfoData.primary_operating_system, sysinfoData.primary_operating_system_detail);
+AddInfo('hostmac', 'Host Primary MAC Address', sysinfoData.host_primary_mac_address);
+
+
+AddInfo('ilomaddress', 'ILOM Address', sysinfoData.ilom_address);
+AddInfo('ilommac', 'ILOM MAC Address', sysinfoData.ilom_mac_address);
+showAsTable({ary:info,
+             title:'General Information',
+             stripe:'table',
+             columnnames:{name:'none', value:'none'},
+             colmeta:{name:{width:'1px', nowrap:'nowrap'}},
+             useColNames:false,
+             width:'100%',
+             summary:'The General Information table displays key product identification information of the system, including hardware identification numbers, network information, and firmware version.'
+            });
+</script>
+    </td>
+    <td width="375">
+<script type="text/javascript">
+var values = new Array();
+var retries = 0;
+var expected_power_state;
+var handleSet = function(error, text) {
+    if (error == false && text == "OK") {
+        if (typeof(this.data) == "object") {
+            makeBall(this.data.val, this.data.type);
+        }
+    } else {
+        alert("Set failed: " + text);
+    }
+}
+
+handlePowerGet = function(error, resp_val)
+{
+    var state_val = parseAjaxResponse(error, resp_val);
+    if (!state_val || typeof(state_val) != "object" || typeof(state_val[0]) != "string" || state_val[0] == "") {
+        alert("Could not obtain current power state");
+        return;
+    }
+    var curr_state = state_val[0];
+    if (expected_power_state.strcasecmp("update_only")) {
+        expected_power_state = sysinfoData.power_state = curr_state;
+        makeBall(curr_state, "Power");
+        return;
+    }
+    if (curr_state.strcasecmp(expected_power_state)) {
+        sysinfoData.power_state = curr_state;
+        makeBall(curr_state, "Power");
+        document.getElementById("power_status").innerHTML = "";
+        retries = 0;
+    } else {
+        setButtonDisable("button_Power");
+        document.getElementById("power_status").innerHTML = "<font size='-15%'>Power " + expected_power_state + " In Progress...<\/font>";
+        if (retries < 20) {
+            setTimeout("getPowerState()", 10000);
+        } else {
+            alert("Unable to confirm that the power state was changed. Please check the status of the host OS or its settings.");
+            setButtonEnable("button_Power");
+            document.getElementById("power_status").innerHTML = "";
+            retries = 0;
+        }
+    }
+}
+getPowerState = function()
+{
+    retries++;
+    var getpower = new htAjax({params:"cmd=luapiGet&0=/System/power_state", resp_func:handlePowerGet});
+    getpower.send();
+}
+handlePowerSet = function(error, text)
+{
+    if (error == false && text == "OK") {
+        retries = 0;
+        getPowerState();
+    } else {
+        alert("Set failed: " + text);
+        expected_power_state = "update_only";
+        getPowerState();
+    }
+}
+
+
+doSet = function(type, val)
+{
+    var path;
+    var resp_func;
+
+    if (type == "Power") {
+        resp_func = handlePowerSet;
+        path = "/System/action";
+        if (val.strcasecmp("power_off")) {
+            expected_power_state = "Off";
+        } else if (val.strcasecmp("power_on")) {
+            expected_power_state = "On";
+        }
+    } else
+
+
+    if (type == "Locator") {
+        resp_func = handleSet;
+        path = "/System/locator_indicator";
+    } else {
+        alert("Oops invalid type: " + type);
+        return;
+    }
+    var setobj = new htAjax({params:"cmd=luapiTestAndSet&0=" + path + "&1=" + val, resp_func:resp_func, data:{type:type, val:val}});
+    setobj.send();
+}
+summaryPageAction = function(type, state)
+{
+    var txt, path, val, systype;
+    if (type == "Locator") {
+        if (state.strcasecmp("on")) {
+            val = "off";
+            txt = "The location LED will be set to off. Click OK to continue.";
+        } else {
+            val = "on"
+            txt = "The location LED will be set to on. Click OK to continue.";
+        }
+        if (confirm(txt)) {
+            doSet(type, val);
+        }
+
+    } else if (type == "Firmware") {
+        ht_selectTreeNode("ILOM_Administration", "Maintenance");
+        return;
+
+
+    } else if (type == "Power") {
+
+        systype = "host";
+
+        if (state.strcasecmp("ON")) {
+            val = "power_off";
+            txt = "The " + systype + " power will be set to off. Click OK to continue.";
+        } else {
+            val = "power_on";
+            txt = "The " + systype + " power will be set to on. Click OK to continue.";
+        }
+        if (confirm(txt)) {
+            doSet(type, val);
+        }
+
+
+    } else {
+        return;
+    }
+}
+makeBall = function(state, type) {
+    var showButton = false;
+    if (state == undefined) {
+        state = "UNKNOWN";
+    }
+    var display_state = state;
+    state = state.toUpperCase();
+
+    if (type == "Power") {
+        if (state == "POWER_ON") {
+            sysinfoData.power_state = "On";
+            state = "ON";
+        } else if (state == "POWER_OFF") {
+            sysinfoData.power_state = "Off";
+            state = "OFF";
+        }
+
+
+        {
+            showButton = true;
+        }
+
+    } else
+
+    if (type == "Locator") {
+        showButton = true;
+    } else {
+        alert("OOPS ball type:" + type);
+    }
+    if (state == "ON") {
+        document.getElementById(type + "_ball").innerHTML=showTransparentPngHtml({imgPath:'/Images/ilom/status/PWR-on.png', width:16, height:16, alt:'', valign:'text-top', classname:'healthIcon'}) + state;
+        if (showButton) {
+            document.getElementById(type + "_button").innerHTML="<input class='button' type='submit' name='" + type + "_" + state + "'" +
+                " value='Turn Off' " + "title='Turn " + type +
+                " Off' style='width:80px;margin-top:5px;margin-bottom:5px;margin-left:13px;' onclick='summaryPageAction(\"" + type + "\", \"" + state + "\");'>";
+        } else {
+                document.getElementById(type + "_button").innerHTML="";
+        }
+    } else if (state == "OFF") {
+        document.getElementById(type + "_ball").innerHTML=showTransparentPngHtml({imgPath:'/Images/ilom/status/PWR-off.png', width:16, height:16, alt:'', valign:'text-top', classname:'healthIcon'}) + state;
+        if (showButton) {
+            document.getElementById(type + "_button").innerHTML="<input class='button' type='submit' name='" + type + "_" + state + "'" +
+                "value='Turn On' title='Turn " + type + " On' style='width:80px;margin-top:5px;margin-bottom:5px;margin-left:13px;' onclick='summaryPageAction(\"" + type + "\", \"" + state + "\");'>";
+        } else {
+                document.getElementById(type + "_button").innerHTML="";
+        }
+    } else {
+        document.getElementById(type + "_button").innerHTML = "<input class='buttonDisabled' disabled='disabled' type='submit' name='" + type + "_" + state + "'" +
+                "id='button_" + type + "' value='Turn Off' " + "title='Turn " + type + " Off' style='width:80px;margin-top:5px;margin-bottom:5px;margin-left:13px;'>";
+        document.getElementById(type + "_ball").innerHTML = display_state;
+    }
+    return;
+}
+var actions = new Array();
+var onoffActions = new Array();
+var buttons = new Array();
+
+if (enableHostSettings) {
+    onoffActions.push({name:"Power&nbsp;State<br \/><span id='power_status'><\/span>",value:"<div id='Power_ball' style='display:inline'>&nbsp;<\/div>",nonamespan:true});
+    buttons.push({name:"<div id='Power_button' style='min-height:29px;white-space:nowrap'>&nbsp;<\/div>", nonamespan:true});
+}
+
+if (enableILOMSettings & !ht_isDomainSP()) {
+    onoffActions.push({name:"<div style='width:100px'>Locator&nbsp;Indicator<\/div>",value:"<div id='Locator_ball' style='display:inline'>&nbsp;<\/div>",nonamespan:true});
+    buttons.push({name:"<div id='Locator_button' style='display:inline;white-space:nowrap;'>&nbsp;<\/div>", nonamespan:true});
+}
+if (enableHostSettings || (enableILOMSettings && !ht_isDomainSP())) {
+    onoffActions.push({name:"&nbsp;", value:"&nbsp;"});
+    buttons.push({name:"<div style='min-height:29px;'>&nbsp;<\/div>", nonamespan:true});
+}
+
+
+
+
+
+if (enableILOMSettings) {
+    onoffActions.push({name:'System&nbsp;Firmware&nbsp;Update', value:""});
+    buttons.push({name:"<input class='button' type='submit' " +
+        "name='updateFW' id='Update' value='Update' title='Update System Firmware' " +
+        "style='width:80px;margin-top:5px;margin-bottom:5px;margin-left:13px;' onclick='summaryPageAction(\"Firmware\", \"\");'>", nonamespan:true});
+}
+
+
+
+if (enableHostSettings) {
+
+        {
+            onoffActions.push({name:'Remote&nbsp;Console', value:""});
+            buttons.push({name:"<input class='button' type='submit' " +
+                "name='launchJRC' id='JRC' value='Launch' title='Launch Remote Console' " +
+                "style='width:80px;margin-top:5px;margin-bottom:5px;margin-left:13px;' onclick='doLaunchJava(); return false;'>", nonamespan:true});
+        }
+}
+
+if (onoffActions.length > 0) {
+    actions.push({meta:{settable:'false'}, data:{actionCol:onoffActions, buttonCol:buttons}});
+}
+showAsTable({ary:actions,
+             title:'Actions',
+             stripe:'table',
+             layoutTable:true,
+             nvColumns:Array('actionCol', 'buttonCol'),
+             useColNames:false
+            });
+
+if (enableHostSettings) {
+    makeBall(sysinfoData.power_state, "Power");
+}
+
+if (enableILOMSettings && !ht_isDomainSP()) {
+    makeBall(sysinfoData.locator_indicator, "Locator");
+}
+</script>
+    </td>
+  </tr>
+</table>
+<br />
+<script type="text/javascript">
+function healthToIcon(caption, index, onClickAction, classStr)
+{
+    var healthStr, healthIcon, healthVal, health, mouseoverStr;
+    if (typeof(index) == "undefined") {
+        health = "Service Required";
+        caption = "Sample";
+        onClickAction = "return false;";
+        classStr = "";
+        mouseoverStr = "";
+        healthVal = health.replace(/ /g, "&nbsp;");
+    } else {
+        if (sysinfo == undefined || sysinfo[index] == undefined ||
+            sysinfo[index].data == undefined || sysinfo[index].data.health == undefined) {
+            return "UNKNOWN";
+        }
+        classStr = DefaultInit(classStr, "");
+        health = sysinfo[index].data.health;
+        healthVal = health.replace(/ /g, "&nbsp;");
+        if (health.strcasecmp("okay") || health.strcasecmp("ok")) {
+            healthStr = showTransparentPngHtml({imgPath:'/Images/oracle/icons/okay_icon.png', width:12, height:13, alt:'', valign:'text-top', classname:'healthIcon'}) + healthVal + "\n";
+            return healthStr;
+        }
+        mouseoverStr = "sdmDisplayHealthTooltip(this, event, \"" + caption + "\", sysinfo[" + index + "].data.health, sysinfo[" + index + "].data.health_details); return false;";
+    }
+    if (classStr) {
+        classStr = " class='" + classStr + "'";
+    }
+    var a_icon_id = caption.make_html_id().toLowerCase() + "_icon";
+    if (health.strcasecmp("service required")) {
+        healthIcon = showTransparentPngHtml({imgPath:'/Images/oracle/icons/error_icon.png', width:12, height:13, alt:'', valign:'text-top', id:a_icon_id, onmouseover:mouseoverStr, onclick:onClickAction, classname:'healthIcon'});
+    } else if (health.strcasecmp("warning")) {
+        healthIcon = showTransparentPngHtml({imgPath:'/Images/oracle/icons/warning_icon.png', width:13, height:13, alt:'', valign:'text-top', id:a_icon_id, onmouseover:mouseoverStr, onclick:onClickAction, classname:'warningIcon'});
+    } else if (health.strcasecmp("not available")) {
+        healthIcon = showTransparentPngHtml({imgPath:'/Images/oracle/icons/warning_icon.png', width:13, height:13, alt:'', valign:'text-top', id:a_icon_id, onmouseover:mouseoverStr, onclick:onClickAction, classname:'warningIcon'});
+    } else {
+        return "UNKNOWN";
+    }
+    var a_id = caption.make_html_id().toLowerCase() + "_lnk";
+    healthStr = healthIcon + "<a id='" + a_id + "' href='#' onmouseover='" + mouseoverStr + "' onClick='" + onClickAction + "'" + classStr + ">" + healthVal + "<\/a>\n";
+    if (index != undefined && sysinfo[index].data.health_details) {
+        healthStr += "<div class='hiddenContent'>";
+        healthStr += sysinfo[index].data.health_details.linkify();
+        if (openProblemsViewable()) {
+            healthStr += "<p>View <a onClick='return viewOpenProblems();' href='#'>Open Problems<\/a> for more details.<\/p>";
+        }
+        healthStr += "<\/div>";
+    }
+    return healthStr;
+}
+var index;
+var serverstatus = new Array();
+var emptyPair = {name:'', value:''};
+index = sysinfoIndex.Blades;
+if (typeof(index) == "number") {
+    var bladesOnClick = "ht_selectTreeNode(\"System_Information\", \"Blades\"); return false;";
+    var bladesDetails = new Array(emptyPair);
+    var bladesInvValue = FormatInstalledMax(sysinfo[index].data.installed_blades, sysinfo[index].data.max_blades);
+    var bladesInv = new Array({name:'Installed Blades:', value:bladesInvValue}, emptyPair);
+    var bladesSpan = "<a onClick='" + procOnClick + "' href='#' title='Blades'>Blades<\/a>";
+    var bladesHealth = healthToIcon("Blades", index, bladesOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'blades', items:bladesSpan, status:bladesHealth, details:bladesDetails, inventory:bladesInv}});
+}
+index = sysinfoIndex.ComputeNodes;
+if (typeof(index) == "number") {
+    var cnodesOnClick = "ht_selectTreeNode(\"System_Information\", \"Compute_Nodes\"); return false;";
+    var cnodesDetails = new Array(emptyPair);
+    var cnodesInvValue = FormatInstalledMax(sysinfo[index].data.installed_computenodes);
+    var cnodesInv = new Array({name:'Compute Nodes:', value:cnodesInvValue}, emptyPair);
+    var cnodesSpan = "<a onClick='" + cnodesOnClick + "' href='#' title='Compute Nodes'>Compute Nodes<\/a>";
+    var cnodesHealth = healthToIcon("Compute Nodes", index, cnodesOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'cnodes', items:cnodesSpan, status:cnodesHealth, details:cnodesDetails, inventory:cnodesInv}});
+}
+index = sysinfoIndex.DCUs;
+if (typeof(index) == "number") {
+    var dcusOnClick = "ht_selectTreeNode(\"System_Information\", \"DCUs\"); return false;";
+    var dcusDetails = new Array(emptyPair);
+    var dcusInvVal = FormatInstalledMax(sysinfo[index].data.installed_dcus, sysinfo[index].data.max_dcus);
+    var dcusInv = new Array({name:'DCUs:', value:dcusInvVal})
+    var dcusSpan = "<a onClick='" + dcusOnClick + "' href='#' title='DCUs'>DCUs<\/a>";
+    var dcusHealth = healthToIcon("DCUs", index, dcusOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'dcus', items:dcusSpan, status:dcusHealth, details:dcusDetails, inventory:dcusInv}});
+}
+index = sysinfoIndex.Processors;
+if (typeof(index) == "number") {
+    var procOnClick = "ht_selectTreeNode(\"System_Information\", \"Processors\"); return false;";
+    var procNum = FormatInstalledMax(sysinfo[index].data.installed_cpus, sysinfo[index].data.max_cpus);
+    var procDetails = new Array({name:'Processor Architecture:', value:sysinfo[index].data.architecture},
+        {name:'Processor Summary:', value:sysinfo[index].data.summary_description});
+    var procInv = new Array({name:'Processors:', value:procNum});
+    var procSpan = "<a onClick='" + procOnClick + "' href='#' title='Processors'>Processors<\/a>";
+    var procHealth = healthToIcon("Processors", index, procOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'processors', items:procSpan, status:procHealth, details:procDetails, inventory:procInv}});
+}
+index = sysinfoIndex.Memory;
+if (typeof(index) == "number") {
+    var memOnClick = "ht_selectTreeNode(\"System_Information\", \"Memory\"); return false;";
+    var memDetails = new Array({name:'Installed RAM Size:', value:DefaultInnerHtmlNA(sysinfo[index].data.installed_memory)});
+    var memInvDetails = FormatInstalledMax(sysinfo[index].data.installed_dimms, sysinfo[index].data.max_dimms);
+    var memInv = new Array({name:'DIMMs:', value:memInvDetails}, emptyPair);
+    var memSpan = "<a onClick='" + memOnClick + "' href='#' title='Memory'>Memory<\/a>";
+    var memHealth = healthToIcon("Memory", index, memOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'memory', items:memSpan, status:memHealth, details:memDetails, inventory:memInv}});
+}
+index = sysinfoIndex.Power;
+if (typeof(index) == "number") {
+    var powOnClick = "ht_selectTreeNode(\"System_Information\", \"Power\"); return false;";
+    var powPermittedVal = FormatPowerValueNA(sysinfo[index].data.max_permitted_power);
+    var powActualVal = FormatPowerValueNA(sysinfo[index].data.actual_power_consumption);
+    var powInvDetails = FormatInstalledMax(sysinfo[index].data.installed_power_supplies, sysinfo[index].data.max_power_supplies);
+    var powDetails = new Array({name:'Permitted Power Consumption:', value:powPermittedVal},
+        {name:'Actual Power Consumption:', value:powActualVal});
+    var powInv = new Array({name:'PSUs:', value:powInvDetails});
+    var powSpan = "<a onClick='" + powOnClick + "' href='#' title='Power'>Power<\/a>";
+    var powHealth = healthToIcon("Power", index, powOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'power', items:powSpan, status:powHealth, details:powDetails, inventory:powInv}});
+}
+index = sysinfoIndex.Cooling;
+if (typeof(index) == "number") {
+    var coolOnClick = "ht_selectTreeNode(\"System_Information\", \"Cooling\"); return false;";
+    var inletTemp = FormatTemp(sysinfo[index].data.inlet_temp);
+    var exhaustTemp = FormatTemp(sysinfo[index].data.exhaust_temp);
+    var chassisFanMod = FormatInstalledMax(sysinfo[index].data.installed_chassis_fans, sysinfo[index].data.max_chassis_fans);
+    var psuFanMod = FormatInstalledMax(sysinfo[index].data.installed_power_supply_fans, sysinfo[index].data.max_power_supply_fans);
+    var coolDetails = new Array({name:'Inlet Air Temperature:', value:inletTemp}, {name:'Exhaust Air Temperature:', value:exhaustTemp});
+    var coolInv = new Array({name:'Chassis Fans:', value:chassisFanMod}, {name:'PSU Fans:', value:psuFanMod});
+    var coolSpan = "<a onClick='" + coolOnClick + "' href='#' title='Cooling'>Cooling<\/a>";
+    var coolHealth = healthToIcon("Cooling", index, coolOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'cooling', items:coolSpan,
+        status:coolHealth, details:coolDetails, inventory:coolInv}});
+}
+index = sysinfoIndex.Storage;
+if (typeof(index) == "number") {
+    var storageOnClick = "ht_selectTreeNode(\"System_Information\", \"Storage\"); return false;";
+    var storageDetails = new Array({name:'Installed Disk Size:', value:DefaultInnerHtmlNA(sysinfo[index].data.installed_disk_size)}, {name:'Disk Controllers:', value:DefaultInnerHtmlNA(sysinfo[index].data.disk_controllers)});
+    var storageInvVal = FormatInstalledMax(sysinfo[index].data.installed_disks, sysinfo[index].data.max_disks);
+    var storageInv = new Array({name:'Internal Disks:', value:storageInvVal});
+    var storageSpan = "<a onClick='" + storageOnClick + "' href='#' title='Storage'>Storage<\/a>";
+    var storageHealth = healthToIcon("Storage", index, storageOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'storage', items:storageSpan, status:storageHealth, details:storageDetails, inventory:storageInv}});
+}
+index = sysinfoIndex.Networking;
+if (typeof(index) == "number") {
+    var networkingOnClick = "ht_selectTreeNode(\"System_Information\", \"Networking\"); return false;";
+    var networkingDetails = new Array(emptyPair);
+    var networkingInv = new Array();
+    if (typeof(sysinfo[index].data.installed_ethernet_switches) != "undefined") {
+       networkingInv.push({name:'Switches:',
+            value:FormatInstalledMax(sysinfo[index].data.installed_ethernet_switches)});
+    }
+    if (typeof(sysinfo[index].data.installed_eth_nics) != "undefined") {
+        networkingInv.push({name:'Ethernet NICs:',
+            value:FormatInstalledMax(sysinfo[index].data.installed_eth_nics)});
+    }
+    if (typeof(sysinfo[index].data.installed_infiniband_hcas) != "undefined") {
+        networkingInv.push({name:'Infiniband HCAs:',
+            value:FormatInstalledMax(sysinfo[index].data.installed_infiniband_hcas)});
+    }
+    var networkingSpan = "<a onClick='" + networkingOnClick + "' href='#' title='Networking'>Networking<\/a>";
+    var networkingHealth = healthToIcon("Networking", index, networkingOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'networking', items:networkingSpan, status:networkingHealth, details:networkingDetails, inventory:networkingInv}});
+}
+index = sysinfoIndex.CPU_Modules;
+if (typeof(index) == "number") {
+    var moduleOnClick = "ht_selectTreeNode(\"System_Information\", \"CPU_Modules\"); return false;";
+    var moduleNum = FormatInstalledMax(sysinfo[index].data.installed_cpu_modules, sysinfo[index].data.max_cpu_modules);
+    var moduleDetails = new Array(emptyPair);
+    var moduleInv = new Array({name:'CPU Modules:', value:moduleNum}, emptyPair);
+    var moduleSpan = "<a onClick='" + moduleOnClick + "' href='#' title='CPU_Modules'>CPU Modules<\/a>";
+    var moduleHealth = healthToIcon("CPU Modules", index, moduleOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'cpu_modules', items:moduleSpan, status:moduleHealth, details:moduleDetails, inventory:moduleInv}});
+}
+index = sysinfoIndex.IO_Modules;
+if (typeof(index) == "number") {
+    var iomodulesOnClick = "ht_selectTreeNode(\"System_Information\", \"I_O_Modules\"); return false;";
+    var iomodulesDetails = new Array(emptyPair, emptyPair);
+    var iomodulesInv = new Array();
+    if (typeof(sysinfo[index].data.installed_nems) != "undefined") {
+       iomodulesInv.push({name:'Installed NEMs',
+            value:FormatInstalledMax(sysinfo[index].data.installed_nems, sysinfo[index].data.max_nems)});
+    }
+    if (typeof(sysinfo[index].data.installed_fems) != "undefined") {
+        iomodulesInv.push({name:'Installed FEMs',
+            value:FormatInstalledMax(sysinfo[index].data.installed_fems, sysinfo[index].data.max_fems)});
+    }
+    if (typeof(sysinfo[index].data.installed_rems) != "undefined") {
+        iomodulesInv.push({name:'Installed REMs',
+            value:FormatInstalledMax(sysinfo[index].data.installed_rems, sysinfo[index].data.max_rems)});
+    }
+    var iomodulesSpan = "<a onClick='" + iomodulesOnClick + "' href='#' title='IO_Modules'>I/O Modules<\/a>";
+    var iomodulesHealth = healthToIcon("I/O Modules", index, iomodulesOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'iomodules', items:iomodulesSpan, status:iomodulesHealth, details:iomodulesDetails, inventory:iomodulesInv}});
+}
+index = sysinfoIndex.Other_Removable_Devices;
+if (typeof(index) == "number") {
+    var ordOnClick = "ht_selectTreeNode(\"System_Information\", \"Other_Removable_Devices\"); return false;";
+    var ordDetails = new Array(emptyPair, emptyPair);
+    var ordInv = new Array(emptyPair, emptyPair);
+    var ordSpan = "<a onClick='" + ordOnClick + "' href='#' title='Other Reovable Devices'>Other Removable Devices<\/a>";
+    var ordHealth = healthToIcon("Other Removable Devices", index, ordOnClick);
+    serverstatus.push({meta:{settable:'false'}, data:{row_index:'ord', items:ordSpan, status:ordHealth, details:ordDetails, inventory:ordInv}});
+}
+var statusHeading = null;
+if (openProblemsViewable()) {
+    var problemCount = DefaultInit(sysinfoData.open_problems_count, 0);
+    var problemLink;
+    var problemClick;
+    if (problemCount >= 1) {
+        problemClick = "return viewOpenProblems();";
+        problemLink = "onClick='" + problemClick + "' title='View Open Problems' href='#'";
+    }
+    statusHeading = new Array({ name:'Overall Status', value:healthToIcon('System', 0, problemClick, 'tableActionLink') },
+                              { name:'Total Problem Count', value:problemCount, link:problemLink });
+}
+var sampleHealth = "<span style='visibility:hidden'>" + healthToIcon() + "<\/span>";
+var statusTableSummary = "The Status table displays the overall system health";
+if (openProblemsViewable()) {
+    statusTableSummary += " and total problem count";
+}
+statusTableSummary += " as well as the health, details, and inventory for each major subsystem.";
+showAsTable({ary:serverstatus,
+             title:'Status',
+             nvColumns:Array('details', 'inventory'),
+             stripe:'columns',
+             col_meta:{
+                 status:{nowrap:'nowrap'},
+                 inventory:{namewidth:'1'},
+                 details:{namewidth:'1'}},
+             columnnames:{
+                 items:'Subsystem',
+                 status:'Status',
+                 details:'Details',
+                 inventory:'Inventory'},
+             heading:statusHeading,
+             sampleHealth:sampleHealth,
+             width:'100%',
+             summary:statusTableSummary
+            });
+</script>
+<iframe id="RedirHidden" name="RedirHidden" src="/iPages/blank.htm" style="display:none;"></iframe>
+</body>
+</html>
+5≤”rÛ           ]˜∆A"1_       ?    :https://adc-mgmt-1146fmm0lu.us.oracle.com/iPages/i_summary.asp strongly-framed 0 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeBAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAASNMIIEiTCCA3GgAwIBAgIJAOJ0rN3uRWu+MA0GCSqGSIb3DQEBCwUAMIGJMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEXMBUGA1UEBxMOUmVkd29vZCBTaG9yZXMxHTAbBgNVBAoTFE9yYWNsZSBBbWVyaWNhLCBJbmMuMS0wKwYDVQQDEyRPcmFjbGUgSW50ZWdyYXRlZCBMaWdodHMgT3V0IE1hbmFnZXIwHhcNMTQwNjEyMTUyOTAxWhcNMzQwNjA3MTUyOTAxWjCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvMQXO6DUOUnSJ7IXLCR0E9iAmJtQlyO10sds8ZERf08FVsjWvE5D5s9dFeDTSGNJLmiSM/TmkC1aCcHi+YZI92yREcUPJP8oAYs1kZsOC8SPpZ0ykfHgBajgU90SsbSe3v2G+dMVgSX3xParoi+XxdAKFpvWqypsFL21n+PfnxJMbbNkqZHS+YqDhF4aljZ5C55a5O+1z2+qNBLgVLakK36XvWH5+3xzUksH9Ew6IYxrCKAMEc7/eJYGtel2RdW3WQlx3DZ+6TFbvTnI0/Jl4+mGH/n79xTICGlFJrX09AuiU/FVasb78+2gMB6y/AgETFjFxu2myuuoAx8HEF+2owIDAQABo4HxMIHuMB0GA1UdDgQWBBTPh78BeErvt1lLsZ6Iea8XLjhVKzCBvgYDVR0jBIG2MIGzgBTPh78BeErvt1lLsZ6Iea8XLjhVK6GBj6SBjDCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyggkA4nSs3e5Fa74wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAbTaZeskxbirmUTW/QCXkZLcvY5/2FgrgWU6+0c1WyLpfg8qO+0KAH2GLSe9xxkFomFd0kzRncw/i1bF/4RXMoBnEM6ANp/aSGFggaUfoo0mhjyN66s+rNtWPNvDQCADxaWq67HyNdpEzWY4cAcgDGJphrgZCsTy7A9Y7Fc283YCbWVnYyiKWX35B3kr2E/4pDNj1gig2nPd/MPobdy7ZCYpXsPTpgpsQnIExi3THJijiz6NLjG1k2e8IAi2Y68taFO8cvN2m5jhEuwYSkXV5hjMrr6EffS8KkHVgPziBPjWbgboN5QUO2XPimjwH44/vP5JPB02xnU6Rlp6Kg9A1iwAvAwMBAAEAAQEBAAAAAAAEbm9uZQAAAARub25lAAAA request-method GET response-head HTTP/1.0 200 OK
+Date: Mon Dec 16 18:38:02 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ original-response-headers Date: Mon Dec 16 18:38:02 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ uncompressed-len 0 predictor::resource-count 16 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/ajax.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/session.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/luapi.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/browserVersion.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/cssPicker.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/htui.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/sdm.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/platform.jasp 1,1,0,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Styles/oracle.css 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/domTT/domLib.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/domTT/domTT.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/sun/2.2/table/empty_table_cell.gif 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/ilom/status/PWR-on.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/ilom/status/PWR-off.png 1,1,0,4096 net-response-time-onstart 6095 net-response-time-onstop 7809 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/okay_icon.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/error_icon.png 1,1,0,4096   ÅF

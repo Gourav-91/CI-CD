@@ -1,0 +1,145 @@
+﻿// Login Page WARNING messages
+
+var emptyUserName = new Array();
+emptyUserName[ 'ar-ae' ] =  'الرجاء إدخال اسم مستخدم صالح ';
+emptyUserName[ 'cs-cz' ] =  ' Zadejte platné uživatelské jméno ';
+emptyUserName[ 'da-dk' ] =  'Indtast et gyldigt brugernavn';
+emptyUserName[ 'de-de' ] =  ' Geben Sie einen gültigen Benutzernamen ein ';
+emptyUserName[ 'el-gr' ] =  ' Καταχωρίστε ένα έγκυρο όνομα χρήστη ';
+emptyUserName[ 'en-us' ] =  ' Please enter valid username ';
+emptyUserName[ 'es-es' ] =  ' Introduzca un nombre de usuario válido ';
+emptyUserName[ 'fi-fi' ] =  ' Syötä hyväksyttävä käyttäjätunnus ';
+emptyUserName[ 'fr-fr' ] =  ' Entrez un nom utilisateur valide ';
+emptyUserName[ 'he-il' ] =  'הזן שם משתמש תקף';
+emptyUserName[ 'hr-hr' ] =  ' Unesite valjano korisničko ime ';
+emptyUserName[ 'hu-hu' ] =  ' Adjon meg érvényes felhasználónevet ';
+emptyUserName[ 'it-it' ] =  ' Immettere un nome utente valido ';
+emptyUserName[ 'ja-jp' ] =  ' 有効なユーザー名を入力してください ';
+emptyUserName[ 'ko-kr' ] =  ' 적합한 사용자 이름을 입력하십시오.';
+emptyUserName[ 'nl-nl' ] =  ' Voer een geldige gebruikersnaam in. ';
+emptyUserName[ 'no-no' ] =  'Angi et gyldig brukernavn';
+emptyUserName[ 'pl-pl' ] =  ' Proszę podać poprawną nazwę użytkownika ';
+emptyUserName[ 'pt-br' ] =  ' Informe um nome de usuário válido ';
+emptyUserName[ 'pt-pt' ] =  ' Introduza um nome de utilizador válido ';
+emptyUserName[ 'ro-ro' ] =  ' Introduceţi numele de utilizator valid';
+emptyUserName[ 'ru-ru' ] =  ' Введите действительное имя пользователя ';
+emptyUserName[ 'sk-sk' ] =  ' Zadajte platné meno používateľa ';
+emptyUserName[ 'sv-se' ] =  'Ange ett giltigt användarnamn';
+emptyUserName[ 'th-th' ] =  ' โปรดป้อนชื่อผู้ใช้ที่ถูกต้อง ';
+emptyUserName[ 'tr-tr' ] =  ' Lütfen geçerli bir kullanıcı adı girin ';
+emptyUserName[ 'zh-cn' ] =  ' 请输入有效的用户名 ';
+emptyUserName[ 'zh-tw' ] =  ' 請輸入有效的使用者名稱';
+
+
+var emptyPassword = new Array();
+emptyPassword[ 'ar-ae' ] =  'الرجاء إدخال كلمة سر صالحة ';
+emptyPassword[ 'cs-cz' ] =  ' Zadejte platné heslo ';
+emptyPassword[ 'da-dk' ] =  'Indtast en gyldig adgangskode';
+emptyPassword[ 'de-de' ] =  ' Geben Sie ein gültiges Kennwort ein ';
+emptyPassword[ 'el-gr' ] =  ' Καταχωρίστε έναν έγκυρο κωδικό πρόσβασης ';
+emptyPassword[ 'en-us' ] =  ' Please enter valid password ';
+emptyPassword[ 'es-es' ] =  ' Introduzca una contraseña válida ';
+emptyPassword[ 'fi-fi' ] =  ' Syötä hyväksyttävä salasana ';
+emptyPassword[ 'fr-fr' ] =  ' Entrez un mot de passe valide ';
+emptyPassword[ 'he-il' ] =  'הזן סיסמה תקפה';
+emptyPassword[ 'hr-hr' ] =  ' Unesite valjanu lozinku ';
+emptyPassword[ 'hu-hu' ] =  ' Adjon meg érvényes jelszót ';
+emptyPassword[ 'it-it' ] =  ' Immettere una password valida ';
+emptyPassword[ 'ja-jp' ] =  ' 有効なパスワードを入力してください ';
+emptyPassword[ 'ko-kr' ] =  ' 적합한 비밀번호를 입력하십시오.';
+emptyPassword[ 'nl-nl' ] =  ' Voer een geldig wachtwoord in. ';
+emptyPassword[ 'no-no' ] =  'Angi et gyldig passord ';
+emptyPassword[ 'pl-pl' ] =  ' Proszę podać poprawne hasło ';
+emptyPassword[ 'pt-br' ] =  ' Informe uma senha válida ';
+emptyPassword[ 'pt-pt' ] =  ' Introduza uma senha válida ';
+emptyPassword[ 'ro-ro' ] =  ' Introduceţi parola validă';
+emptyPassword[ 'ru-ru' ] =  ' Введите действительный пароль ';
+emptyPassword[ 'sk-sk' ] =  ' Zadajte platné heslo ';
+emptyPassword[ 'sv-se' ] =  'Ange ett giltigt lösenord';
+emptyPassword[ 'th-th' ] =  ' โปรดป้อนรหัสผ่านที่ถูกต้อง ';
+emptyPassword[ 'tr-tr' ] =  ' Lütfen geçerli bir parola girin ';
+emptyPassword[ 'zh-cn' ] =  ' 请输入有效口令 ';
+emptyPassword[ 'zh-tw' ] =  ' 請輸入有效的密碼';
+
+
+// Logout specific
+var logoutSuccess = new Array();
+logoutSuccess[ 'ar-ae' ] =  'تم الخروج بنجاح ';
+logoutSuccess[ 'cs-cz' ] =  ' Byli jste úspěšně odhlášeni ';
+logoutSuccess[ 'da-dk' ] =  'Du er logget af';
+logoutSuccess[ 'de-de' ] =  ' Sie wurden erfolgreich abgemeldet ';
+logoutSuccess[ 'el-gr' ] =  ' Η αποσύνδεσή σας ολοκληρώθηκε με επιτυχία. ';
+logoutSuccess[ 'en-us' ] =  ' You have been successfully logged out ';
+logoutSuccess[ 'es-es' ] =  ' Se ha desconectado correctamente ';
+logoutSuccess[ 'fi-fi' ] =  ' Uloskirjaus onnistui ';
+logoutSuccess[ 'fr-fr' ] =  ' Vous avez été déconnecté ';
+logoutSuccess[ 'he-il' ] =  'התנתקת בהצלחה';
+logoutSuccess[ 'hr-hr' ] =  ' Uspješno ste odjavljeni ';
+logoutSuccess[ 'hu-hu' ] =  ' Sikeresen kijelentkezett ';
+logoutSuccess[ 'it-it' ] =  ' Logout riuscito ';
+logoutSuccess[ 'ja-jp' ] =  ' 正常にログアウトしました ';
+logoutSuccess[ 'ko-kr' ] =  ' 성공적으로 로그아웃되었습니다.';
+logoutSuccess[ 'nl-nl' ] =  ' U bent uitgelogd. ';
+logoutSuccess[ 'no-no' ] =  'Du er logget av ';
+logoutSuccess[ 'pl-pl' ] =  ' Pomyślnie wylogowano ';
+logoutSuccess[ 'pt-br' ] =  ' Você efetuou log-out com sucesso ';
+logoutSuccess[ 'pt-pt' ] =  ' Saiu de sessão com êxito ';
+logoutSuccess[ 'ro-ro' ] =  ' Aţi fost deconectat cu succes';
+logoutSuccess[ 'ru-ru' ] =  ' Сеанс завершен успешно ';
+logoutSuccess[ 'sk-sk' ] =  ' Boli ste úspešne odhlásení ';
+logoutSuccess[ 'sv-se' ] =  'Du har loggats ut';
+logoutSuccess[ 'th-th' ] =  ' คุณล็อกเอาต์สำเร็จแล้ว ';
+logoutSuccess[ 'tr-tr' ] =  ' Oturumu başarıyla kapattınız ';
+logoutSuccess[ 'zh-cn' ] =  ' 您已成功注销 ';
+logoutSuccess[ 'zh-tw' ] =  ' 您已經順利登出';
+
+var logoutFailed = new Array();
+logoutFailed[ 'ar-ae' ] =  'فشل الخروج. الرجاء إغلاق المتصفح ';
+logoutFailed[ 'cs-cz' ] =  ' Odhlašování selhalo. Zavřete prohlížeč ';
+logoutFailed[ 'da-dk' ] =  ' Log af fejlede. Luk din browser ';
+logoutFailed[ 'de-de' ] =  ' Der Abmeldevorgang war nicht erfolgreich. Schließen Sie den Browser ';
+logoutFailed[ 'el-gr' ] =  ' Η αποσύνδεση απέτυχε. Κλείστε το πρόγραμμα περιήγησης ';
+logoutFailed[ 'en-us' ] =  ' Logout failed. Please close your browser ';
+logoutFailed[ 'es-es' ] =  ' Fallo de desconexión. Cierre el explorador ';
+logoutFailed[ 'fi-fi' ] =  ' Uloskirjaus epäonnistui. Sulje selain ';
+logoutFailed[ 'fr-fr' ] =  ' Echec de la déconnexion. Fermez votre navigateur Web ';
+logoutFailed[ 'he-il' ] =  'התנתקות נכשלה. סגור את הדפדפן';
+logoutFailed[ 'hr-hr' ] =  ' Odjava nije uspjela. Zatvorite svoj preglednik ';
+logoutFailed[ 'hu-hu' ] =  ' A kijelentkezés nem sikerült. Zárja be a böngészőt ';
+logoutFailed[ 'it-it' ] =  ' Logout non riuscito. Chiudere il browser. ';
+logoutFailed[ 'ja-jp' ] =  ' ログアウトに失敗しました。ブラウザを閉じてください ';
+logoutFailed[ 'ko-kr' ] =  ' 로그아웃을 실패했습니다. 브라우저를 닫으십시오.';
+logoutFailed[ 'nl-nl' ] =  ' Het uitloggen is mislukt. Sluit de browser. ';
+logoutFailed[ 'no-no' ] =  'Avlogging mislyktes. Lukk nettleseren ';
+logoutFailed[ 'pl-pl' ] =  ' Nie udało się wylogować. Proszę zamknąć przeglądarkę ';
+logoutFailed[ 'pt-br' ] =  ' Falha no log-out. Feche seu browser ';
+logoutFailed[ 'pt-pt' ] =  ' Falha na saída de sessão. Feche o navegador ';
+logoutFailed[ 'ro-ro' ] =  ' Deconectarea a eşuat. Închideţi browserul';
+logoutFailed[ 'ru-ru' ] =  ' Сбой при завершении сеанса. Закройте браузер ';
+logoutFailed[ 'sk-sk' ] =  ' Odhlásenie zlyhalo. Zatvorte prehľadávač ';
+logoutFailed[ 'sv-se' ] =  'Utloggningen utfördes inte. Stäng webbläsaren';
+logoutFailed[ 'th-th' ] =  ' การล็อกเอาต์ล้มเหลว โปรดปิดเบราเซอร์ของคุณ';
+logoutFailed[ 'tr-tr' ] =  ' Oturum kapatılamadı. Lütfen gözatıcınızı kapatın ';
+logoutFailed[ 'zh-cn' ] =  ' 注销失败。请关闭浏览器 ';
+logoutFailed[ 'zh-tw' ] =  ' 登出失敗. 請關閉您的瀏覽器 ';
+
+�$��      ]��]��A��]���   2    :https://login.oracle.com/oam/pages/js/messages.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Sun, 08 Dec 2019 14:20:32 GMT
+Server: Oracle-HTTP-Server
+Accept-Ranges: bytes
+Content-Length: 8492
+Last-Modified: Fri, 04 Oct 2019 05:43:02 GMT
+X-ORACLE-DMS-ECID: 604d4a4f6aec6685:2d7e6608:16edbc15aa4:-8000-0000000000c29a8d
+Content-Type: text/plain
+Content-Language: en
+ original-response-headers Date: Sun, 08 Dec 2019 14:20:32 GMT
+Server: Oracle-HTTP-Server
+Accept-Ranges: bytes
+Content-Length: 8492
+Last-Modified: Fri, 04 Oct 2019 05:43:02 GMT
+X-ORACLE-DMS-ECID: 604d4a4f6aec6685:2d7e6608:16edbc15aa4:-8000-0000000000c29a8d
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/plain
+Content-Language: en
+ uncompressed-len 0 net-response-time-onstart 1231 net-response-time-onstop 1516   !,

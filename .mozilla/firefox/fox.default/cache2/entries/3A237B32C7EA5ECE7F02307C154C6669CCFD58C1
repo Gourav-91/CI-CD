@@ -1,0 +1,584 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- Copyright (c) 2011, 2016, Oracle and/or its affiliates. All rights reserved. -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>ILOM Navigation</title>
+<script type="text/javascript" src="/Extensions/ajax.js"></script>
+<script type="text/javascript" src="/Extensions/win.js"></script>
+<script type="text/javascript" src="/Extensions/browserVersion.js"></script>
+<script type="text/javascript" src="/Extensions/cssPicker.js"></script>
+<script type="text/javascript" src="/Extensions/luapi.js"></script>
+<script type="text/javascript" src="/Extensions/session.js"></script>
+<script type="text/javascript" src="/Extensions/platform.jasp"></script>
+<script type="text/javascript" src="/Extensions/htui.js"></script>
+<script type="text/javascript" src="/Extensions/sdm.js"></script>
+<script type="text/javascript">
+var mainFrameObj;
+var ilom_nodes = new Array ();
+var treeReady = false;
+var enableILOMSettings = ht_enableILOMSettings();
+var enableHostSettings = ht_enableHostSettings();
+onload = function() {
+    
+    showElement("treeTable");
+
+    if (openProblemsViewable()) {
+        updateOpenProblems();
+        setInterval("updateOpenProblems()", 60000);
+    }
+
+    treeReady = true;
+}
+getMainFrame = function()
+{
+    var i;
+    for (i = 0; i < parent.frames.length; i++) {
+        if (parent.frames[i].name == "mainFrame") {
+            mainFrameObj = parent.frames[i];
+            return;
+        }
+    }
+}
+
+handleOP = function(error, resp)
+{
+    var op_anchor = getElement("Open_Problems_anchor");
+    if (op_anchor == undefined) {
+        return;
+    }
+    var newOPText = "Open Problems";
+    var respVal = parseAjaxResponse(error, resp);
+    if (respVal && typeof(respVal) == "object" && respVal[0] != undefined) {
+        var openProblems = parseInt(respVal[0]);
+        if (typeof(openProblems) == "number") {
+            newOPText = "Open Problems (" + openProblems + ")";
+        }
+    }
+    if (op_anchor.innerHTML != newOPText) {
+        op_anchor.innerHTML = newOPText;
+    }
+}
+updateOpenProblems = function()
+{
+    if (isTreeHidden()) {
+        return;
+    }
+    var setobj = new htAjax({params:"cmd=luapiGet&0=/System/open_problems_count", resp_func:handleOP});
+    setobj.send();
+}
+
+hasTarget = function(target)
+{
+
+    return (targets[target]);
+}
+
+var targets = { '/System': true, '/System/Processors': true, '/System/Memory': true, '/System/Power': true, '/System/Cooling': true, '/System/Storage': true, '/System/Networking': true, '/System/PCI_Devices': true, '/System/Firmware': true, '/System/Log': true};
+
+KeysSysinfo = new Array();
+KeysPower = new Array();
+KeysILOM = new Array ();
+KeysSystem = new Array ();
+KeysSwitch = new Array ();
+KeysRemote = new Array ();
+KeysHost = new Array ();
+KeysSysinfo.push({name:'Summary', href:'/iPages/i_summary.asp', longname:'Summary Information'});
+if (hasTarget("/System/Blades")) {
+    KeysSysinfo.push({name:'Blades', href:'/iPages/i_blades.asp'});
+}
+if (hasTarget("/System/DCUs")) {
+    KeysSysinfo.push({name:'DCUs', href:'/iPages/i_dcus.asp'});
+}
+
+if (hasTarget("/System/Processors")) {
+    KeysSysinfo.push({name:'Processors', href:'/iPages/i_processors.asp'});
+}
+if (hasTarget("/System/Memory")) {
+    KeysSysinfo.push({name:'Memory', href:'/iPages/i_memory.asp'});
+}
+if (hasTarget("/System/Power")) {
+    KeysSysinfo.push({name:'Power', href:'/iPages/i_powersupplies.asp'});
+}
+if (hasTarget("/System/Cooling")) {
+    KeysSysinfo.push({name:'Cooling', href:'/iPages/i_cooling.asp'});
+}
+if (hasTarget("/System/Storage")) {
+    KeysSysinfo.push({name:'Storage', href:'/iPages/i_storage.asp'});
+}
+if (hasTarget("/System/ComputeNodes")) {
+    KeysSysinfo.push({name:'Compute Nodes', href:'/iPages/i_computeNodes.asp'});
+}
+if (hasTarget("/System/Networking")) {
+    KeysSysinfo.push({name:'Networking', href:'/iPages/i_networking.asp'});
+}
+if (hasTarget("/System/CPU_Modules")) {
+    KeysSysinfo.push({name:'CPU Modules', href:'/iPages/i_cpu_modules.asp'});
+}
+if (hasTarget("/System/IO_Modules")) {
+    KeysSysinfo.push({name:'I/O Modules', href:'/iPages/i_iomodules.asp'});
+}
+if (hasTarget("/System/PCI_Devices")) {
+    KeysSysinfo.push({name:'PCI Devices', href:'/iPages/i_pcidevices.asp'});
+}
+if (hasTarget("/System/Other_Removable_Devices")) {
+    KeysSysinfo.push({name:'Other Removable Devices', tabKey:9});
+}
+if (hasTarget("/System/Firmware")) {
+    KeysSysinfo.push({name:'Firmware', href:'/iPages/i_firmware.asp'});
+}
+
+    var powerPagePrefix = "";
+
+
+    KeysPower.push({name:'Consumption', href:'/iPages/i_powerconsum.asp', longname:'Power Consumption'});
+
+
+    KeysPower.push({name:'Limit', href:'/iPages/i_' + powerPagePrefix + 'powerbudget.asp', longname:'Power Limit'});
+
+
+    KeysPower.push({name:'Allocation', href:'/iPages/i_' + powerPagePrefix + 'powerdist.asp', longname:'Power Allocation'});
+
+
+
+
+    KeysPower.push({name:'Statistics', href:'/iPages/i_' + powerPagePrefix + 'powerstat.asp', longname:'Power Statistics'});
+
+
+    KeysPower.push({name:'History', href:'/iPages/i_' + powerPagePrefix + 'powerhistory.asp', longname:'Power History'});
+
+
+if (enableILOMSettings) {
+if (!ht_isDomainSP()) {
+    KeysILOM.push({name:'Identification', href:'/iPages/i_custinfo.asp', longname:'Identification Information'});
+    KeysILOM.push({name:'Logs', tabKey:0});
+    KeysILOM.push({name:'Management Access', tabKey:1});
+    KeysILOM.push({name:'User Management', tabKey:2});
+    KeysILOM.push({name:'Connectivity', tabKey:3});
+    KeysILOM.push({name:'Configuration Management', tabKey:4});
+    KeysILOM.push({name:'Notifications', tabKey:5});
+    KeysILOM.push({name:'Date and Time', tabKey:6});
+    KeysILOM.push({name:'Maintenance', tabKey:7});
+}
+
+
+
+
+
+    KeysSystem.push({name:'Policy', href:'/iPages/i_policy.asp'});
+
+
+
+}
+if (enableHostSettings) {
+
+    KeysRemote.push({name:'Redirection', href:'/iPages/i_redopt.asp'});
+
+
+    KeysRemote.push({name:'KVMS', href:'/iPages/i_kvms.asp'});
+
+
+if (!ht_isDomainSP()) {
+
+    KeysHost.push({name:'Power Control', href:'/iPages/i_power.asp'});
+
+
+    KeysHost.push({name:'Diagnostics', href:'/iPages/i_diag.asp'});
+
+
+
+
+    KeysHost.push({name:'Host Control', href:'/iPages/i_hostcontrol.asp'});
+
+
+
+
+
+
+
+
+
+}
+}
+
+
+
+
+if (KeysSysinfo.length > 0) {
+    ilom_nodes.push({name:'System Information', keys:KeysSysinfo, initial_open: true});
+}
+if (openProblemsViewable()) {
+    ilom_nodes.push({name:'Open Problems', href:'/iPages/i_openproblems.asp'});
+}
+if (systemLogViewable()) {
+    ilom_nodes.push({name:'System Log', href:'/iPages/i_systemLog.asp'});
+}
+if (KeysRemote.length > 0) {
+    ilom_nodes.push({name:'Remote Control', longname:'Remote Control/Redirection', keys:KeysRemote, initial_open: false});
+}
+if (KeysHost.length > 0) {
+    ilom_nodes.push({name:'Host Management', keys:KeysHost, initial_open: false});
+}
+if (KeysSystem.length > 0) {
+    ilom_nodes.push({name:'System Management', keys:KeysSystem, initial_open: false});
+}
+if (KeysSwitch.length > 0) {
+    ilom_nodes.push({name:'Switch Management', keys:KeysSwitch, initial_open: false});
+}
+if (KeysPower.length > 0) {
+    ilom_nodes.push({name:'Power Management', keys:KeysPower, initial_open: false});
+}
+if (KeysILOM.length > 0) {
+    ilom_nodes.push({name:'ILOM Administration', keys:KeysILOM, initial_open: false});
+}
+ilom_nodes.push({name:'Site Map', href:'/iPages/i_siteMap.asp'});
+
+
+var navtree = ({nodes: ilom_nodes});
+var ht_tree_nodes = new Array();
+var lastSelectedNode = "";
+function handleClick(event, priId, secId) {
+    if (mainFrameObj == undefined) {
+        return;
+    }
+    selectNode(event, priId, secId);
+}
+function getNodeHref(priId, secId) {
+    if (secId == "") {
+        return ht_tree_nodes[priId].href;
+    }
+    return ht_tree_nodes[priId].child[secId].href;
+}
+function getNodeName(priId, secId) {
+    if (secId == "") {
+        return ht_tree_nodes[priId].name;
+    }
+    return ht_tree_nodes[priId].child[secId].name;
+}
+function getNodeTabKey(priId, secId) {
+    if (secId == "") {
+        return ht_tree_nodes[priId].tabKey;
+    }
+    return ht_tree_nodes[priId].child[secId].tabKey;
+}
+function make_tree_id() {
+    var priId = arguments[0];
+    var secId = "";
+    if (arguments.length >= 2) {
+        secId = arguments[1];
+    }
+    if (secId == "") {
+        return priId;
+    }
+    return priId + "__" + secId;
+}
+function getParentId(id) {
+    return id.split("__")[0];
+}
+function highlightTreeNode(priId, secId)
+{
+    var id = make_tree_id(priId, secId);
+    if (id == lastSelectedNode) {
+        return;
+    }
+    if (getElement(id) == undefined) {
+        alert("Undefined node " + id);
+        return;
+    }
+    if (lastSelectedNode != "") {
+        var lastParent = getParentId(lastSelectedNode);
+        getElement(lastSelectedNode).className = getElement(lastSelectedNode).className.replace("Selected", "Unselected");
+        if (lastSelectedNode != lastParent) {
+            getElement(lastParent).className = getElement(lastParent).className.replace("Selected", "Unselected");
+        }
+    }
+    lastSelectedNode = id;
+    getElement(lastSelectedNode).className = getElement(lastSelectedNode).className.replace("Unselected", "Selected");
+}
+function selectNode() {
+    var clickevent = arguments[0];
+    var priId = arguments[1];
+    var secId;
+    var href_val;
+    var id;
+    var selectedTab;
+    if (arguments.length < 3 || arguments[2] == undefined || arguments[2] == "") {
+        if (ht_tree_nodes[priId] == "undefined") {
+            alert("Invalid node: " + priId);
+            return;
+        }
+        secId = "";
+    } else {
+        secId = arguments[2];
+        if (ht_tree_nodes[priId] == "undefined" || ht_tree_nodes[priId].child == "undefined" || ht_tree_nodes[priId].child[secId] == "undefined") {
+            alert("Invalid node: " + priId + ", " + secId);
+            return;
+        }
+        if (arguments.length == 4) {
+            selectedTab = arguments[3];
+        }
+    }
+    var tab_key = getNodeTabKey(priId, secId);
+    if (tab_key == undefined) {
+        href_val = getNodeHref(priId, secId);
+    } else {
+        href_val = "";
+    }
+    if (mainFrameObj == undefined) {
+        getMainFrame();
+    }
+    highlightTreeNode(priId, secId);
+    ht_setTitleBar(getNodeName(priId, secId));
+    if (secId != undefined && secId != "" && !ht_tree_nodes[priId].open) {
+        htTree_Toggle(priId);
+    }
+    mainFrameObj.htTree_loadPage(clickevent, href_val, tab_key, selectedTab);
+}
+function htTree_Toggle(id) {
+    var open_val;
+    var anchor = getElement(id + "_anchor");
+    if (ht_tree_nodes[id].open) {
+        ht_tree_nodes[id].open = false;
+        open_val = "none";
+        anchor.innerHTML = anchor.innerHTML.replace("expnd", "colpsd");
+        anchor.innerHTML = anchor.innerHTML.replace("Collapse Node", "Expand Node");
+        if (lastSelectedNode.beginsWith(id)) {
+            getElement(id).className = getElement(id).className.replace("Unselected", "Selected");
+        }
+    } else {
+        ht_tree_nodes[id].open = true;
+        open_val = "";
+        anchor.innerHTML = anchor.innerHTML.replace("colpsd", "expnd");
+        anchor.innerHTML = anchor.innerHTML.replace("Expand Node", "Collapse Node");
+        if (lastSelectedNode.beginsWith(id)) {
+            getElement(id).className = getElement(id).className.replace("Selected", "Unselected");
+        }
+    }
+    for (var sec_key in ht_tree_nodes[id].child) {
+        if (elem = getElement(make_tree_id(id, sec_key))) {
+            elem.style.display = open_val;
+        }
+    }
+}
+function htTree_DrawTree(args) {
+    var has_children;
+    rowIdPrefix = "htTreeNode";
+    document.writeln("<div width='100%' class='listTable' style='display:none' id='treeTable'>");
+    for (var nodeIndex = 0; nodeIndex < args.nodes.length; nodeIndex++) {
+        var priId = String(args.nodes[nodeIndex].name).make_html_id();
+        var node_name = args.nodes[nodeIndex].name;
+        var href_val = args.nodes[nodeIndex].href;
+        var node_alt = ht_getFullName(args.nodes[nodeIndex]);
+        var divClass = "";
+        if (args.nodes[nodeIndex].keys) {
+            has_children = true;
+        } else {
+            has_children = false;
+        }
+        if (nodeIndex) {
+            divClass = "listTitleNotFirst ";
+        }
+        if (has_children) {
+            divClass += "listTitle listTitleWithSubUnselected";
+            document.writeln(
+                "<div id='" + priId + "' class='" + divClass + "' " +
+                "onClick='htTree_Toggle(\"" + priId + "\"); return false;'>" +
+                "<a " +
+                "id='" + priId + "_anchor'" +
+                "href='#' " +
+                "title='" + node_alt + "'>" +
+                showTransparentPngHtml({imgPath:'/Images/oracle/tree/tree_colpsd_icon.png',width:9,height:9,alt:'Expand Node',classname:'listTitleImg',valign:'baseline'}) +
+                node_name +
+                "<\/a><\/div>"
+                );
+        } else if (href_val) {
+            divClass += "listTitle listTitleUnselected";
+            document.writeln(
+                   "<div class='" + divClass + "' " +
+                   "onClick='handleClick(event, \"" + priId + "\", \"\"\); return false;' " +
+                   "id='" + priId + "'>" +
+                   "<a " +
+                   "id='" + priId + "_anchor'" +
+                   "href='#' " +
+                   "title='" + node_alt + "'>" +
+                   node_name +
+                   "<\/a><\/div>"
+                );
+        }
+        ht_tree_nodes[priId] = {rowId:priId, target:args.nodes[nodeIndex].target, href:href_val, open:args.nodes[nodeIndex].initial_open, name:node_alt};
+        ht_tree_nodes[priId].child = new Array();
+        if (has_children) {
+            for (var childNodeIndex = 0; childNodeIndex < args.nodes[nodeIndex].keys.length; childNodeIndex++) {
+                var secId;
+                var full_name = ht_getFullName(args.nodes[nodeIndex].keys[childNodeIndex]);
+                var tabKey = args.nodes[nodeIndex].keys[childNodeIndex].tabKey;
+                var href_val = args.nodes[nodeIndex].keys[childNodeIndex].href;
+                secId = String(args.nodes[nodeIndex].keys[childNodeIndex].name).make_html_id();
+                ht_tree_nodes[priId].child[secId] = {rowId:secId, target:args.nodes[nodeIndex].target, href:args.nodes[nodeIndex].keys[childNodeIndex].href, open:args.nodes[nodeIndex].initial_open, name:full_name};
+                if (typeof(tabKey) == "number") {
+                    ht_tree_nodes[priId].child[secId].tabKey = tabKey;
+                }
+                var tree_id = make_tree_id(priId, secId);
+                document.writeln(
+                    "<div id='" + tree_id + "' style='display:none' " +
+                    "onClick='handleClick(event, \"" + priId + "\", \"" + secId + "\"); return false;' " +
+                    "class='listSubTitle listSubTitleUnselected'>");
+                if (typeof(href_val) == "undefined") {
+                    href_val = "blank.htm";
+                }
+                document.writeln(
+                    "<a " +
+                    "id='" + tree_id + "_anchor' " +
+                    "href='#' " +
+                    "title='" + full_name + "'>" +
+                    args.nodes[nodeIndex].keys[childNodeIndex].name +
+                    "<\/a><\/div>"
+                    );
+            }
+        }
+    }
+    document.writeln("<\/div>");
+    for (var prim_key in ht_tree_nodes) {
+        var elem;
+        if (ht_tree_nodes[prim_key].open) {
+            ht_tree_nodes[prim_key].open = false;
+            htTree_Toggle(prim_key);
+        }
+    }
+}
+var treeWidth = parent.getElement("treeMain").cols;
+function hideTree()
+{
+   if (parent.getElement("treeMain")) {
+       parent.getElement("treeMain").cols = '0,*';
+   }
+   parent.hideElement("treeFrame");
+}
+function showTree()
+{
+   if (parent.getElement("treeMain") && treeWidth) {
+       parent.getElement("treeMain").cols = treeWidth;
+   }
+   parent.showElement("treeFrame");
+}
+function isTreeHidden()
+{
+   return parent.isElementHidden("treeFrame");
+}
+function fixHref(href) {
+    if (typeof(href) != "string" || !href.contains("?")) {
+        return href;
+    }
+    parts = href.split("?");
+    base = parts[0];
+    if (base != "/iPages/i_ord.asp") {
+        return base;
+    }
+    qs = parts[1].split("&");
+    for (i = 0; i < qs.length; i++) {
+        if (qs[i].beginsWith("basepath")) {
+            base += "?" + qs[i];
+        }
+    }
+    return base;
+}
+function lookupPageByHref(location) {
+    var tabsArray = parent.mainFrame.TabsArray;
+    var tabKey;
+    var path;
+    var locationHref = fixHref(location);
+    for (i = 0; i < ilom_nodes.length; i++) {
+        if (ilom_nodes[i].href == locationHref) {
+            path = {priKey:ilom_nodes[i].name.make_html_id(), secKey:""};
+            return path;
+        }
+        if (ilom_nodes[i].keys) {
+            for (j = 0; j < ilom_nodes[i].keys.length; j++) {
+                if (ilom_nodes[i].keys[j].href == locationHref) {
+                    path = {priKey:ilom_nodes[i].name.make_html_id(), secKey:ilom_nodes[i].keys[j].name.make_html_id()};
+                    return path;
+                }
+                tabKey = ilom_nodes[i].keys[j].tabKey;
+                if (tabKey != undefined && tabsArray && tabsArray[tabKey]) {
+                    for (k = 0; k < tabsArray[tabKey].length; k++) {
+                        if (tabsArray[tabKey][k].href == locationHref) {
+                            path = {priKey:ilom_nodes[i].name.make_html_id(), secKey:ilom_nodes[i].keys[j].name.make_html_id(), tab: k, tabKey: tabKey};
+                            return path;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return;
+}
+function isFirmwarePage(location) {
+    return (location.beginsWith("/iPages/i_flashcomplete.asp") ||
+            location.beginsWith("/iPages/i_flashstatus.asp") ||
+            location.beginsWith("/iPages/i_fwverify.asp") ||
+            location.beginsWith("/iPages/i_uploadimage.asp"));
+}
+function syncTreeAndTabs(location) {
+    if (isFirmwarePage(location)) {
+        ht_hideTabs();
+        ht_hideNavTree();
+        ht_hideNavigationLabel();
+        return;
+    }
+    ht_showNavTree();
+    ht_showNavigationLabel();
+    var pageLocation = lookupPageByHref(location);
+    if (pageLocation == undefined) {
+        return;
+    }
+    ht_setTitleBar(getNodeName(pageLocation.priKey, pageLocation.secKey));
+    if (pageLocation.secKey && !ht_tree_nodes[pageLocation.priKey].open) {
+        htTree_Toggle(pageLocation.priKey);
+    }
+    highlightTreeNode(pageLocation.priKey, pageLocation.secKey);
+    if (pageLocation.tabKey != undefined) {
+        ht_drawTabs({tabKey:pageLocation.tabKey, selected:pageLocation.tab});
+        ht_showTabs();
+    } else {
+        ht_hideTabs();
+    }
+}
+function exportTreeNodes()
+{
+    return navtree.nodes;
+}
+function exportSessionToken()
+{
+    return sessionToken;
+}
+</script>
+</head>
+<body class="navTreeTable">
+<div id="jumpToContent"><a href="#" onclick="parent.getElement('bodyFrame').focus(); return false;">Jump to Content</a></div>
+<script type="text/javascript">
+var sessionToken = 'fyyzRwaEpKVogPFvWzCGALBCTjUSCY';
+htTree_DrawTree(navtree);
+</script>
+</body>
+</html>
+†·Aa           ]÷Ê"A"/Ô       >    :https://adc-mgmt-1146fmm0lu.us.oracle.com/iPages/ilomtree.asp strongly-framed 0 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeBAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAASNMIIEiTCCA3GgAwIBAgIJAOJ0rN3uRWu+MA0GCSqGSIb3DQEBCwUAMIGJMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEXMBUGA1UEBxMOUmVkd29vZCBTaG9yZXMxHTAbBgNVBAoTFE9yYWNsZSBBbWVyaWNhLCBJbmMuMS0wKwYDVQQDEyRPcmFjbGUgSW50ZWdyYXRlZCBMaWdodHMgT3V0IE1hbmFnZXIwHhcNMTQwNjEyMTUyOTAxWhcNMzQwNjA3MTUyOTAxWjCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvMQXO6DUOUnSJ7IXLCR0E9iAmJtQlyO10sds8ZERf08FVsjWvE5D5s9dFeDTSGNJLmiSM/TmkC1aCcHi+YZI92yREcUPJP8oAYs1kZsOC8SPpZ0ykfHgBajgU90SsbSe3v2G+dMVgSX3xParoi+XxdAKFpvWqypsFL21n+PfnxJMbbNkqZHS+YqDhF4aljZ5C55a5O+1z2+qNBLgVLakK36XvWH5+3xzUksH9Ew6IYxrCKAMEc7/eJYGtel2RdW3WQlx3DZ+6TFbvTnI0/Jl4+mGH/n79xTICGlFJrX09AuiU/FVasb78+2gMB6y/AgETFjFxu2myuuoAx8HEF+2owIDAQABo4HxMIHuMB0GA1UdDgQWBBTPh78BeErvt1lLsZ6Iea8XLjhVKzCBvgYDVR0jBIG2MIGzgBTPh78BeErvt1lLsZ6Iea8XLjhVK6GBj6SBjDCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyggkA4nSs3e5Fa74wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAbTaZeskxbirmUTW/QCXkZLcvY5/2FgrgWU6+0c1WyLpfg8qO+0KAH2GLSe9xxkFomFd0kzRncw/i1bF/4RXMoBnEM6ANp/aSGFggaUfoo0mhjyN66s+rNtWPNvDQCADxaWq67HyNdpEzWY4cAcgDGJphrgZCsTy7A9Y7Fc283YCbWVnYyiKWX35B3kr2E/4pDNj1gig2nPd/MPobdy7ZCYpXsPTpgpsQnIExi3THJijiz6NLjG1k2e8IAi2Y68taFO8cvN2m5jhEuwYSkXV5hjMrr6EffS8KkHVgPziBPjWbgboN5QUO2XPimjwH44/vP5JPB02xnU6Rlp6Kg9A1iwAvAwMBAAEAAQEBAAAAAAAEbm9uZQAAAARub25lAAAA request-method GET response-head HTTP/1.0 200 OK
+Date: Mon Dec 16 18:28:33 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ original-response-headers Date: Mon Dec 16 18:28:33 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ uncompressed-len 0 predictor::resource-count 12 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/ajax.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/win.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/browserVersion.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/cssPicker.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/luapi.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/session.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/platform.jasp 1,1,0,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/htui.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/sdm.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Styles/oracle.css 1,1,0,4096 net-response-time-onstart 1841 net-response-time-onstop 3189 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/domTT/domLib.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/domTT/domTT.js 1,1,0,4096   KÝ

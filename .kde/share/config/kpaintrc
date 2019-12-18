@@ -1,0 +1,42 @@
+[Colors]
+CurrentPalette=* Recent Colors *
+
+[KFileDialog Settings]
+Automatic Preview=true
+Recent Files=/home/mpereira/wallpaper3_800.jpg,/home/mpereira/wallpaper2_800.jpg,/home/mpereira/login2_800.jpg,/home/mpereira/wallpaper_800.jpg,/home/mpereira/login2gds,/home/mpereira/logongds1,/home/mpereira/logon1gds,/home/mpereira/login3_800.jpg,/home/mpereira/login3_1280.jpg,/home/mpereira/wallpaper_1280.jpg,/home/mpereira/gds1.jpg
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[MainWindowSettings]
+Height 768=480
+MenuBar=Enabled
+StatusBar=Enabled
+Width 1024=640
+
+[MainWindowSettings Toolbar mainToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=1
+NewLine=false
+Offset=-1
+Position=Top
+
+[MainWindowSettings Toolbar sideToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=0
+NewLine=false
+Offset=-1
+Position=Top
+
+[MainWindowSettings Toolbar toolsToolBar]
+Hidden=false
+IconSize=22
+IconText=IconOnly
+Index=2
+NewLine=false
+Offset=-1
+Position=Top

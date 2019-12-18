@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="Inet" oor:package="org.openoffice">
+ <node oor:name="Settings">
+  <prop oor:name="ooInetProxyType" oor:type="xs:int">
+   <value>2</value>
+  </prop>
+  <prop oor:name="ooInetFTPProxyName" oor:type="xs:string">
+   <value>www-proxy.us.oracle.com</value>
+  </prop>
+  <prop oor:name="ooInetFTPProxyPort" oor:type="xs:int">
+   <value>80</value>
+  </prop>
+  <prop oor:name="ooInetHTTPProxyName" oor:type="xs:string">
+   <value>www-proxy.us.oracle.com</value>
+  </prop>
+  <prop oor:name="ooInetHTTPProxyPort" oor:type="xs:int">
+   <value>80</value>
+  </prop>
+  <prop oor:name="ooInetNoProxy" oor:type="xs:string">
+   <value>oracle.com; oracleads.com; us.oracle.com; uk.oracle.com; ca.oracle.com; oraclecorp.com; oracleportal.com</value>
+  </prop>
+ </node>
+</oor:component-data>

@@ -1,0 +1,17 @@
+[Devices][/org/freedesktop/UDisks2/block_devices/dm_2d0]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=30.5 GiB Hard Drive
+LastSeenMounted=true
+
+[Devices][/org/freedesktop/UDisks2/block_devices/sda1]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=1.0 GiB Hard Drive
+LastSeenMounted=true
+
+[Devices][/org/freedesktop/UDisks2/block_devices/sr0]
+EverMounted=true
+Icon=media-optical-data
+LastNameSeen=VBox_GAs_6.0.8
+LastSeenMounted=false

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_writer.xpm
+Type=MimeType
+Patterns=*.sdw
+MimeType=application/vnd.stardivision.writer
+Comment=StarWriter 5

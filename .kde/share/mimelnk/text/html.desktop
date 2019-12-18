@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=HTML Page
+Hidden=false
+Icon=html
+MimeType=text/html
+Patterns=*.html;*.HTML;*.htm;*.HTM
+Type=MimeType
+X-KDE-AutoEmbed=true

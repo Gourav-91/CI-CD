@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Exec=obicc
+Icon=/usr/share/icons/gnome/32x32/status/security-medium.png
+Icon[en_US]=/usr/share/icons/gnome/32x32/status/security-medium.png
+Name=OBI Configuration Center
+Name[en_US]=OBI Configuration Center
+Terminal=false
+Type=Application

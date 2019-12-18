@@ -1,0 +1,258 @@
+//Default pooling period
+var alertsPoolingPeriod = ALERTS_POOLING_PERIOD;
+//2 * 60 * 1000;
+//Global variables to track user idle
+var USER_TIME_OUT = ALERTS_POOLING_PERIOD;
+//1000 * 60;
+var lastMouseMoveTime = new Date().getTime();
+var authorized = true;
+
+var lovHash;
+var oldHash;
+
+/**
+ * Basic Ajax util functions
+ */
+var AjaxUtils = {
+    /**
+   * Ajax GET function
+   */
+    xhrGet: function(ajaxParameters) {
+        var xmlhttp = AjaxUtils.getXmlHttpObject();
+        if (xmlhttp == null) {
+            alert("Your browser does not support XMLHTTP!");
+            return;
+        }
+
+        var url = ajaxParameters.url;
+
+        if (ajaxParameters.content != undefined) {
+            var parameters = ajaxParameters.content;
+            for (property in parameters) {
+                //console.debug( property, parameters[property] );
+                if (url.indexOf('?') < 0) {
+                    url += "?" + property + "=" + parameters[property];
+                } else {
+                    url += "&" + property + "=" + parameters[property];
+                }
+            }
+        }
+
+        if (ajaxParameters.preventCache) {
+            if (url.indexOf('?') < 0) {
+                url = url + "?preventCache = " + Math.random();
+            } else {
+                url = url + "&preventCache = " + Math.random();
+            }
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    try {
+                        var responseObject = eval("(" + xmlhttp.responseText + ")");
+                        //console.debug( 'responseObject:', responseObject );
+                        ajaxParameters.load.call(this, responseObject);
+                    } catch(e) {
+                        //console.error( 'Error when parsing response ', e );
+                        }
+                } else if (xmlhttp.status == 401) {
+                    authorized = false;
+
+                }
+
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send(null);
+    },
+
+    /**
+   * Ajax xmlHttp object
+   */
+    getXmlHttpObject: function() {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            return new XMLHttpRequest();
+        }
+
+        if (window.ActiveXObject) {
+            // code for IE6, IE5
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        return null;
+    }
+}
+
+//----------------------------------------------------------------------------- 
+function isArray(it) {
+    return it && (it instanceof Array || typeof it == "array");
+}
+//-----------------------------------------------------------------------------       
+function showAlertsDialog() {
+    getNewAlerts();
+    var popupHeight = 600;
+    var popupWidth = 800;
+
+    var popupTop = (screen.height - popupHeight) / 2;
+    var popupLeft = (screen.width - popupWidth) / 2;
+
+    var winHandle = window.open("/oip/faces/secure/srm/alerts/Alerts.jspx", "mywindow", "status=0, toolbar=0, location=0, scrollbars=1, menubar=0, " + " top=" + popupTop + " , left=" + popupLeft + " , " + " height=" + popupHeight + ", width=" + popupWidth);
+    winHandle.focus();
+}
+//----------------------------------------------------------------------------- 
+function getAlertsIcon() {
+    var alertsIcon;
+
+    var imagesList = document.getElementsByTagName("img");
+    for (var i = 0; i < imagesList.length; i++) {
+        if (imagesList[i].id.indexOf('alertsIcon') > 0) {
+            alertsIcon = imagesList[i];
+        }
+    }
+    return alertsIcon;
+}
+//----------------------------------------------------------------------------- 
+function getAlertsCounter() {
+    var alertsCounter;
+
+    var spanList = document.getElementsByTagName("span");
+    for (var i = 0; i < spanList.length; i++) {
+        if (spanList[i].id.indexOf('alertCnt') > 0) {
+            alertsCounter = spanList[i];
+        }
+    }
+    return alertsCounter;
+}
+//-----------------------------------------------------------------------------       
+function refreshNewAlerts() {
+    console.debug('refreshNewAlerts: ACTION_GET_NEW_ALERTS');
+    getNewAlerts();
+}
+//----------------------------------------------------------------------------- 
+var dfd;
+function getNewAlerts() {
+    console.debug("Get NEW ALERTS for user... [" + new Date() + "]");
+//    var alertCnt = getAlertsCounter();
+//    var alertsIcon = getAlertsIcon();
+    var kw = {
+        url: '/oip/faces/AlertNotification',
+        content: {
+            'ACTION': 'ACTION_GET_NEW_ALERTS'
+        },
+        preventCache: true,
+        handleAs: 'json',
+        load: function(data) {
+            console.debug("Get NEW ALERTS load function... [" + new Date() + "]");
+            var alertCnt = getAlertsCounter();
+            var alertsIcon = getAlertsIcon();
+            if (data != undefined && data.poolingPeriod != undefined)
+                alertsPoolingPeriod = data.poolingPeriod;
+            try {
+            alertCnt.innerHTML = "";
+            alertCnt.innerHTML = "(" + data.unacknowledgedAlertsCount + " alerts)";
+            } catch(e) {
+                console.debug("Error in alert count: " +e);            
+            }
+            if (alertsIcon != undefined) {
+                if (data.unacknowledgedAlertsCount > 0) {
+                    alertsIcon.style.background = "red";
+                    alertsIcon.style.visibility = "";
+                } else {
+                    alertsIcon.style.background = "#00FF00";
+                    alertsIcon.style.visibility = "";
+                }
+            } else {
+                if (data.unacknowledgedAlertsCount > 0) {
+                    var ans = window.confirm('You have ' + data.unacknowledgedAlertsCount + ' unacknowledged alert message(s). Do you want to see the list?');
+                    if (ans == true) {
+                        showAlertsDialog();
+                    }
+                }
+            }
+            // Process LOV caching data
+            if (lovHash != data.lovHash) {
+                lovHash = data.lovHash;
+                if (typeof(processLOVChange) != "undefined" && processLOVChange instanceof Function) {
+                    processLOVChange(true);
+                }
+            }
+            try {
+                resetSessionTimeout (); //Bug 16286517 - UPDATE JAVASCRIPTS UNDER SP TO INVOKE RESETSESSIONTIMEOUT()
+                 console.debug("getNewAlerts: invoke resetSessionTimeout");
+           } catch (e) {
+                console.debug("Error invoking resetSessionTimeout. " +e);
+            }
+            return data;
+        },
+        error: function(data) {
+            console.log("Error", dojo.toJson(data));
+        },
+        timeout: 120000
+    };
+    //If the user is not idle then request the alerts
+    if (((new Date().getTime() - lastMouseMoveTime) < USER_TIME_OUT) && (authorized == true)) {
+        //Ajax request to server
+        dfd = AjaxUtils.xhrGet(kw);
+    } else {
+        //console.debug( "WARN: Alerts pooling stopped. User is idle !" );
+        }
+
+    if (authorized == true) {
+        setTimeout("refreshNewAlerts()", alertsPoolingPeriod);
+    }
+    return dfd;
+};
+//----------------------------------------------------------------------------- 
+//Input event handler
+function onUserInputEvent(e) {
+    //console.debug( 'in onUserInputEvent ' + ( e ? e : window.event ) + ' date: ' + new Date() );
+    lastMouseMoveTime = new Date().getTime();
+}
+//----------------------------------------------------------------------------- 
+function hookUserInputEvents() {
+    try {
+        if (document.body) {
+            //console.debug( 'add Event Listener' );
+            document.body.onmousedown = onUserInputEvent;
+        } else {
+            //console.error('No body');
+            }
+    } catch(e) {
+        //console.error( 'Error hook events ', e );
+        }
+}
+//----------------------------------------------------------------------------- 
+//Start pooling only for Support users
+if (HAS_SUPPORT_RESPONSIBILITIES) {
+    console.log("start polling in alertNotificationPooling");
+    try{
+        //Hook input event handlers to track user idling
+        hookUserInputEvents();
+        //getNewAlerts();
+        setTimeout("getNewAlerts()", 2000); //give a delay of 2 secs for the very first 
+    }catch(exc){
+        console.log("problem encountered in alertNotificationPooling.js" + exc.message);
+    }
+}¼€Sçú      ]÷·+]÷·+A"+_Î¿À   j    :https://support.us.oracle.com/oip/secure/srm/js/alerts/alertNotificationPooling.js?vBT19412_19.4.0.0.0.12 necko:classified 1 strongly-framed 1 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeAAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAAahMIIGnTCCBYWgAwIBAgIQB/fdZD/U+mRji1EHhXTHzTANBgkqhkiG9w0BAQsFADBNMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMScwJQYDVQQDEx5EaWdpQ2VydCBTSEEyIFNlY3VyZSBTZXJ2ZXIgQ0EwHhcNMTgxMDI0MDAwMDAwWhcNMjAwMjIyMTIwMDAwWjBwMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEVMBMGA1UEBxMMUmVkd29vZCBDaXR5MRswGQYDVQQKExJPcmFjbGUgQ29ycG9yYXRpb24xGDAWBgNVBAMMDyoudXMub3JhY2xlLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANfeX0A1YhnHzjcnkTV4HGLqhZLpcQ62rqldoPKOCZF1kstgHwrrQahJeLSTG08ds7c75MXbm+bkTO2e9QbJrZd/WJD9Wl/Hts+Q9kll6Xif60sO71+vE6iU72vcWFZzA2+njL3r2Zi8kFKllCe4+ewae89oJrQGVx9ihPUwZzOOTJNqeX+zBxN+vu6eJg8h5WJYPyIyuaWsZN7FoGMiXZCLOr0zzXDRs0QctNKR5BOfZ77XLWeiIF/XE/EedwFZd24PxzR2aegW38w8K++vdZZOp9dz21RTUgec64FXZ0n1d2dCKaEvSW+kkd3SZvRek0u8hXmsLjf5bPoD0R9E7BcCAwEAAaOCA1QwggNQMB8GA1UdIwQYMBaAFA+AYRyCMWHVLyjnjUY4tCzhxtniMB0GA1UdDgQWBBR6xrqOkg6O345XB7u84kzkjMm6hjAaBgNVHREEEzARgg8qLnVzLm9yYWNsZS5jb20wDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjBrBgNVHR8EZDBiMC+gLaArhilodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vc3NjYS1zaGEyLWc2LmNybDAvoC2gK4YpaHR0cDovL2NybDQuZGlnaWNlcnQuY29tL3NzY2Etc2hhMi1nNi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1sAQEwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAIBgZngQwBAgIwfAYIKwYBBQUHAQEEcDBuMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wRgYIKwYBBQUHMAKGOmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFNIQTJTZWN1cmVTZXJ2ZXJDQS5jcnQwCQYDVR0TBAIwADCCAX0GCisGAQQB1nkCBAIEggFtBIIBaQFnAHYApLkJkLQYWBSHuxOizGdwCjw1mAT5G9+443fNDsgN3BAAAAFmpKSwtwAABAMARzBFAiEA0Ax6st8/DSKTvVluA9xV2jLYvMsWe+DvIk4NLxjCfTQCIFZSMaVUFS0cqYPxe4KbPbIUTy8hqAtDEGnC2yUU2w5CAHYAh3W/51l8+IxDmV+9827/Vo1HVjb/SrVgwbTq/16ggw8AAAFmpKSxlAAABAMARzBFAiBBA9OwBMrNG49CocYu3Q9KhfeBl11R5ooBDJbDZqvP+QIhALcaol5TwGkDjiSjo6Zz0sTsk5o4OKymHhT3BUbjfH/8AHUA7ku9t3XOYLrhQmkfq+GeZqMPfl+wctiDAMR7iXqo/csAAAFmpKSxngAABAMARjBEAiAwVsb/WA/h24Q8d+Fr62F7VhUEmBpYyVO2SDWxKLgXhQIgAVxkjV0HdoMM+StFSlxbwNLKvLiqwih4ruzg2+ZOuAEwDQYJKoZIhvcNAQELBQADggEBAKdqp/RWLJ7VrCzb+pkTlB1YVyEn8XM9rXNzFgpTHAe8fM1V8/apgrVSTW53fTyhhkDpCAdgfBLiWYJSmJ6waFdkZ5VUaRWvqV1D+C5LAZQ/GxxcytUWjwWAy4DmIlu8pdJDjhYaAQQdRhsDSyDWC4rJqJ9GnGl7tFRR/A3lDvXgf0Klxfe3yYjMavy9Dnbv1YvBXiK19wvcL+rBLju1NcrErhKCIAuE4LODwIEKf+9IpJGEW6efjtJEyjtpLoXDlBn2r3WGtHP7alTLxYq9AsPxMeq3/Bzm86eCyCgbCgbu+Z1vygqf6Pj04jQ0xWLu1Jh7tlQk+NrgssLpeWLlbifALwMDAAAAAAEBAAAAAAAABG5vbmUAAAAQUlNBLVBLQ1MxLVNIQTI1NgAAAA== request-method GET response-head HTTP/1.1 200 OK
+Date: Sun, 08 Dec 2019 23:50:33 GMT
+Server: Oracle-Application-Server-10g
+Cache-Control: public, max-age=31536000
+Expires: Mon, 07 Dec 2020 23:50:33 GMT
+Last-Modified: Sat, 19 Oct 2019 05:24:13 GMT
+Accept-Ranges: bytes
+Content-Length: 8695
+Content-Type: application/x-javascript
+ original-response-headers Date: Sun, 08 Dec 2019 23:50:33 GMT
+Server: Oracle-Application-Server-10g
+Cache-Control: public, max-age=31536000
+Expires: Mon, 07 Dec 2020 23:50:33 GMT
+Last-Modified: Sat, 19 Oct 2019 05:24:13 GMT
+Accept-Ranges: bytes
+Content-Length: 8695
+Set-Cookie: JSESSIONID=febb8df2c2c1e38f945bfc47f235eabf2d33a5217e799a85fce3955bbf5cb5d9.e34NchyKaheMai0TbNmPbxaObNv0; path=/oip; secure
+Keep-Alive: timeout=2, max=1024
+Connection: Keep-Alive
+Content-Type: application/x-javascript
+ uncompressed-len 0 net-response-time-onstart 9581 net-response-time-onstop 9582   !÷

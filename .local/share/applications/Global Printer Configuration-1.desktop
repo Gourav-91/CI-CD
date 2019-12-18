@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Exec=/usr/bin/firefox http://printers.oraclecorp.com
+Icon=/usr/share/icons/crystalsvg/32x32/devices/printer1.png
+Icon[en_US]=/usr/share/icons/crystalsvg/32x32/devices/printer1.png
+Name=Global Printer Configuration
+Name[en_US]=Global Printer Configuration
+Terminal=false
+Type=Application

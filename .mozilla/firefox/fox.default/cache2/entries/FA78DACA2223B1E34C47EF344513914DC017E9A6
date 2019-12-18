@@ -1,0 +1,684 @@
+
+<html lang="en-us">
+<head>
+<link rel="stylesheet" href="/i/css/apex.min.css?v=4.2.2.00.11" type="text/css" />
+<!--[if IE]><link rel="stylesheet" href="/i/css/apex_ie.min.css?v=4.2.2.00.11" type="text/css" /><![endif]-->
+<link rel="stylesheet" href="/i/libraries/jquery-ui/1.8.22/themes/base/jquery-ui.min.css" type="text/css" />
+
+
+
+
+<script type="text/javascript">
+var apex_img_dir = "/i/", htmldb_Img_Dir = apex_img_dir;
+</script>
+<script src="/i/libraries/apex/minified/desktop_all.min.js?v=4.2.2.00.11" type="text/javascript"></script>
+<script src="/i/libraries/apex/minified/legacy.min.js?v=4.2.2.00.11" type="text/javascript"></script>
+
+
+
+
+<script language="javascript">
+  var get = new htmldb_Get(null, html_GetElement('pFlowId').value, 'APPLICATION_PROCESS=pmmChk4md5', 0);
+  get.add('F110_LOGIN',document.getElementById('P0_LOGIN').value);
+  var r=get.get(null);
+  get=null;
+  if ( r != "0" ) {
+  window.location="f?p=110:102"
+  }
+-->
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Target Search</title>
+<link rel="stylesheet" href="/i/themes/theme_9/theme.css" type="text/css" />
+</head>
+<body ><form action="wwv_flow.accept" method="post" name="wwv_flow" id="wwvFlowForm" novalidate >
+<input type="hidden" name="p_flow_id" value="110" id="pFlowId" /><input type="hidden" name="p_flow_step_id" value="1" id="pFlowStepId" /><input type="hidden" name="p_instance" value="12324860931975" id="pInstance" /><input type="hidden" name="p_page_submission_id" value="2852468687879" id="pPageSubmissionId" /><input type="hidden" name="p_request" value="" id="pRequest" /><table bgcolor="white" width="100%" cellpadding="0" cellspacing="0" border="0" summary="">
+<tr>
+<td nowrap="nowrap" align="right"><img alt="" src="/i/oracle.h2o.mark.gif"/>
+</td>
+</tr>
+</table>
+
+<table bgcolor="white" width="100%" cellpadding="0" cellspacing="0" border="0" summary=""><tr><td align="left" valign="top">&nbsp;</td><td align="right" valign="top" >
+
+<table bgcolor="white" width="100%" cellpadding="0" cellspacing="0" border="0" summary="">
+<tr>
+<td align="right" valign="top" >
+<table cellpadding="0" cellspacing="0" border="0" summary="">
+<tr>
+<td valign="top" align="right" nowrap="nowrap">
+<div style="font-weigth;bold;font-style:italic;font-size:10pt;color:#b80000">
+gourav.s.sarkar@oracle.com<span id="pmmchgpwd" style="position:absolute; visibility:visible; z-index:50;"></span>
+<span onclick="pmm_chgpwd_open();">
+<img id="pmmkeyimg_x" src="/i/keyred.png"
+     title="change my password" alt="change my password"
+     style="cursor:hand;cursor:pointer;"
+/>
+</span>
+ from 10.39.15.244 @ 11-DEC-2019 11.09.13&nbsp;
+</div>
+</td>
+<td>&nbsp;</td>
+<td align="right" valign="center" nowrap="nowrap">
+<table cellpadding="1" cellspacing="2" border="0" class="t9navbar"><tr>
+<td valign="bottom" align="center" >
+    <a href="apex_authentication.logout?p_app_id=110&p_session_id=12324860931975"><img id="pmmexit_x" title="Exit" alt="Logout" src="/i/exitred.png" style="cursor:hand;cursor:pointer;"></a>
+</td>
+<td valign="bottom" align="center" >
+  <img src="/i/blank.gif"/>
+</td></tr></table>
+
+</td>
+<td>&nbsp;</td>
+</tr>
+</table></td>
+</tr>
+</table>
+
+<table bgcolor="white" class="t9pagebody" width="100%" cellpadding="0" cellspacing="0" border="0" summary=""><tr>
+
+<td align="right" valign="bottom" style="text-align:right;padding-right:5px;" class="bottom"><table border="0" cellpadding="0" cellspacing="0" align="left" ><tr><td>&nbsp;</td><td><table cellpadding="0" cellspacing="0" border="0" summary="">
+<tr><td><a href="f?p=110:1:12324860931975"  class="t9tabCurrent"><div class="t9tabCurrent">Target&nbsp;Search</div></a></td></tr>
+<tr><td><a href="f?p=110:1:12324860931975"><img width="110" height="8" src="/i/themes/theme_9/red.gif" alt="" /></a></td></tr></table></td>
+
+</tr></table></td></tr>
+</table>
+
+<table bgcolor="white" class="t9pagebody" width="100%" cellpadding="0" cellspacing="0" border="0" summary="">
+  <tr>
+
+    <td align="left" valign="top" width="100%">  <span id="pmmalert" style="position:absolute; visibility:visible; z-index:50;" onclick="pmm_alert_close()"></span>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function pmm_alert_open(m) {
+var alert_h='<div align="left">' +
+             '<table bgcolor="white" width="230px" border="2">' +
+              '<tr>' +
+               '<td valign="top">' +
+                '<table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" summary="">' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                  '<td valign="center" class="t9Body">' +
+                   '<img width="64px" height="64px" src="/i/pmmalert.png" alt="*" title="Attention: Management message!" id="alertlogo" border="0" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'wwv_flow_file_mgr.get_file?p_security_group_id=2151212307344091&p_fname=pmmalert.png\',sizingMethod=\'scale\');">' +
+                   '<script language="JavaScript">' +
+                    'if ( ((navigator.userAgent.toLowerCase().indexOf("msie") != -1) && ' +
+                    '(navigator.userAgent.toLowerCase().indexOf("opera") == -1)) ) ' +
+                    'document.getElementById("alertlogo").src="/i/blank.gif"' +
+                   '</script>' +
+                  '</td>' +
+                  '<td width="70%" valign="center" style="color:#de1510;font-weight:bold;font-size:18pt;font-style:italic">PMM Alert</td>' +
+                 '</tr>' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                  '<td class="t9Body" style="font-weight:normal;font-size:10pt;" colspan=2 >'
+var alert_t='      <br></td>' +
+                 '</tr>' +
+                '</table>' +
+               '</td>' +
+              '</tr>' +
+             '</table>' +
+            '</div>'
+    document.getElementById('pmmalert').innerHTML=alert_h+m+alert_t;
+    document.getElementById('pmmalert').style.visibility="visible";
+}
+function pmm_alert_close() {
+  document.getElementById('pmmalert').innerHTML="";
+  document.getElementById('pmmalert').style.visibility="hidden";
+}
+//-->
+</script><script language="javascript">
+
+var n=navigator
+var d=document
+var ua=n.userAgent.toLowerCase()
+var name=n.appName.toLowerCase()
+var version=n.appVersion.toLowerCase()
+var s_dom=document.getElementById?true:false
+    d.cookie="cookies"
+var s_cookies=(d.cookie)?true:false
+var s_moz=(ua.indexOf('mozilla')!=-1&&ua.substr(ua.indexOf("mozilla")+8,1)>=5&&ua.indexOf('konqueror')<0)?true:false
+var s_ie=(document.all && s_dom )
+var s_iphone=((ua.indexOf('safari')!=-1)&&(ua.indexOf('iphone')!=-1))?true:false
+var s_safari=((ua.indexOf('safari')!=-1)&&(ua.indexOf('mac')!=-1))?true:false
+var s_opera=(ua.indexOf("opera")!=-1&&ua.substr(ua.indexOf("opera")+6,1)>=8&&ua.indexOf('opera mini')<0)?true:false
+var s_other=(ua.indexOf('mozilla')!=-1&&ua.indexOf('MSIE')!=-1&&ua.substr(ua.indexOf('MSIE')+5,1)>=6)?true:false
+var u_ones=(ua.indexOf('windows ce')!=-1||ua.indexOf('phone')!=-1||ua.indexOf('palm')!=-1||ua.indexOf('playstation')!=-1)?true:false
+var s_ajax=null
+    try {
+      s_ajax = new ActiveXObject("Msxml2.XMLHTTP")
+    } catch(e) {
+      s_ajax = new XMLHttpRequest()
+    } s_ajax=s_ajax?true:false
+if ( !s_iphone&u_ones|!((s_moz|s_ie|s_safari|s_opera|s_other)&s_cookies&s_dom&s_ajax) ) {
+  window.location="#LOGOUT_URL#"
+}
+-->
+</script><script language="JavaScript" type="text/javascript">
+<!--
+function pmm_ondemand_open(m) {
+var odalert='<div align="left">' +
+             '<table bgcolor="white" width="230px" border="2">' +
+              '<tr>' +
+               '<td valign="top">' +
+                '<table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" summary="">' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                  '<td valign="center" class="t9Body">' +
+                   '<img src="/i/oracle_ondemand.gif" alt="*" title="Attention: OnDemnand Management message!" id="ondemandlogo" border="0" >' +
+                  '</td>' +
+                 '</tr>' +
+                 '<tr>' +
+                  '<td width="4%">&nbsp;</td>' +
+                 '</tr>' +
+                '</table>' +
+               '</td>' +
+              '</tr>' +
+             '</table>' +
+            '</div>'
+    document.getElementById('pmmondemand').innerHTML=odalert;
+    document.getElementById('pmmondemand').style.visibility="visible";
+}
+function pmm_ondemand_close() {
+  document.getElementById('pmmondemand').innerHTML="";
+  document.getElementById('pmmdemand').style.visibility="hidden";
+}
+//-->
+</script><div align="center"><input type="hidden" name="p_arg_names" value="1902829144622292" /><input type="hidden" name="p_t01" id="P0_TOKEN" value="Tubai321,"><input type="hidden" name="p_arg_names" value="1903029764622292" /><input type="hidden" name="p_t02" id="P0_LOGIN" value="gosarkar"><input type="hidden" name="p_arg_names" value="1903430291622294" /><input type="hidden" name="p_t03" id="P0_CHGPWD_DIALOG" value="&lt;table cellpadding=&quot;10&quot; cellspacing=&quot;0&quot; border=&quot;2&quot; summary=&quot;&quot; class=&quot;t9SBCCStyle2&quot;&gt;
+ &lt;tr&gt;
+  &lt;td align=&quot;center&quot; valign=&quot;center&quot; class=&quot;t9RegionHeader&quot;&gt;
+   &lt;i&gt;&lt;T12W&gt;Change My Password&lt;&#x2F;T12W&gt;&lt;&#x2F;i&gt;
+  &lt;&#x2F;td&gt;
+ &lt;&#x2F;tr&gt;
+ &lt;tr&gt;
+  &lt;td class=&quot;t9Body&quot;&gt;
+   &lt;table class=&quot;formlayout&quot; summary=&quot;&quot; &gt;
+    &lt;tr&gt;
+     &lt;td nowrap align=&quot;right&quot; valign=&quot;middle&quot;&gt;New Password&lt;&#x2F;td&gt;&lt;td nowrap align=&quot;left&quot; valign=&quot;middle&quot;&gt;&lt;label for=&quot;newpassword&quot; class=&quot;hideMeButHearMe&quot;&gt;New Password&lt;&#x2F;label&gt;&lt;input type=&quot;text&quot; name=&quot;f01&quot; size=&quot;16&quot; maxlength=&quot;16&quot; value=&quot;&quot;  id=&quot;newpassword&quot; &#x2F;&gt;&lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+    &lt;tr&gt;
+     &lt;td nowrap=&quot;nowrap&quot; align=&quot;right&quot; valign=&quot;middle&quot;&gt;Retype Password&lt;&#x2F;td&gt;&lt;td nowrap align=&quot;left&quot; valign=&quot;middle&quot;&gt;&lt;label for=&quot;retypepassword&quot; class=&quot;hideMeButHearMe&quot;&gt;Retype Password&lt;&#x2F;label&gt;&lt;input type=&quot;text&quot; name=&quot;f01&quot; size=&quot;16&quot; maxlength=&quot;16&quot; value=&quot;&quot; type=&quot;password&quot; id=&quot;retypepassword&quot; &#x2F;&gt;&lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+   &lt;&#x2F;table&gt;
+   &lt;table summary=&quot;&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+    &lt;tr&gt;
+     &lt;td align=&quot;right&quot;&gt;
+      &lt;table class=&quot;t9StandardButton&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot;  summary=&quot;&quot;&gt;
+       &lt;tr&gt;
+        &lt;td class=&quot;t9L&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_alert(&#x27;Password change canceled.&#x27;)&quot;&gt;&lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;but_left.png&quot; alt=&quot;&quot; width=&quot;6&quot; height=&quot;21&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+        &lt;td class=&quot;t9C&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_alert(&#x27;Password change canceled.&#x27;)&quot;&gt;Cancel&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+        &lt;td class=&quot;t9R&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_alert(&#x27;Password change canceled.&#x27;)&quot;&gt;&lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;but_right.png&quot; width=&quot;6&quot; height=&quot;21&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+       &lt;&#x2F;tr&gt;
+      &lt;&#x2F;table&gt;
+      &lt;table class=&quot;t9StandardButton&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot;  summary=&quot;&quot;&gt;
+       &lt;tr&gt;
+        &lt;td class=&quot;t9L&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_action()&quot;&gt;&lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;but_left.png&quot; alt=&quot;&quot; width=&quot;6&quot; height=&quot;21&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+        &lt;td class=&quot;t9C&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_action()&quot;&gt;Change&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+        &lt;td class=&quot;t9R&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_action()&quot;&gt;&lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;but_right.png&quot; width=&quot;6&quot; height=&quot;21&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+       &lt;&#x2F;tr&gt;
+      &lt;&#x2F;table&gt;
+     &lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+   &lt;&#x2F;table&gt;
+  &lt;&#x2F;td&gt;
+ &lt;&#x2F;tr&gt;
+ &lt;tr&gt;
+  &lt;td class=&quot;t9RegionFooter&quot;&gt;
+   &lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;spacer.gif&quot; width=&quot;200&quot; height=&quot;1&quot;&#x2F;&gt;
+  &lt;&#x2F;td&gt;
+ &lt;&#x2F;tr&gt;
+&lt;&#x2F;table&gt;"><input type="hidden" name="p_arg_names" value="1903223028622293" /><input type="hidden" name="p_t04" id="P0_CHGPWD_ALERT" value="&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;2&quot; summary=&quot;&quot; class=&quot;t9SBCCStyle2&quot;&gt;
+ &lt;tr&gt;
+  &lt;td align=&quot;center&quot; valign=&quot;center&quot; class=&quot;t9RegionHeader&quot;&gt;
+   &lt;i&gt;&lt;T12W&gt;Change Result&lt;&#x2F;T12W&gt;&lt;&#x2F;i&gt;
+  &lt;&#x2F;td&gt;
+ &lt;&#x2F;tr&gt;
+ &lt;tr&gt;
+  &lt;td class=&quot;t9Body&quot;&gt;
+   &lt;table class=&quot;formlayout&quot; summary=&quot;&quot; &gt;
+    &lt;tr&gt;
+     &lt;td nowrap align=&quot;center&quot; valign=&quot;middle&quot;&gt;
+      &lt;div align=&quot;center&quot; id=&quot;pmmchgpwdalert&quot;&gt;&lt;&#x2F;div&gt;
+     &lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+   &lt;&#x2F;table&gt;
+   &lt;table summary=&quot;&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+    &lt;tr&gt;
+     &lt;td align=&quot;right&quot;&gt;
+      &lt;table class=&quot;t9StandardButton&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot;  summary=&quot;&quot;&gt;
+       &lt;tr&gt;
+        &lt;td class=&quot;t9L&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_close()&quot;&gt;&lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;but_left.png&quot; alt=&quot;&quot; width=&quot;6&quot; height=&quot;21&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+        &lt;td class=&quot;t9C&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_close()&quot;&gt;OK&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+        &lt;td class=&quot;t9R&quot;&gt;&lt;a href=&quot;javascript:pmm_chgpwd_close()&quot;&gt;&lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;but_right.png&quot; width=&quot;6&quot; height=&quot;21&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+       &lt;&#x2F;tr&gt;
+      &lt;&#x2F;table&gt;
+     &lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+   &lt;&#x2F;table&gt;
+  &lt;&#x2F;td&gt;
+ &lt;&#x2F;tr&gt;
+ &lt;tr&gt;
+  &lt;td class=&quot;t9RegionFooter&quot;&gt;
+   &lt;img src=&quot;&#x2F;i&#x2F;themes&#x2F;theme_9&#x2F;spacer.gif&quot; width=&quot;200&quot; height=&quot;1&quot;&#x2F;&gt;
+  &lt;&#x2F;td&gt;
+ &lt;&#x2F;tr&gt;
+&lt;&#x2F;table&gt;
+"><div align="center">
+<table cellpadding="0" cellspacing="0" border="2" summary="" class="t9GCCBorderless" id="R9386667255389222">
+<tr>
+<td valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0" summary="">
+<tr><td width="64" align="center"><img width="32px" height="32px" title="Find a GDC host's Administrator password" alt="Find a GDC host's Administrator password" src="/i/target.png"/></td>
+<td class="t9RegionHeader">GDC Managed Target Search</td>
+<td class="t9ButtonHolder">&nbsp;&nbsp;&nbsp;</td>
+</tr>
+
+</table></td>
+</tr>
+<tr>
+<td class="t9Body"><div align="center">
+
+<input type="hidden" name="p_arg_names" value="8641952077263707" /><input type="hidden" name="p_t05" id="P1_CHART_FILTER" value=""><input type="hidden" name="p_arg_names" value="8642159926263707" /><input type="hidden" name="p_t06" id="P1_VALUE" value="INVALID"><table id="apex_layout_9386667255389222" border="0" class="formlayout" class="instructiontext" summary="" role="presentation"><tr><td  align="right"><label for="P1_REPORT_SEARCH" tabindex="999"><span class="t9optionalwithhelp"><a href="javascript:popupFieldHelp('8642372301263708','12324860931975')" tabindex="999"><table><tr><td><img width="32px" height="32px" title="Find a GDC host's password" alt="Find a GDC host's password" src="/i/search.png"/></td><td><b>S</b>earch</td></tr></table></a><span></label></td><td  align="left"><input type="hidden" name="p_arg_names" value="8642372301263708" /><input type="text" id="P1_REPORT_SEARCH" name="p_t07" class="text_field"  value="" size="30" maxlength="2000" onkeypress="return apex.submit({request:'P1_REPORT_SEARCH',submitIfEnter:event})"  /></td><td  align="left"><table class="t9StandardButton" cellspacing="0" cellpadding="0" border="0"  summary="">
+<tr>
+<td class="t9L"><a href="javascript:apex.submit(&#x27;GO&#x27;);"><img src="/i/themes/theme_9/but_left.png" alt="" width="6" height="21" /></a></td>
+<td class="t9C"><a href="javascript:apex.submit(&#x27;GO&#x27;);">Get</a></td>
+<td class="t9R"><a href="javascript:apex.submit(&#x27;GO&#x27;);"><img src="/i/themes/theme_9/but_right.png" width="6" height="21" alt="" /></a></td>
+</tr></table><input type="hidden" name="p_arg_names" value="5126163274258591" /><input type="hidden" name="p_t08" id="P1_FOUND" value=""></td></tr></table><span class="nodatafound">Enter a target name, and click get.</span>
+</div></td>
+</tr>
+<tr>
+<td class="t9RegionFooter"><img src="/i/themes/theme_9/spacer.gif" width="400" height="1"/></td></tr>
+</table>
+</div><div align="center" class="t9GCCShowHide" id="R4283832098722404"><div><a href="javascript:hideShow('region14','shIMG14','/i/htmldb/builder/rollup_plus_dgray.gif','/i/htmldb/builder/rollup_minus_dgray.gif');" class="htmldbHideShowMinLink"><img src="/i/htmldb/builder/rollup_plus_dgray.gif" 
+  id="shIMG14" alt="" /></a>&nbsp;<b>Need Help?</b></div>
+<div class="t9Hide" id="region14">
+  <div class="t9Body">
+  
+<table width="70%" cellpadding="0" cellspacing="0" border="2" summary="" class="" id="14">
+<tr><td align="right" valign="bottom" class="t9ButtonHolder"> &nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td valign="top" class="t9RegionHeader">&nbsp;</td></tr>
+<tr><td class="t9Body" ><html>
+<head>
+<title>Global Datacenter Operations</title>
+<style type="text/css">
+T4 {
+font-size: 14pt; color: red;
+}
+</style>
+</head>
+<body lang=EN-US link=blue vlink=purple>
+<table width="70%" border="0" align="center">
+    <tr>
+      <td>
+
+<div class=Section1>
+<div align="center">
+<T4>Using an HTTPS client</T4>
+</div>
+<blockquote>
+<p>Each password request is a request for the password of an
+individual host (e.g., vandana).  The host's current password, or cause for
+failure to set the valid password, is returned.  Using the HTTPS client,
+repeated requests can be made with a single login.</p>
+
+<p>Once logged in, a request dialog is presented (example 1.). 
+Notice the <span style='color:blue'>Logout</span> hyperlink, in the upper right hand corner. End all request sessions by logging
+out.  Inactivity for three (3) minutes will result in automatic logout.</p>
+
+<p align=center style='text-align:center'><img border=2 src="/i/Distribution_Procedure_files/Search.step1.gif"></p>
+
+<p align=center style='text-align:center'><b>example 1</b>.  password request dialog.</p>
+
+<p>Enter a hostname (or other managed target) in the Search
+     field and click Get.  In example 2., a request was made for the password
+     of vandana.  Valid targets include</li>
+<blockquote>
+ <ol style='margin-top:0in' start=1 type=a>
+  <li>Fully qualified host names (e.g., <b><span
+      style='color:red'>vandana.us.oracle.com</span></b>)</li>
+  <li> Short, alias, hostnames (e.g., <b><span
+      style='color:red'>vandana</span></b>)</li>
+  <li>The 
+     words <b>PROVISION</b>, <b>ODPROVISION</b>, <b>netappcc</b>, <b>netapp</b>, 
+     <b>ohsstor</b> or <b>empatch</b> (See SSH access, below, for use descriptions)</li>
+ </ol>
+</blockquote>
+</p>
+<p align=center style='text-align:center'><img border=0
+src="/i/Distribution_Procedure_files/Search.step2.gif"></p>
+
+<p align=center style='text-align:center'><b>example 2</b>.
+password request granted.</p>
+
+<p>In the dialog, above, a result for <b><span
+style='color:red'>vandana.us.oracle.com</span></b> is shown.  The host was last
+logged into on <b>Jun</b>e <b>15</b>, 20<b>07</b> (<b>Last Visited</b>).  The
+password that the Global Data Center intends for this change interval is <b><span
+style='color:red'>Dem0Pass</span></b> (<b>Valid Token</b>).  The last verified
+password for this host was <b><span style='color:red'>Dem0Pass</span></b> (<b>Active
+Token</b>), set on <b>Jun</b>e <b>15</b>, 20<b>07</b> (<b>Active Date</b>). </p>
+
+<p align=center style='text-align:center'><img border=0
+ src="/i/Distribution_Procedure_files/Search.step.failed.gif"></p>
+
+<p align=center style='text-align:center'><b>example 3</b>. <b><span
+style='color:red'>unknown</span></b> password request granted.</p>
+
+<p>Example 3. depicts the result of a proper password grant;
+however the password of the host is <b><span style='color:red'>unknown</span></b>
+(<b>Active Token</b>) and the last change attempt failed because root access
+was not obtained (<b>Status</b> = <b><span style='color:red'>suroot</span></b>). 
+Again, the password that the Global Data Center intends for this change
+interval is posted.  With this knowledge, the requesting administrator can
+instate the latter password manually.</p>
+
+<p align=center style='text-align:center'><img border=0
+ src="/i/Distribution_Procedure_files/Search.step.notfound.gif"></p>
+
+<p align=center style='text-align:center'><b>example 4</b>.
+password request denied.</p>
+
+<p>Example 4., above, shows the result of a password request
+for an unauthorized target or one that is not managed by the GDC.</p>
+
+<p>Note that repeated password requests can be made using this
+venue.  The logout timer will be reset to three (3) minutes for each request (i.e., <b>Get</b>
+or <b>&lt;Enter&gt;</b>), to include <b>NULL</b> requests.  Every request is logged.</p>
+
+<p style='margin-left:.25in'><o:p>&nbsp;</o:p></p>
+
+<div align="center">
+<T4>Using an SSH version 2, client</T4>
+</div>
+
+<p><span style='font-family:Arial'>Each password request is a
+request for the password of an individual host (e.g., vandana).<span
+style='mso-spacerun:yes'>  </span>The host's current password, or cause for
+failure to set the valid password, is returned.</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+
+ <li style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-family:Arial'>with an ssh client, logon to the administrative
+     host, <b>rmdcpbox.oracle.com</b>, using your own Unix account id and
+     password;</span></li>
+ <li style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-family:Arial'>when prompted with &quot;Hostname:&quot;, supply
+     the hostname of interest (FQDN is best).</span></li>
+</ol>
+
+<p align=center style='text-align:center'><span
+style='font-family:Arial;color:white'>
+<img 
+src="/i/Distribution_Procedure_files/sshclient001.gif" v:shapes="_x0000_i1025"></span>
+
+<p align=center style='text-align:center'><b><span
+style='font-family:Arial'>example 5</span></b><span style='font-family:Arial'>.
+successful password grant</span></p>
+
+<p><span style='font-family:Arial'>The password, or failed
+status, is returned, and after 8 seconds, your login to <b>rmdcpbox.oracle.com</b>
+will be closed.</span></p>
+
+<p><span style='font-family:Arial'>Notice, in <b>example 6</b>.,
+below, when a password change operation fails (e.g., on the prior 15<sup>th</sup>
+of the month), the password is reported as <i><u><span style='color:red'>unknown</span></u></i>
+and the host's intended (<i><u><span style='color:#339966'>valid</span></u></i>)
+password is returned.</span></p>
+
+<p align=center style='text-align:center'><span
+style='font-family:Arial'><img 
+src="/i/Distribution_Procedure_files/sshclient002.gif" v:shapes="_x0000_i1027"></span></p>
+
+<p align=center style='text-align:center'><b><span
+style='font-family:Arial'>example 6</span></b><span style='font-family:Arial'>.
+unknown password grant</span></p>
+
+<p><b><span style='font-family:Arial'>Special Key Words</span></b><span
+style='font-family:Arial'> to enter at the <b><span style='color:#3333FF'>Hostname:</span></b>
+prompt</span></p>
+ 
+<ol style='margin-top:0in' start=1 type=1> 
+ <li style='tab-stops:list .5in'><b>PROVISION</b> 
+     and <b>ODPROVISION</b> (case insensitive)</li> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=1 type=1> 
+ <ul style='margin-top:0in' type=disc> 
+  <li style='tab-stops:list 1.0in'>Use 
+      the PROVISION password when provisioning an internal managed host.</li> 
+  <li style='tab-stops:list 1.0in'>Use 
+      the ODPROVISION password when provisioning an OMS Delivery Services 
+      (OnDemand) managed host.</li> 
+  <li style='tab-stops:list 1.0in'>If 
+      the password request does not return a valid GDC password for the 
+      hostname supplied, the <b>PROVISION</b> or <b>ODPROVISION</b> password should 
+      be set for the root account by an Administrator.</li> 
+ </ul> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=2 type=1> 
+ <li style='tab-stops:list .5in'><b>netapcc</b></li> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=1 type=1> 
+ <ul style='margin-top:0in' type=disc> 
+  <li style='tab-stops:list 1.0in'>If 
+      you are part of the netapp Core Competency team, you can get the netappcc 
+      password with the <b>netappcc</b> key word.</li> 
+ </ul> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=3 type=1> 
+ <li style='tab-stops:list .5in'><b>netapp</b></li> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=1 type=1> 
+ <ul style='margin-top:0in' type=disc> 
+  <li style='tab-stops:list 1.0in'>Share 
+      the netapp key word and associated password with the Network Appliance 
+      Service representative.</li> 
+ </ul> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=4 type=1> 
+ <li style='tab-stops:list .5in'><b>ohsstor</b></li> 
+</ol> 
+<ol style='margin-top:0in' start=1 type=1> 
+ <ul style='margin-top:0in' type=disc> 
+  <li style='tab-stops:list 1.0in'>If you are part of the netapp Core 
+Competency team and manage OHS filers, you can get the ohsstor password with 
+the <b>ohsstor</b> key word.</li> 
+ </ul> 
+</ol>
+<ol style='margin-top:0in' start=5 type=1> 
+ <li style='tab-stops:list .5in'><b>empatch</b></li> 
+</ol> 
+ 
+<ol style='margin-top:0in' start=1 type=1> 
+ <ul style='margin-top:0in' type=disc> 
+  <li style='tab-stops:list 1.0in'>
+This Password is accessible using the Powerbroker policy, OHS_DBA, subcommand pmm-empatch. Accesses are logged by the Powerbroker facility. See the Powerbroker TWiki for user detail.
+</li> 
+ </ul> 
+</ol> 
+
+<p style='tab-stops:.5in center 3.0in right 6.0in'><span
+style='font-family:Arial'>The depiction, (<b>example 7.</b>) below, shows the
+dialog when</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo3;
+tab-stops:list .5in center 3.0in right 6.0in'><span style='font-family:Arial'>the
+requestor does not have access permission for the host's password, or</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo3;
+tab-stops:list .5in center 3.0in right 6.0in'><span style='font-family:Arial'>the
+hostname supplied is unknown to the password distribution system (i.e., new or
+unmanaged hosts)</span></p>
+
+<p style='margin-left:.25in;tab-stops:.5in center 3.0in right 6.0in'><b><span
+style='font-family:Arial'>Hint</span></b><span style='font-family:Arial'>:</span></p>
+
+<p style='margin-left:.5in;tab-stops:.5in center 3.0in right 6.0in'><span
+style='font-family:Arial'>When receiving the 'No access' dialog, as presented
+in <b>example 6</b>., request the <b>PROVISION</b> password and try accessing
+the host with it.</span></p>
+
+<p align=center style='margin-left:.25in;text-align:center'><span
+style='font-family:Arial'><img 
+src="/i/Distribution_Procedure_files/sshclient003.gif" v:shapes="_x0000_i1026"></span></p>
+
+<p align=center style='text-align:center'><b><span
+style='font-family:Arial'>example 7</span></b><span style='font-family:Arial'>.
+denied password request</span></p>
+
+</blockquote>
+</div>
+      </td>
+    </tr>
+</table>
+</body>
+</html></div></td></tr>
+<tr><td class="t9RegionFooter"><img src="/i/themes/theme_9/spacer.gif"  height="1"/></td></tr>
+</table>
+
+  </div>
+</div></div>
+
+<div align="center">
+<table>
+<tr><td>
+<img width="32px" height="32px" title="PMM FAQs" alt="PMM FAQs" src="/i/change.png"/>
+</td>
+<td>
+<a class="moz-txt-link-freetext" href="/faq"><b>or, See our Frequently Asked Questions.</b></a>
+</td>
+</tr></table>
+</div></td>
+    <td  valign="top" align="right"></td>    
+  </tr>
+  <tr>
+    <td class="bottom" colspan="4">&nbsp;</td>
+  </tr>
+  <tr><td class="customize" align="right" colspan="4">&nbsp;</td></tr>
+</table><script language="JavaScript" type="text/javascript">
+<!--
+var curpwd=document.getElementById('P0_TOKEN').value;
+function pmm_chgpwd_open() {
+  document.getElementById('pmmchgpwd').innerHTML=document.getElementById("P0_CHGPWD_DIALOG").value;
+  document.getElementById('newpassword').type="password";
+  document.getElementById('retypepassword').type="password";
+  document.getElementById('pmmchgpwd').style.visibility="visible";
+}
+function pmm_chgpwd_alert(m) {
+  document.getElementById('pmmchgpwd').innerHTML=document.getElementById("P0_CHGPWD_ALERT").value;
+  document.getElementById('pmmchgpwdalert').innerHTML=m;
+}
+function pmm_chgpwd_close() {
+  document.getElementById('pmmchgpwd').innerHTML="";
+  document.getElementById('pmmchgpwd').style.visibility="hidden";
+}
+function pmm_chgpwd_action() {
+  if ( document.getElementById('newpassword').value.length < 6 ) {
+    return pmm_chgpwd_alert('Password length, short.');
+  }
+  if ( document.getElementById('newpassword').value.indexOf("'") > 0 ) {
+    return pmm_chgpwd_alert('Password contains an invalid charater.')
+  }
+  if ( document.getElementById('newpassword').value != document.getElementById('retypepassword').value ) {
+    return pmm_chgpwd_alert('Oops. Passwords don\'t match.');
+  }
+  var get = new htmldb_Get(null, html_GetElement('pFlowId').value, 'APPLICATION_PROCESS=pmmChangePassword', 0);
+  get.add('F110_LOGIN',document.getElementById('P0_LOGIN').value);
+  get.add('F110_TOKEN',document.getElementById('newpassword').value);
+  var r=get.get(null);
+  if ( r == "0" ) {
+    pmm_chgpwd_alert('Password Change Successful!');
+  } else {
+    get.add('F110_TOKEN',curpwd);
+    pmm_chgpwd_alert('Password Change Failed. with,'+document.getElementById('P0_LOGIN').value+', '+curpwd);
+  }
+  get=null;
+}
+-->
+</script><script type="text/javascript">
+
+  var get = new htmldb_Get(null, html_GetElement('pFlowId').value, 'APPLICATION_PROCESS=pmmChk4md5', 0)
+  get.add('F110_LOGIN',html_GetElement('P0_LOGIN').value)
+  var r=get.get(null)
+  get=null
+  if ( r != "0" ) window.location='f?p=110:102'
+
+  setTimeout("doSubmit('TIME')",180000)
+</script><span id="R7939569636951350"><div align="center"><html>
+<head>
+<title>Global Datacenter Operations foot</title>
+<style type="text/css">
+F1 {
+font-size: 7pt; color: black;
+}
+F2 {
+font-size: 8pt; color: black;
+}
+F3 {
+font-size: 7pt; color: red;
+}
+</style>
+</head>
+<body lang=EN-US link=blue vlink=purple>
+<div class=Section1>
+<hr style="width: 425px; height: 1px;">
+<table width="425px" border="2">
+    <tr>
+      <td>
+        <div><blockquote>
+          <p> <b><F2>Password Management Charter</B><br>
+          <i><F1>The root password of&nbsp; Global Data Center (GDC) 
+          managed hosts and facilities, in accordance with GDC root password management 
+          <a
+ href="http://files.oraclecorp.com/content/MySharedFolders/GDC-OPS_SOP/Root_Password_Change_Procedures/GDCops_Root_Password.doc"><F1>policies</a>, 
+          is scheduled to change on the 15th of each month.&nbsp; In addition, 
+          the root password of&nbsp; Global Data Center managed hosts and facilities 
+          will change at the discretion of GDC Management.&nbsp; 
+          <br><br>Please be advised that this is notification of scheduled and discretionary 
+            intent to change the root password of&nbsp; Global Data Center managed 
+            hosts and facilities.<br><br></F1><F3>
+Use of this site by Oracle employees is subject to compliance monitoring against adherence to company policies, including the Employee Code of Conduct, the Internal Privacy Policy, the Acceptable Use Policy and the Information Protection Policy. Any confirmed access violations will be discussed with user's management for further action.
+</p>
+          </i></F3> </div></blockquote>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html></span><br />
+<input type="hidden" name="p_md5_checksum" value=""  /><input type="hidden" name="p_page_checksum" value="FBB5B6351BF395DF8EA5CBD277A24F94" id="pPageChecksum" /></form> 
+
+
+<script type="text/javascript" src="/i/libraries/apex/minified/widget.report.min.js?v=4.2.2.00.11"></script>
+<script type="text/javascript">
+apex.jQuery( document ).ready( function() {
+(function(){apex.widget.report.init("R9386667255389222",{"styleChecked":"#dddddd","internalRegionId":"9386667255389222"});})();
+
+
+apex.item( 'P1_REPORT_SEARCH' ).setFocus();
+});</script>
+
+</body>
+</html>e._‰      ]ñ"¹]ñ"ºA—/       <    :https://acitpbox.us.oracle.com/pmm/f?p=110:1:12324860931975 necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Wed, 11 Dec 2019 17:09:14 GMT
+Server: Oracle-Application-Server-11g
+X-Frame-Options: SAMEORIGIN
+Content-Length: 33429
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ original-response-headers Date: Wed, 11 Dec 2019 17:09:14 GMT
+Server: Oracle-Application-Server-11g
+X-Frame-Options: SAMEORIGIN
+Content-Length: 33429
+Set-Cookie: PMM_SESSION_TIME=11-DEC-2019 11.12.13;path=/
+Keep-Alive: timeout=5, max=99
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8
+Content-Language: en
+ uncompressed-len 0 predictor::resource-count 23 predictor::https://acitpbox.us.oracle.com/i/css/apex.min.css?v=4.2.2.00.11 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/jquery-ui/1.8.22/themes/base/jquery-ui.min.css 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/apex/minified/desktop_all.min.js?v=4.2.2.00.11 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/apex/minified/legacy.min.js?v=4.2.2.00.11 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/theme.css 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/keyred.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/exitred.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/blank.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/red.gif 1,1,1576084153,4096 net-response-time-onstart 409 net-response-time-onstop 767 predictor::https://acitpbox.us.oracle.com/i/target.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/search.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/but_left.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/but_right.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/Search.step1.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/Search.step2.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/Search.step.failed.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/Search.step.notfound.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/sshclient001.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/sshclient002.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/Distribution_Procedure_files/sshclient003.gif 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/change.png 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/libraries/apex/minified/widget.report.min.js?v=4.2.2.00.11 1,1,1576084153,4096 predictor::https://acitpbox.us.oracle.com/i/themes/theme_9/but_center.png 1,1,1576084153,4096   ‚•

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=CrashPlan
+Categories=Utility;System;
+Comment=CrashPlan Desktop
+Comment[en_CA]=CrashPlan Desktop
+Exec=/opt/oracle/crashplan/bin/CrashPlanDesktop
+Icon=/opt/oracle/crashplan/skin/icon_app_128x128.png
+Hidden=false
+Terminal=false
+Type=Application
+GenericName[en_CA]=

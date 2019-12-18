@@ -1,0 +1,9 @@
+vol:64:64:P
+synth:64:64:P
+pcm:64:64:P
+speaker:64:0:P
+line:64:64:P
+mic:0:0:R
+cd:64:64:P
+rec:0:0:P
+line1:64:64:P

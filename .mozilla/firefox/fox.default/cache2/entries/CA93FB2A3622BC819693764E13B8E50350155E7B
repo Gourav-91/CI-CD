@@ -1,0 +1,2131 @@
+var _byteLenKey="org.apache.myfaces.trinidad.validator.ByteLengthValidator.MAXIMUM";
+function TrByteLengthValidator(
+a0,
+a1
+)
+{
+this._length=a0;
+this._messages=a1;
+this._class="TrByteLengthValidator";
+}
+TrByteLengthValidator.prototype=new TrValidator();
+function CjkFormat(
+a0,
+a1
+)
+{
+this._base=TrByteLengthValidator;
+this._base(a0,a1);
+this._class="CjkFormat";
+}
+CjkFormat.prototype=new TrByteLengthValidator();
+CjkFormat.prototype.getHints=function(
+a2
+)
+{
+var a3=null;
+if(this._messages["hint"])
+{
+a3=new Array();
+a3.push(TrMessageFactory.createCustomMessage(
+this._messages["hint"],
+this._length)
+);
+}
+return a3;
+}
+CjkFormat.prototype.validate=function(
+a4,
+a5,
+a6
+)
+{
+var a7=0;
+var a8=this._length;
+while(a7<a4.length)
+{
+var a9=a4.charCodeAt(a7);
+if((a9<0x80)||((0xFF60<a9)&&(a9<0xFFA0)))a8--;
+else a8-=2;
+if(a8<0)
+{
+var a10;
+if(!this._messages["detail"])
+{
+a10=_createFacesMessage(_byteLenKey,
+a5,
+a4,
+this._length);
+}
+else
+{
+a10=_createCustomFacesMessage(
+TrMessageFactory.getSummaryString(_byteLenKey),
+this._messages["detail"],
+a5,
+a4,
+this._length);
+}
+throw new TrValidatorException(a10);
+}
+a7++;
+}
+return a4;
+}
+function Utf8Format(
+a0,
+a1
+)
+{
+this._base=TrByteLengthValidator;
+this._base(a0,a1);
+this._class="Utf8Format";
+}
+Utf8Format.prototype=new TrByteLengthValidator();
+Utf8Format.prototype.getHints=function(
+a2
+)
+{
+var a3=null;
+if(this._messages["hint"])
+{
+a3=new Array();
+a3.push(TrMessageFactory.createCustomMessage(
+this._messages["hint"],
+this._length)
+);
+}
+return a3;
+}
+Utf8Format.prototype.validate=function(
+a4,
+a5,
+a6
+)
+{
+var a7=0;
+var a8=this._length;
+while(a7<a4.length)
+{
+var a9=a4.charCodeAt(a7);
+if(a9<0x80)a8--;
+else if(a9<0x800)a8-=2;
+else
+{
+if((a9&0xF800)==0xD800)
+a8-=2;
+else
+a8-=3;
+}
+if(a8<0)
+{
+var a10;
+if(!this._messages["detail"])
+{
+a10=_createFacesMessage(_byteLenKey,
+a5,
+a4,
+this._length);
+}
+else
+{
+a10=_createCustomFacesMessage(
+TrMessageFactory.getSummaryString(_byteLenKey),
+this._messages["detail"],
+a5,
+a4,
+this._length);
+}
+throw new TrValidatorException(a10);
+}
+a7++;
+}
+return a4;
+}
+function SBFormat(
+a0,
+a1
+)
+{
+this._base=TrByteLengthValidator;
+this._base(a0,a1);
+this._class="SBFormat";
+}
+SBFormat.prototype=new TrByteLengthValidator();
+SBFormat.prototype.getHints=function(
+a2
+)
+{
+var a3=null;
+if(this._messages["hint"])
+{
+a3=new Array();
+a3.push(TrMessageFactory.createCustomMessage(
+this._messages["hint"],
+this._length)
+);
+}
+return a3;
+}
+SBFormat.prototype.validate=function(
+a4,
+a5,
+a6
+)
+{
+if(this._length<a4.length)
+{
+var a7;
+if(!this._messages["detail"])
+{
+a7=_createFacesMessage(_byteLenKey,
+a5,
+a4,
+this._length);
+}
+else
+{
+a7=_createCustomFacesMessage(
+TrMessageFactory.getSummaryString(_byteLenKey),
+this._messages["detail"],
+a5,
+a4,
+this._length);
+}
+throw new TrValidatorException(a7);
+}
+return a4;
+}
+
+var TrCollections=new Object();
+TrCollections.removeValuesFromArray=function(
+a0,
+a1
+)
+{
+if(a0&&a1)
+{
+for(i=0;i<a0.length;i++)
+{
+var a2=a0[i];
+for(j=0;j<a1.length;j++)
+{
+if(a1[j].toLowerCase()==a2.toLowerCase())
+{
+a1.splice(j,1);
+j--;
+}
+}
+}
+}
+}
+
+function TrNumberFormat(a0,a1)
+{
+if(!a0)
+alert("type for TrNumberFormat not defined!");
+this._type=a0;
+this._localeSymbols=getLocaleSymbols(a1);
+this._pPre=this._localeSymbols.getPositivePrefix();
+this._pSuf=this._localeSymbols.getPositiveSuffix();
+this._nPre=this._localeSymbols.getNegativePrefix();
+this._nSuf=this._localeSymbols.getNegativeSuffix();
+if(this._type=="percent")
+this._maxFractionDigits=0;
+else
+this._maxFractionDigits=3;
+this._maxIntegerDigits=40;
+if(this._type=="currency")
+{
+this._minFractionDigits=2;
+}
+else
+{
+this._minFractionDigits=0;
+}
+this._minIntegerDigits=1;
+this._groupingUsed=true;
+}
+TrNumberFormat.getNumberInstance=function(a2)
+{
+return new TrNumberFormat("number",a2);
+}
+TrNumberFormat.getCurrencyInstance=function(a3)
+{
+return new TrNumberFormat("currency",a3);
+}
+TrNumberFormat.getPercentInstance=function(a4)
+{
+return new TrNumberFormat("percent",a4);
+}
+TrNumberFormat.prototype.setGroupingUsed=function(a5)
+{
+this._groupingUsed=a5;
+}
+TrNumberFormat.prototype.isGroupingUsed=function()
+{
+return this._groupingUsed;
+}
+TrNumberFormat.prototype.setMaximumIntegerDigits=function(a6)
+{
+if(a6)
+{
+this._maxIntegerDigits=a6<0?0:a6;
+if(this._minIntegerDigits>this._maxIntegerDigits)
+{
+this._minIntegerDigits=this._maxIntegerDigits;
+}
+}
+}
+TrNumberFormat.prototype.getMaximumIntegerDigits=function()
+{
+return this._maxIntegerDigits;
+}
+TrNumberFormat.prototype.setMaximumFractionDigits=function(a7)
+{
+if(a7)
+{
+this._maxFractionDigits=a7<0?0:a7;
+if(this._maxFractionDigits<this._minFractionDigits)
+{
+this._minFractionDigits=this._maxFractionDigits;
+}
+this._isMaxFractionDigitsSet=true;
+}
+}
+TrNumberFormat.prototype.getMaximumFractionDigits=function()
+{
+return this._maxFractionDigits;
+}
+TrNumberFormat.prototype.setMinimumIntegerDigits=function(a8)
+{
+if(a8)
+{
+this._minIntegerDigits=a8<0?0:a8;
+if(this._minIntegerDigits>this._maxIntegerDigits)
+{
+this._maxIntegerDigits=this._minIntegerDigits;
+}
+}
+}
+TrNumberFormat.prototype.getMinimumIntegerDigits=function()
+{
+return this._minIntegerDigits;
+}
+TrNumberFormat.prototype.setMinimumFractionDigits=function(a9)
+{
+if(a9)
+{
+this._minFractionDigits=a9<0?0:a9;
+if(this._maxFractionDigits<this._minFractionDigits)
+{
+this._maxFractionDigits=this._minFractionDigits;
+}
+}
+}
+TrNumberFormat.prototype.getMinimumFractionDigits=function()
+{
+return this._minFractionDigits;
+}
+TrNumberFormat.prototype.format=function(a10)
+{
+if(this._type=="percent")
+return this.percentageToString(a10);
+else if(this._type=="currency")
+return this.currencyToString(a10);
+else if(this._type=="number")
+return this.numberToString(a10);
+}
+TrNumberFormat.prototype.parse=function(a11)
+{
+if(this._type=="percent")
+return this.stringToPercentage(a11);
+else if(this._type=="currency")
+return this.stringToCurrency(a11);
+return this.stringToNumber(a11);
+}
+TrNumberFormat.prototype.stringToNumber=function(a12)
+{
+if(isNaN(a12)||a12.indexOf('e')!=-1||a12.indexOf('E')!=-1)
+{
+throw new TrParseException("not able to parse number");
+}
+return parseFloat(a12);
+}
+TrNumberFormat.prototype.hasCurrencyPrefixAndSuffix=function(a13)
+{
+var a14=a13.indexOf(this._nPre);
+var a15=this._nSuf;
+if(a15.charAt(0)==' '||a15.charAt(0)=='\xa0')
+a15=a15.substring(1);
+var a16=a13.indexOf(a15);
+if(a14==0&&a16!=-1)
+{
+return true;
+}
+else
+{
+var a17=a13.indexOf(this._pPre);
+var a18=this._pSuf;
+if(a18.charAt(0)==' '||a18.charAt(0)=='\xa0')
+a18=a18.substring(1);
+var a19=a13.indexOf(a18);
+if(a17==0&&a19!=-1)
+{
+return true;
+}
+}
+return false;
+}
+TrNumberFormat.prototype.stringToCurrency=function(a20)
+{
+var a21=this.removeCurrencyPrefixAndSuffix(a20);
+a20=a21[0]
+var a22=a21[1];
+if(a22)
+{
+return this.stringToNumber(a20);
+}
+else
+{
+return(this.stringToNumber(a20)*-1);
+}
+}
+TrNumberFormat.prototype.removeCurrencyPrefixAndSuffix=function(a23)
+{
+var a24=[];
+var a25=a23.indexOf(this._nPre);
+var a26=this._nSuf;
+if(a26.charAt(0)==' '||a26.charAt(0)=='\xa0')
+a26=a26.substring(1);
+var a27=a23.indexOf(a26);
+if(a25!=-1&&a27!=-1)
+{
+a24.push(a23.substr(this._nPre.length,a23.length-(this._nPre.length+a26.length)));
+a24.push(false);
+return a24;
+}
+else
+{
+var a28=a23.indexOf(this._pPre);
+var a29=this._pSuf;
+if(a29.charAt(0)==' '||a29.charAt(0)=='\xa0')
+a29=a29.substring(1);
+var a30=a23.indexOf(a29);
+if(a28!=-1&&a30!=-1)
+{
+a24.push(a23.substr(this._pPre.length,a23.length-(this._pPre.length+a29.length)));
+a24.push(true);
+return a24;
+}
+else
+{
+throw new TrParseException("not able to parse number");
+}
+}
+}
+TrNumberFormat.prototype.stringToPercentage=function(a31)
+{
+var a32=(a31.indexOf('%')!=-1);
+if(!a32)
+{
+throw new TrParseException("not able to parse number");
+}
+var a33=a31.replace(/\%/g,'');
+return this.stringToNumber(a33);
+}
+TrNumberFormat.prototype.numberToString=function(a34)
+{
+var a35=a34<0;
+if(a35)
+a34=(a34*-1);
+var a36=a34+"";
+a36=TrNumberFormat.scientificToExpanded(a36);
+var a37=a36.indexOf(".");
+var a38=a36.length;
+var a39;
+var a40;
+if(a37!=-1)
+{
+a39=a36.substring(0,a37);
+a40=a36.substring(a37+1,a38);
+}
+else
+{
+a39=a36;
+a40="";
+}
+a39=this._formatIntegers(a39);
+a40=this._formatFractions(a40)
+var a41=this._localeSymbols.getDecimalSeparator();
+if(a40!="")
+a36=(a39+a41+a40);
+else
+a36=(a39);
+if(a35)
+a36="-"+a36;
+return a36;
+}
+TrNumberFormat.prototype.addCurrencyPrefixAndSuffix=function(a42,a43)
+{
+if(a43)
+{
+return this._pPre+a42+this._pSuf;
+}
+else
+{
+return this._nPre+a42+this._nSuf;
+}
+}
+TrNumberFormat.prototype.currencyToString=function(a44)
+{
+if(a44<0)
+{
+a44=(a44*-1)+"";
+a44=this.numberToString(a44);
+return this.addCurrencyPrefixAndSuffix(a44,false);
+}
+else
+{
+a44=this.numberToString(a44);
+return this.addCurrencyPrefixAndSuffix(a44,true);
+}
+}
+TrNumberFormat.prototype.percentageToString=function(a45)
+{
+a45=a45*100;
+if(this._isMaxFractionDigitsSet==null)
+a45=this.getRounded(a45);
+if(isNaN(a45))
+{
+throw new TrParseException("not able to parse number");
+}
+var a46=this._localeSymbols.getPercentSuffix();
+if(!a46||a46=="")
+{
+throw new TrParseException("percent suffix undefined or empty");
+}
+a45=this.numberToString(a45);
+return a45+a46;
+}
+TrNumberFormat.scientificToExpanded=function(a47)
+{
+var a48=a47.indexOf('e');
+if(a48==-1)
+return a47;
+var a49="";
+if(a47.charAt(0)=='-')
+{
+a49="-";
+a47=a47.substring(1);
+a48-=1;
+}
+var a50=a47.charAt(a48+1)=='+';
+var a51=parseInt(a47.substring(a48+2));
+var a52=a48-2;
+var a53="";
+if(a50)
+{
+for(var a54=0;a54<a51-a52;++a54)
+a53+="0";
+return a49+a47.charAt(0)+a47.substring(2,a48)+a53;
+}
+for(var a54=0;a54<a51-1;++a54)
+a53+="0";
+return a49+"0."+a53+a47.charAt(0)+a47.substring(2,a48);
+}
+TrNumberFormat.trimLeadingZeroes=function(a55)
+{
+var a56=[];
+var a57,ch;
+for(a57=0;a57<a55.length;++a57)
+{
+ch=a55.charAt(a57);
+if((ch>='1'&&ch<='9')||ch=='.')
+break;
+if(ch=='0'&&a57+1<a55.length&&a55.charAt(a57+1)!='.')
+continue;
+a56.push(ch);
+}
+return a56.join('')+a55.substring(a57);
+}
+TrNumberFormat.prototype.getRounded=function(a58)
+{
+a58=this.moveDecimalRight(a58);
+a58=Math.round(a58);
+a58=this.moveDecimalLeft(a58);
+return a58;
+}
+TrNumberFormat.prototype.moveDecimalRight=function(a59)
+{
+var a60='';
+a60=this.moveDecimal(a59,false);
+return a60;
+}
+TrNumberFormat.prototype.moveDecimalLeft=function(a61)
+{
+var a62='';
+a62=this.moveDecimal(a61,true);
+return a62;
+}
+TrNumberFormat.prototype.moveDecimal=function(a63,a64)
+{
+var a65='';
+a65=this.moveDecimalAsString(a63,a64);
+return parseFloat(a65);
+}
+TrNumberFormat.prototype.moveDecimalAsString=function(a66,a67)
+{
+var a68=2;
+if(a68<=0)
+return a66;
+var a69=a66+'';
+var a70=this.getZeros(a68);
+var a71=new RegExp('([0-9.]+)');
+if(a67)
+{
+a69=a69.replace(a71,a70+'$1');
+var a72=new RegExp('(-?)([0-9]*)([0-9]{'+a68+'})(\\.?)');
+a69=a69.replace(a72,'$1$2.$3');
+}
+else
+{
+var a73=a71.exec(a69);
+if(a73!=null)
+{
+a69=a69.substring(0,a73.index)+a73[1]+a70+a69.substring(a73.index+a73[0].length);
+}
+var a72=new RegExp('(-?)([0-9]*)(\\.?)([0-9]{'+a68+'})');
+a69=a69.replace(a72,'$1$2$4.');
+}
+a69=a69.replace(/\.$/,'');
+return a69;
+}
+TrNumberFormat.prototype.getZeros=function(a74)
+{
+var a75='';
+var a76;
+for(a76=0;a76<a74;a76++){
+a75+='0';
+}
+return a75;
+}
+TrNumberFormat.prototype._formatIntegers=function(a77)
+{
+var a78=a77.length;
+var a79=this.getMaximumIntegerDigits();
+var a80=this.getMinimumIntegerDigits();
+var a81;
+if(a78>a79)
+{
+a81=a78-a79;
+a77=a77.substring(a81,a78);
+}
+else if(a78<a80)
+{
+a81=a80-a78;
+var a82="";
+while(a81>0)
+{
+a82="0"+a82;
+--a81;
+}
+a77=a82+a77;
+}
+if(this.isGroupingUsed())
+{
+a77=this._addGroupingSeparators(a77);
+}
+return a77;
+}
+TrNumberFormat.prototype._formatFractions=function(a83)
+{
+var a84=a83.length;
+var a85=this.getMaximumFractionDigits();
+var a86=this.getMinimumFractionDigits();
+if(a84>a85&&a85>=a86)
+{
+a83=a83.substring(0,a85);
+}
+if(a84<a86)
+{
+var a87=a86-a84;
+while(a87>0)
+{
+a83=a83+"0";
+--a87;
+}
+}
+return a83;
+}
+TrNumberFormat.prototype._addGroupingSeparators=function(a88)
+{
+var a89=a88.length;
+var a90=a89%3;
+var a91;
+var a92;
+var a93="";
+var a94=this._localeSymbols.getGroupingSeparator();
+if(a90>0)
+{
+a91=(a89<4)?a88.substring(0,a90):a88.substring(0,a90)+a94;
+a92=a88.substring(a90,a89);
+}
+else
+{
+a91="";
+a92=a88;
+}
+for(i=0;i<a92.length;i++)
+{
+if(i%3==0&&i!=0)
+{
+a93+=a94;
+}
+a93+=a92.charAt(i);
+}
+a88=a91+a93;
+return a88;
+}
+function TrParseException(
+a0
+)
+{
+this._message=a0;
+}
+TrParseException.prototype.getMessage=function()
+{
+return this._message;
+}
+
+function TrNumberConverter(
+a0,
+a1,
+a2,
+a3,
+a4,
+a5,
+a6,
+a7,
+a8,
+a9,
+a10,
+a11)
+{
+this._pattern=a0;
+this._type=a1;
+this._locale=a2;
+this._messages=a3;
+this._currencyCode=a6;
+this._currencySymbol=a7;
+this._maxFractionDigits=a8;
+this._maxIntegerDigits=a9;
+this._minFractionDigits=a10;
+this._minIntegerDigits=a11;
+if(a4!==undefined)
+this._integerOnly=a4;
+else
+this._integerOnly=false;
+if(a5!==undefined)
+this._groupingUsed=a5;
+else
+this._groupingUsed=true;
+this._initNumberFormat(a2);
+this._class="TrNumberConverter";
+}
+TrNumberConverter.prototype=new TrConverter();
+TrNumberConverter.prototype.setCurrencyCode=function(a12)
+{
+this._currencyCode=a12;
+}
+TrNumberConverter.prototype.getCurrencyCode=function()
+{
+return this._currencyCode;
+}
+TrNumberConverter.prototype.setCurrencySymbol=function(a13)
+{
+this._currencySymbol=a13;
+}
+TrNumberConverter.prototype.getCurrencySymbol=function()
+{
+return this._currencySymbol;
+}
+TrNumberConverter.prototype.setMaxFractionDigits=function(a14)
+{
+this._maxFractionDigits=a14;
+}
+TrNumberConverter.prototype.getMaxFractionDigits=function()
+{
+return this._maxFractionDigits;
+}
+TrNumberConverter.prototype.setMaxIntegerDigits=function(a15)
+{
+this._maxIntegerDigits=a15;
+}
+TrNumberConverter.prototype.getMaxIntegerDigits=function()
+{
+return this._maxIntegerDigits;
+}
+TrNumberConverter.prototype.setMinFractionDigits=function(a16)
+{
+this._minFractionDigits=a16;
+}
+TrNumberConverter.prototype.getMinFractionDigits=function()
+{
+return this._minFractionDigits;
+}
+TrNumberConverter.prototype.setMinIntegerDigits=function(a17)
+{
+this._minIntegerDigits=a17;
+}
+TrNumberConverter.prototype.getMinIntegerDigits=function()
+{
+return this._minIntegerDigits;
+}
+TrNumberConverter.prototype.setGroupingUsed=function(a18)
+{
+this._groupingUsed=a18;
+}
+TrNumberConverter.prototype.isGroupingUsed=function()
+{
+return this._groupingUsed;
+}
+TrNumberConverter.prototype.setIntegerOnly=function(a19)
+{
+this._integerOnly=a19;
+}
+TrNumberConverter.prototype.isIntegerOnly=function()
+{
+return this._integerOnly;
+}
+TrNumberConverter.prototype.getFormatHint=function()
+{
+if(this._messages&&this._messages["hintPattern"])
+{
+return TrMessageFactory.createCustomMessage(
+this._messages["hintPattern"],
+this._pattern);
+}
+else
+{
+if(this._pattern)
+{
+return TrMessageFactory.createMessage(
+"org.apache.myfaces.trinidad.convert.NumberConverter.FORMAT_HINT",
+this._pattern);
+}
+else
+{
+return null;
+}
+}
+}
+TrNumberConverter.prototype.getAsString=function(
+a20,
+a21
+)
+{
+if(this._isConvertible())
+{
+if(this._type=="percent"||this._type=="currency")
+{
+var a22=this._numberFormat.format(a20);
+if(this._type=="currency")
+{
+if(this._currencyCode)
+{
+a22=a22.replace(getLocaleSymbols().getCurrencyCode(),this._currencyCode);
+}
+else if(this._currencySymbol)
+{
+a22=a22.replace(getLocaleSymbols().getCurrencySymbol(),this._currencySymbol);
+}
+}
+return a22;
+}
+else
+{
+if(typeof a20==="string")
+{
+return this._numberFormat.format(parseFloat(a20));
+}
+else
+{
+return this._numberFormat.format(parseFloat(a20.toFixed(this._numberFormat.getMaximumFractionDigits())));
+}
+}
+}
+else
+{
+return undefined;
+}
+}
+TrNumberConverter.prototype.getAsObject=function(
+a23,
+a24
+)
+{
+a23=TrFormatUtils.trim(a23);
+if(this._isConvertible(a23))
+{
+if(a23==null)
+return null;
+if(a23.length==0)
+return null
+var a25;
+var a26=getLocaleSymbols(this._locale);
+var a27=false;
+var a28=(this._type=="currency"&&this._numberFormat.hasCurrencyPrefixAndSuffix(a23));
+try
+{
+if(a28)
+{
+var a29=this._numberFormat.removeCurrencyPrefixAndSuffix(a23);
+a23=a29[0];
+a27=a29[1];
+}
+var a30=a26.getGroupingSeparator();
+if(a30=="\xa0")
+{
+var a31=new RegExp("\\ ","g");
+a23=a23.replace(a31,"\xa0");
+}
+var a32=new RegExp("\\"+a30,"g");
+a23=a23.replace(a32,"");
+var a33=a26.getDecimalSeparator();
+var a34=new RegExp("\\"+a33,"g");
+a23=a23.replace(a34,".");
+if(a28)
+{
+a23=this._numberFormat.addCurrencyPrefixAndSuffix(a23,a27);
+}
+a23=this._numberFormat.parse(a23)+"";
+}
+catch(e)
+{
+try
+{
+var a35=TrNumberFormat.getNumberInstance();
+a35.setMinimumIntegerDigits(this._minIntegerDigits);
+a35.setMaximumIntegerDigits(this._maxIntegerDigits);
+a35.setMinimumFractionDigits(this._minFractionDigits);
+a35.setMaximumFractionDigits(this._maxFractionDigits);
+a23=a35.parse(a23)+"";
+}
+catch(e)
+{
+var a36;
+var a37=this._numberFormat.format(this._example);
+var a38="org.apache.myfaces.trinidad.convert.NumberConverter.CONVERT_"+this._type.toUpperCase();
+if(this._messages&&this._messages[this._type])
+{
+a36=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a38),this._messages[this._type],a24,a23,a37);
+}
+else
+{
+a36=_createFacesMessage(a38,a24,a23,a37);
+}
+throw new TrConverterException(a36);
+}
+}
+var a39=new RegExp("\\"+".","g");
+a23=a23.replace(a39,getLocaleSymbols().getDecimalSeparator());
+a25=_decimalParse(a23,
+this._messages,
+"org.apache.myfaces.trinidad.convert.NumberConverter",
+null,
+null,
+null,
+null,
+a24,
+!this.isIntegerOnly());
+a25=parseFloat(a25.toFixed(this._numberFormat.getMaximumFractionDigits()));
+if(this._type=="percent")
+{
+a25=a25/100;
+}
+return a25;
+}
+else
+{
+return undefined;
+}
+}
+TrNumberConverter.prototype._isConvertible=function(a40)
+{
+if(this._pattern!=null)
+return false;
+return TrFormatUtils.isNumberConvertible(a40);
+}
+TrNumberConverter.prototype._initNumberFormat=function(a41)
+{
+if(this._type=="percent")
+{
+this._example=0.3423;
+this._numberFormat=TrNumberFormat.getPercentInstance(a41);
+}
+else if(this._type=="currency")
+{
+this._example=10250;
+this._numberFormat=TrNumberFormat.getCurrencyInstance(a41);
+}
+else if(this._type=="number")
+{
+this._numberFormat=TrNumberFormat.getNumberInstance(a41);
+}
+this._numberFormat.setGroupingUsed(this.isGroupingUsed());
+this._numberFormat.setMaximumFractionDigits(this.getMaxFractionDigits());
+this._numberFormat.setMaximumIntegerDigits(this.getMaxIntegerDigits());
+this._numberFormat.setMinimumFractionDigits(this.getMinFractionDigits());
+this._numberFormat.setMinimumIntegerDigits(this.getMinIntegerDigits());
+}
+
+function TrIntegerConverter(
+a0,
+a1,
+a2,
+a3,
+a4)
+{
+this._message=a0;
+this._maxPrecision=a1;
+this._maxScale=a2;
+this._maxValue=a3;
+this._minValue=a4;
+this._class="TrIntegerConverter";
+}
+TrIntegerConverter.prototype=new TrConverter();
+TrIntegerConverter.prototype.getFormatHint=function()
+{
+return null;
+}
+TrIntegerConverter.prototype.getAsString=function(
+a5,
+a6
+)
+{
+return""+a5;
+}
+TrIntegerConverter.prototype.getAsObject=function(
+a7,
+a8
+)
+{
+return _decimalParse(a7,
+this._message,
+"org.apache.myfaces.trinidad.convert.IntegerConverter",
+this._maxPrecision,
+this._maxScale,
+this._maxValue,
+this._minValue,
+a8,
+null);
+}
+function TrLongConverter(
+a0,
+a1,
+a2,
+a3,
+a4)
+{
+this._message=a0;
+this._maxPrecision=a1;
+this._maxScale=a2;
+this._maxValue=a3;
+this._minValue=a4;
+this._class="TrLongConverter";
+}
+TrLongConverter.prototype=new TrConverter();
+TrLongConverter.prototype.getFormatHint=function()
+{
+return null;
+}
+TrLongConverter.prototype.getAsString=function(
+a5,
+a6
+)
+{
+return""+a5;
+}
+TrLongConverter.prototype.getAsObject=function(
+a7,
+a8
+)
+{
+if(TrFormatUtils.isNumberConvertible(a7))
+{
+return _decimalParse(a7,
+this._message,
+"org.apache.myfaces.trinidad.convert.LongConverter",
+this._maxPrecision,
+this._maxScale,
+this._maxValue,
+this._minValue,
+a8,
+null);
+}
+else
+{
+return undefined;
+}
+}
+function TrShortConverter(
+a0,
+a1,
+a2,
+a3,
+a4)
+{
+this._message=a0;
+this._maxPrecision=a1;
+this._maxScale=a2;
+this._maxValue=a3;
+this._minValue=a4;
+this._class="TrShortConverter";
+}
+TrShortConverter.prototype=new TrConverter();
+TrShortConverter.prototype.getFormatHint=function()
+{
+return null;
+}
+TrShortConverter.prototype.getAsString=function(
+a5,
+a6
+)
+{
+return""+a5;
+}
+TrShortConverter.prototype.getAsObject=function(
+a7,
+a8
+)
+{
+return _decimalParse(a7,
+this._message,
+"org.apache.myfaces.trinidad.convert.ShortConverter",
+this._maxPrecision,
+this._maxScale,
+this._maxValue,
+this._minValue,
+a8,
+null);
+}
+function TrByteConverter(
+a0,
+a1,
+a2,
+a3,
+a4)
+{
+this._message=a0;
+this._maxPrecision=a1;
+this._maxScale=a2;
+this._maxValue=a3;
+this._minValue=a4;
+this._class="TrByteConverter";
+}
+TrByteConverter.prototype=new TrConverter();
+TrByteConverter.prototype.getFormatHint=function()
+{
+return null;
+}
+TrByteConverter.prototype.getAsString=function(
+a5,
+a6
+)
+{
+return""+a5;
+}
+TrByteConverter.prototype.getAsObject=function(
+a7,
+a8
+)
+{
+return _decimalParse(a7,
+this._message,
+"org.apache.myfaces.trinidad.convert.ByteConverter",
+this._maxPrecision,
+this._maxScale,
+this._maxValue,
+this._minValue,
+a8,
+null);
+}
+function TrDoubleConverter(
+a0,
+a1,
+a2,
+a3,
+a4)
+{
+this._message=a0;
+this._maxPrecision=a1;
+this._maxScale=a2;
+this._maxValue=a3;
+this._minValue=a4;
+this._class="TrDoubleConverter";
+}
+TrDoubleConverter.prototype=new TrConverter();
+TrDoubleConverter.prototype.getFormatHint=function()
+{
+return null;
+}
+TrDoubleConverter.prototype.getAsString=function(
+a5,
+a6
+)
+{
+var a7=""+a5;
+var a8=a7.indexOf(".");
+if(a8!=-1)
+return a7;
+else
+return""+a5.toFixed(1);
+}
+TrDoubleConverter.prototype.getAsObject=function(
+a9,
+a10
+)
+{
+return _decimalParse(a9,
+this._message,
+"org.apache.myfaces.trinidad.convert.DoubleConverter",
+this._maxPrecision,
+this._maxScale,
+this._maxValue,
+this._minValue,
+a10,
+true,
+true);
+}
+function TrFloatConverter(
+a0,
+a1,
+a2,
+a3,
+a4)
+{
+this._message=a0;
+this._maxPrecision=a1;
+this._maxScale=a2;
+this._maxValue=a3;
+this._minValue=a4;
+this._class="TrFloatConverter";
+}
+TrFloatConverter.prototype=new TrConverter();
+TrFloatConverter.prototype.getFormatHint=function()
+{
+return null;
+}
+TrFloatConverter.prototype.getAsString=function(
+a5,
+a6
+)
+{
+var a7=""+a5;
+var a8=a7.indexOf(".");
+if(a8!=-1)
+return a7;
+else
+return""+a5.toFixed(1);
+}
+TrFloatConverter.prototype.getAsObject=function(
+a9,
+a10
+)
+{
+return _decimalParse(a9,
+this._message,
+"org.apache.myfaces.trinidad.convert.FloatConverter",
+this._maxPrecision,
+this._maxScale,
+this._maxValue,
+this._minValue,
+a10,
+true,
+true);
+}
+function TrRangeValidator(
+a0,
+a1,
+a2)
+{
+this._maxValue=a0;
+this._minValue=a1;
+this._messages=a2;
+this._class="TrRangeValidator";
+}
+TrRangeValidator.prototype=new TrValidator();
+TrRangeValidator.prototype.getHints=function(
+a3
+)
+{
+return _returnRangeHints(
+this._messages,
+this._maxValue,
+this._minValue,
+"org.apache.myfaces.trinidad.validator.RangeValidator.MAXIMUM_HINT",
+"org.apache.myfaces.trinidad.validator.RangeValidator.MINIMUM_HINT",
+"org.apache.myfaces.trinidad.validator.RangeValidator.RANGE_HINT",
+"hintMax",
+"hintMin",
+"hintRange"
+);
+}
+TrRangeValidator.prototype.validate=function(
+a4,
+a5,
+a6
+)
+{
+string=""+a4;
+numberValue=parseFloat(string);
+var a7;
+if(this._minValue!=null&&this._maxValue!=null)
+{
+if(numberValue>=this._minValue&&numberValue<=this._maxValue)
+{
+return string;
+}
+else
+{
+var a8="org.apache.myfaces.trinidad.validator.LongRangeValidator.NOT_IN_RANGE";
+if(this._messages&&this._messages["range"])
+{
+a7=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a8),
+this._messages["range"],
+a5,
+string,
+""+this._minValue,
+""+this._maxValue);
+}
+else
+{
+a7=_createFacesMessage(a8,
+a5,
+string,
+""+this._minValue,
+""+this._maxValue);
+}
+}
+}
+else
+{
+if(this._minValue!=null)
+{
+if(numberValue>=this._minValue)
+{
+return string;
+}
+else
+{
+var a8="org.apache.myfaces.trinidad.validator.LongRangeValidator.MINIMUM";
+if(this._messages&&this._messages["min"])
+{
+a7=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a8),
+this._messages["min"],
+a5,
+string,
+""+this._minValue);
+}
+else
+{
+a7=_createFacesMessage(a8,
+a5,
+string,
+""+this._minValue);
+}
+}
+}
+else
+{
+if(this._maxValue==null||numberValue<=this._maxValue)
+{
+return string;
+}
+else
+{
+var a8="org.apache.myfaces.trinidad.validator.LongRangeValidator.MAXIMUM";
+if(this._messages&&this._messages["max"])
+{
+a7=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a8),
+this._messages["max"],
+a5,
+string,
+""+this._maxValue);
+}
+else
+{
+a7=_createFacesMessage(a8,
+a5,
+string,
+""+this._maxValue);
+}
+}
+}
+}
+throw new TrConverterException(a7);
+}
+function TrLengthValidator(
+a0,
+a1,
+a2)
+{
+this._maxValue=a0;
+this._minValue=a1;
+this._messages=a2;
+this._class="TrLengthValidator";
+}
+TrLengthValidator.prototype=new TrValidator();
+TrLengthValidator.prototype.getHints=function(
+a3
+)
+{
+return _returnRangeHints(
+this._messages,
+this._maxValue,
+this._minValue,
+"org.apache.myfaces.trinidad.validator.LengthValidator.MAXIMUM_HINT",
+"org.apache.myfaces.trinidad.validator.LengthValidator.MINIMUM_HINT",
+(this._minValue==this._maxValue)
+?"org.apache.myfaces.trinidad.validator.LengthValidator.EXACT_HINT"
+:"org.apache.myfaces.trinidad.validator.LengthValidator.RANGE_HINT",
+"hintMax",
+"hintMin",
+"hintRange"
+);
+}
+TrLengthValidator.prototype.validate=function(
+a4,
+a5,
+a6
+)
+{
+var a7=""+a4;
+var a8=a7.length;
+if(a8>=this._minValue&&
+((this._maxValue==null)||(a8<=this._maxValue)))
+{
+return a7;
+}
+else
+{
+if((this._minValue>0)&&(this._maxValue!=null))
+{
+var a9=(this._minValue==this._maxValue);
+var a10=a9
+?"org.apache.myfaces.trinidad.validator.LengthValidator.EXACT"
+:"org.apache.myfaces.trinidad.validator.LengthValidator.NOT_IN_RANGE";
+var a11;
+var a12="range";
+if(this._messages&&this._messages[a12])
+{
+a11=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a10),
+this._messages[a12],
+a5,
+a7,
+""+this._minValue,
+""+this._maxValue);
+}
+else
+{
+a11=_createFacesMessage(a10,
+a5,
+a7,
+""+this._minValue,
+""+this._maxValue);
+}
+throw new TrConverterException(a11);
+}
+else if(a8<this._minValue)
+{
+var a10="org.apache.myfaces.trinidad.validator.LengthValidator.MINIMUM";
+var a11;
+if(this._messages&&this._messages["min"])
+{
+a11=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a10),
+this._messages["min"],
+a5,
+a7,
+""+this._minValue);
+}
+else
+{
+a11=_createFacesMessage(a10,
+a5,
+a7,
+""+this._minValue);
+}
+throw new TrConverterException(a11);
+}
+else
+{
+var a10="org.apache.myfaces.trinidad.validator.LengthValidator.MAXIMUM";
+var a11;
+if(this._messages&&this._messages["max"])
+{
+a11=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a10),
+this._messages["max"],
+a5,
+a7,
+""+this._maxValue);
+}
+else
+{
+a11=_createFacesMessage(a10,
+a5,
+a7,
+""+this._maxValue);
+}
+throw new TrConverterException(a11);
+}
+}
+}
+function TrDateTimeRangeValidator(
+a0,
+a1,
+a2,
+a3,
+a4
+)
+{
+this._maxValue=a0;
+this._maxISODate=a3;
+this._minValue=a1;
+this._minISODate=a4;
+this._messages=a2;
+this._class="TrDateTimeRangeValidator";
+}
+TrDateTimeRangeValidator.prototype=new TrValidator();
+TrDateTimeRangeValidator.prototype.getHints=function(
+a5
+)
+{
+var a6=null;
+var a7=null;
+if(this._maxValue)
+a6=this._maxValue;
+if(this._minValue)
+a7=this._minValue;
+return _returnRangeHints(
+this._messages,
+a6,
+a7,
+"org.apache.myfaces.trinidad.validator.DateTimeRangeValidator.MAXIMUM_HINT",
+"org.apache.myfaces.trinidad.validator.DateTimeRangeValidator.MINIMUM_HINT",
+"org.apache.myfaces.trinidad.validator.DateTimeRangeValidator.RANGE_HINT",
+"hintMax",
+"hintMin",
+"hintRange"
+);
+}
+TrDateTimeRangeValidator.prototype.validate=function(
+a8,
+a9,
+a10
+)
+{
+dateTime=a8.getTime();
+var a11;
+var a12=this._getISOConverter();
+if(this._minValue&&this._maxValue)
+{
+try
+{
+minDate=(this._minISODate==null)?
+a10.getAsObject(this._minValue).getTime():
+a12.getAsObject(this._minISODate).getTime();
+maxDate=(this._maxISODate==null)?
+a10.getAsObject(this._maxValue).getTime():
+a12.getAsObject(this._maxISODate).getTime();
+}
+catch(e)
+{
+return a8;
+}
+if(dateTime>=minDate&&dateTime<=maxDate)
+{
+return a8;
+}
+else
+{
+var a13="org.apache.myfaces.trinidad.validator.DateTimeRangeValidator.NOT_IN_RANGE";
+if(this._messages&&this._messages["range"])
+{
+a11=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a13),
+this._messages["range"],
+a9,
+""+a10.getAsString(a8),
+""+this._minValue,
+""+this._maxValue);
+}
+else
+{
+a11=_createFacesMessage(a13,
+a9,
+""+a10.getAsString(a8),
+""+this._minValue,
+""+this._maxValue);
+}
+}
+}
+else
+{
+if(this._minValue)
+{
+try
+{
+minDate=(this._minISODate==null)?
+a10.getAsObject(this._minValue).getTime():
+a12.getAsObject(this._minISODate).getTime();
+}
+catch(e)
+{
+return a8;
+}
+if(dateTime>=minDate)
+{
+return a8;
+}
+else
+{
+var a13="org.apache.myfaces.trinidad.validator.DateTimeRangeValidator.MINIMUM";
+if(this._messages&&this._messages["min"])
+{
+a11=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a13),
+this._messages["min"],
+a9,
+""+a10.getAsString(a8),
+""+this._minValue);
+}
+else
+{
+a11=_createFacesMessage(a13,
+a9,
+""+a10.getAsString(a8),
+""+this._minValue);
+}
+}
+}
+else if(this._maxValue)
+{
+try
+{
+maxDate=(this._maxISODate==null)?
+a10.getAsObject(this._maxValue).getTime():
+a12.getAsObject(this._maxISODate).getTime();
+}
+catch(e)
+{
+return a8;
+}
+if(dateTime<=maxDate)
+{
+return a8;
+}
+else
+{
+var a13="org.apache.myfaces.trinidad.validator.DateTimeRangeValidator.MAXIMUM";
+if(this._messages&&this._messages["max"])
+{
+a11=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a13),
+this._messages["max"],
+a9,
+""+a10.getAsString(a8),
+""+this._maxValue);
+}
+else
+{
+a11=_createFacesMessage(a13,
+a9,
+""+a10.getAsString(a8),
+""+this._maxValue);
+}
+}
+}
+else
+{
+return a8;
+}
+}
+throw new TrConverterException(a11);
+}
+TrDateTimeRangeValidator.prototype._getISOConverter=function()
+{
+if(this._ISO_CONVERTER==null)
+this._ISO_CONVERTER=new TrDateTimeConverter("yyyy-MM-dd HH:mm:ss",null,null,null,null);
+return this._ISO_CONVERTER;
+}
+function TrDateRestrictionValidator(
+a0,
+a1,
+a2)
+{
+this._weekdaysValue=a0;
+this._monthValue=a1;
+this._messages=a2;
+this._weekdaysMap={'2':'tue','4':'thu','6':'sat','1':'mon','3':'wed','5':'fri','0':'sun'};
+this._translatedWeekdaysMap={'sun':'0','mon':'1','tue':'2','wed':'3','thu':'4','fri':'5','sat':'6'};
+this._monthMap={'2':'mar','4':'may','9':'oct','8':'sep','11':'dec','6':'jul','1':'feb','3':'apr','10':'nov','7':'aug','5':'jun','0':'jan'};
+this._translatedMonthMap={'jan':'0','feb':'1','mar':'2','apr':'3','may':'4','jun':'5','jul':'6','aug':'7','sep':'8','oct':'9','nov':'10','dec':'11'};
+this._class="TrDateRestrictionValidator";
+}
+TrDateRestrictionValidator.prototype=new TrValidator();
+TrDateRestrictionValidator.prototype.getHints=function(
+a3
+)
+{
+var a4=['mon','tue','wed','thu','fri','sat','sun'];
+var a5=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+if(this._weekdaysValue)
+this._removeDisabledValues(this._weekdaysValue,a4);
+if(this._monthValue)
+this._removeDisabledValues(this._monthValue,a5);
+return _returnHints(
+this._messages,
+!this._weekdaysValue?this._weekdaysValue:this._translate(a4,this._translatedWeekdaysMap,a3.getLocaleSymbols().getWeekdays()),
+!this._monthValue?this._monthValue:this._translate(a5,this._translatedMonthMap,a3.getLocaleSymbols().getMonths()),
+"org.apache.myfaces.trinidad.validator.DateRestrictionValidator.WEEKDAY_HINT",
+"org.apache.myfaces.trinidad.validator.DateRestrictionValidator.MONTH_HINT",
+"hintWeek",
+"hintMonth"
+);
+}
+TrDateRestrictionValidator.prototype._translate=function(
+values,
+map,
+valueArray
+)
+{
+if(values)
+{
+var translatedValues=new Array();
+var valuesAsArray=eval(values);
+for(i=0;i<valuesAsArray.length;i++)
+{
+translatedValues.push(valueArray[map[valuesAsArray[i].toLowerCase()]]);
+}
+return eval(translatedValues);
+}
+else
+{
+return values;
+}
+}
+TrDateRestrictionValidator.prototype._removeDisabledValues=function(
+a6,
+a7
+)
+{
+if(a6&&a7)
+{
+for(i=0;i<a7.length;i++)
+{
+if(a6[a7[i].toLowerCase()]!=undefined)
+{
+a7.splice(i,1);
+i--;
+}
+}
+}
+}
+TrDateRestrictionValidator.prototype.validate=function(
+value,
+label,
+converter
+)
+{
+submittedDay=value.getDay();
+weekDaysArray=eval(this._weekdaysValue);
+if(weekDaysArray)
+{
+var dayString=this._weekdaysMap[submittedDay];
+for(var i=0;i<weekDaysArray.length;++i)
+{
+if(weekDaysArray[i].toLowerCase()==dayString)
+{
+var allWeekdays=['mon','tue','wed','thu','fri','sat','sun'];
+this._removeDisabledValues(this._weekdaysValue,allWeekdays);
+var days=_trToString(this._translate(allWeekdays,this._translatedWeekdaysMap,converter.getLocaleSymbols().getWeekdays()));
+var facesMessage;
+var key="org.apache.myfaces.trinidad.validator.DateRestrictionValidator.WEEKDAY";
+if(this._messages&&this._messages["days"])
+{
+facesMessage=_createCustomFacesMessage(TrMessageFactory.getSummaryString(key),
+this._messages["days"],
+label,
+""+converter.getAsString(value),
+days);
+}
+else
+{
+facesMessage=_createFacesMessage(key,
+label,
+""+converter.getAsString(value),
+days);
+}
+throw new TrConverterException(facesMessage);
+}
+}
+}
+submittedMonth=value.getMonth();
+monthArray=eval(this._monthValue);
+if(monthArray)
+{
+var monthString=this._monthMap[submittedMonth];
+for(var i=0;i<monthArray.length;++i)
+{
+if(monthArray[i].toLowerCase()==monthString)
+{
+var allMonth=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+TrCollections.removeValuesFromArray(this._monthValue,allMonth);
+var month=_trToString(this._translate(allMonth,this._translatedMonthMap,converter.getLocaleSymbols().getMonths()));
+var facesMessage;
+var key="org.apache.myfaces.trinidad.validator.DateRestrictionValidator.MONTH";
+if(this._messages&&this._messages["month"])
+{
+facesMessage=_createCustomFacesMessage(TrMessageFactory.getSummaryString(key),
+this._messages["month"],
+label,
+""+converter.getAsString(value),
+month);
+}
+else
+{
+facesMessage=_createFacesMessage(key,
+label,
+""+converter.getAsString(value),
+month);
+}
+throw new TrConverterException(facesMessage);
+}
+}
+}
+return value;
+}
+function _decimalParse(
+a0,
+a1,
+a2,
+a3,
+a4,
+a5,
+a6,
+a7,
+a8,
+a9
+)
+{
+if(a0==null)
+return null;
+a0=TrFormatUtils.trim(a0);
+if(a0.length==0)
+return null
+var a10=null;
+var a11=getLocaleSymbols();
+if(a11&&(a9!=true))
+{
+var a12=a11.getGroupingSeparator();
+if((a0.indexOf(a12)==0)||
+(a0.lastIndexOf(a12)==(a0.length-1)))
+{
+a10=_createFacesMessage(a2+".CONVERT",
+a7,
+a0);
+throw new TrConverterException(a10);
+}
+if(a12=="\xa0"){
+var a13=new RegExp("\\ ","g");
+a0=a0.replace(a13,"\xa0");
+}
+var a14=new RegExp("\\"+a12,"g");
+a0=a0.replace(a14,"");
+var a15=new RegExp("\\"+a11.getDecimalSeparator(),"g");
+a0=a0.replace(a15,".");
+var a16=document.documentElement["dir"].toUpperCase()=="LTR";
+if(!a16)
+{
+var a17=a0.length;
+if(a0.lastIndexOf("-")==(a17-1))
+{
+a0="-"+a0.substring(0,a17-1);
+}
+}
+}
+if((a0.indexOf('e')<0)&&
+(a0.indexOf('E')<0)&&
+(((a0*a0)==0)||
+((a0/a0)==1)))
+{
+var a18=null;
+var a19=false;
+if(a8!=null)
+{
+a0=TrNumberFormat.trimLeadingZeroes(a0);
+a18=a8?parseFloat(a0):parseInt(a0);
+}
+else
+{
+a18=parseInt(a0);
+if(Math.abs(a18)<Math.abs(parseFloat(a0)))
+{
+a19=true;
+}
+}
+if(!a19&&!isNaN(a18))
+{
+var a20=a0.length;
+var a21=0;
+var a22=a0.lastIndexOf('.');
+if(a22!=-1)
+{
+a20=a22;
+a21=parseInt(a0.length-parseInt(a22+1));
+}
+var a23;
+var a24;
+if((a5!=null)&&
+(a18>a5))
+{
+a23=a2+".MAXIMUM";
+a24=a5;
+}
+else if((a6!=null)&&
+(a18<a6))
+{
+a23=a2+".MINIMUM";
+a24=a6;
+}
+if(a23)
+{
+a10=_createFacesMessage(a23,
+a7,
+a0,
+""+a24);
+throw new TrConverterException(a10);
+}
+return a18;
+}
+}
+var a25=null;
+var a26=false;
+if(a2.indexOf("NumberConverter")==-1)
+{
+a25=a2+".CONVERT";
+}
+else
+{
+a25=a2+".CONVERT_NUMBER";
+if(a1&&a1["number"])
+{
+a10=_createCustomFacesMessage(TrMessageFactory.getSummaryString(a25),
+a1["number"],
+a7,
+a0);
+a26=true;
+}
+}
+if(!a26)
+{
+a10=_createFacesMessage(a25,
+a7,
+a0);
+}
+throw new TrConverterException(a10);
+}
+function TrRegExpValidator(
+a0,
+a1
+)
+{
+this._pattern=a0;
+this._messages=a1;
+this._class="TrRegExpValidator";
+}
+TrRegExpValidator.prototype=new TrValidator();
+TrRegExpValidator.prototype.getHints=function(
+a2
+)
+{
+var a3=null;
+if(this._messages["hint"])
+{
+a3=new Array();
+a3.push(TrMessageFactory.createCustomMessage(
+this._messages["hint"],
+""+this._pattern)
+);
+}
+return a3;
+}
+TrRegExpValidator.prototype.validate=function(
+a4,
+a5,
+a6
+)
+{
+a4=a4+'';
+var a7="^("+this._pattern+")$";
+var a8=a4.match(a7);
+if((a8!=(void 0))&&(a8[0]==a4))
+{
+return a4;
+}
+else
+{
+var a9="org.apache.myfaces.trinidad.validator.RegExpValidator.NO_MATCH";
+var a10;
+if(this._messages&&this._messages["detail"])
+{
+a10=_createCustomFacesMessage(
+TrMessageFactory.getSummaryString(a9),
+this._messages["detail"],
+a5,
+a4,
+this._pattern);
+}
+else
+{
+a10=_createFacesMessage(a9,
+a5,
+a4,
+this._pattern);
+}
+throw new TrValidatorException(a10);
+}
+}
+function _returnRangeHints(
+a0,
+a1,
+a2,
+a3,
+a4,
+a5,
+a6,
+a7,
+a8
+)
+{
+if(a1!=null&&a2!=null&&a2!=0)
+{
+var a9=new Array();
+if(a0&&a0[a8])
+{
+a9.push(
+TrMessageFactory.createCustomMessage(
+a0[a8],
+""+a2,
+""+a1)
+);
+}
+else
+{
+a9.push(
+TrMessageFactory.createMessage(
+a5,
+""+a2,
+""+a1)
+);
+}
+return a9;
+}
+return _returnHints(
+a0,
+a1,
+a2,
+a3,
+a4,
+a6,
+a7
+);
+}
+function _trToString(a0)
+{
+if(Array.prototype.isPrototypeOf(a0))
+{
+return a0.join(", ");
+}
+else
+{
+return""+a0;
+}
+}
+function _returnHints(
+a0,
+a1,
+a2,
+a3,
+a4,
+a5,
+a6
+)
+{
+var a7;
+if(a1!=null)
+{
+a7=new Array();
+if(a0&&a0[a5])
+{
+a7.push(
+TrMessageFactory.createCustomMessage(
+a0[a5],
+_trToString(a1))
+);
+}
+else
+{
+a7.push(
+TrMessageFactory.createMessage(
+a3,
+_trToString(a1))
+);
+}
+}
+if(a2!=null&&a2!=0)
+{
+if(!a7)
+{
+a7=new Array();
+}
+if(a0&&a0[a6])
+{
+a7.push(
+TrMessageFactory.createCustomMessage(
+a0[a6],
+_trToString(a2))
+);
+}
+else
+{
+a7.push(
+TrMessageFactory.createMessage(
+a4,
+_trToString(a2))
+);
+}
+}
+return a7;
+}
+ÏÁ‚3·Ô      ]îÆ5]îÆ9Aô*_ÍVµ   C    :https://itas.oraclecorp.com/itas/adf/jsLibs/CoreFmt2_0_0_beta_2.js necko:classified 1 strongly-framed 1 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeAAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAAZXMIIGUzCCBTugAwIBAgIQA0SkBkcJHfOfYEyXPo7YCjANBgkqhkiG9w0BAQsFADBNMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMScwJQYDVQQDEx5EaWdpQ2VydCBTSEEyIFNlY3VyZSBTZXJ2ZXIgQ0EwHhcNMTkwMzExMDAwMDAwWhcNMjAwNTA5MTIwMDAwWjCBjTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFTATBgNVBAcTDFJlZHdvb2QgQ2l0eTEbMBkGA1UEChMST3JhY2xlIENvcnBvcmF0aW9uMRowGAYDVQQLExFPcmFjbGUgR0lULUVOUyBVUzEZMBcGA1UEAwwQKi5vcmFjbGVjb3JwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI3Wh/dT0vDahFEPaDRtW9ZT06dqYHsKLyrl5IxXTt+6xgeihqsBRjDRa8P0mzgyl8YHSivUAeYiNXMXSyOaueCSRPWpTyg/K4eKuHhJdKo/7CnFVz+LrmVt7YSf7duQDXJt6Lm2wwh36+uj7qeYAb8vEfUp5MiF8p6brVK+flMTiFOL98xeye3NkN8SrShwE5fEiEpdpoCisiHtMN86zJ+U9rDaQrh4Y1Zcclaj/waw6bWAdoT3bLy+AZLMi3tdBpvDDRvsjgP5uVNGtgdLSQBFxeBeQGwyAZwxyHkC2ya/oI/w0RloiMweRcXN8PqEMaZ5EpaX5TVg1LFuTTtuhe8CAwEAAaOCAuwwggLoMB8GA1UdIwQYMBaAFA+AYRyCMWHVLyjnjUY4tCzhxtniMB0GA1UdDgQWBBRde0AeCaEcgi7KnzjK5q/ZuybqBTArBgNVHREEJDAighAqLm9yYWNsZWNvcnAuY29tgg5vcmFjbGVjb3JwLmNvbTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMGsGA1UdHwRkMGIwL6AtoCuGKWh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9zc2NhLXNoYTItZzYuY3JsMC+gLaArhilodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vc3NjYS1zaGEyLWc2LmNybDBMBgNVHSAERTBDMDcGCWCGSAGG/WwBATAqMCgGCCsGAQUFBwIBFhxodHRwczovL3d3dy5kaWdpY2VydC5jb20vQ1BTMAgGBmeBDAECAjB8BggrBgEFBQcBAQRwMG4wJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBGBggrBgEFBQcwAoY6aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0U0hBMlNlY3VyZVNlcnZlckNBLmNydDAJBgNVHRMEAjAAMIIBBAYKKwYBBAHWeQIEAgSB9QSB8gDwAHcAu9nfvB+KcbWTlCOXqpJ7RzhXlQqrUugakJZkNo4e0YUAAAFpbrOPSwAABAMASDBGAiEAvu40L2p0w35ylTAGNxDS7cUqD8MjdrBa/zl9SVFTgBQCIQCsHx51KQsLUbnpesUwy7/FetQcumtU2vUfdgz06DNkXgB1AId1v+dZfPiMQ5lfvfNu/1aNR1Y2/0q1YMG06v9eoIMPAAABaW6zkJIAAAQDAEYwRAIgXnTtAQEXnqAEWCEsjZZAcvS26zisCfG/py8UjBxM4FoCIGHAnCYYNAYAKhxBVDdtMhZV5wKsMl/cCpZDw/uKZ9plMA0GCSqGSIb3DQEBCwUAA4IBAQA5xgV+7SUXK3WKVqsdF3Cw8vk3tWLHNmIjGukW4s/FuZvEudpIRycZmnuB1nAz3Fy6pjyLjJtLz5xso58tm/YIgVys3tV6Lwyv7WXh7X4laPpwxm6aw5UaN2D+UGFHjQnc9lsyWmQXkmC/TafJZFxtP7RYiHfSsOOG2fVS8XPKuYZCziVZxSHu/P+Vt9JgA84d2rd6XtdfMYHCY3JVHYZlNLwD9xnHhBqlXhhbeh0CPMxjL/v1ec0zj6jWIiHGEaG8ubtDyqb+bRubcYmiYm+iQux1xCyodfffsG8sdj115DVMEIv0aY+c09wzttfV9bro7/PVErmaBQoh+j70+9WVADkDAwAAAAABAQAAAAAAAARub25lAAAAEFJTQS1QS0NTMS1TSEEyNTYAAAA= request-method GET response-head HTTP/1.1 200 OK
+Date: Mon, 09 Dec 2019 22:10:01 GMT
+Server: Oracle-Application-Server-11g
+Cache-Control: Public
+Expires: Sun, 06 Dec 2020 22:10:01 GMT
+Last-Modified: Thu, 14 Dec 2017 13:05:24 GMT
+X-ORACLE-DMS-ECID: 005aKmcBLDH6iKQqu^n3EH0002rj001Xru
+X-Powered-By: JSF/2.0
+Content-Type: application/x-javascript
+Content-Language: en
+ original-response-headers Date: Mon, 09 Dec 2019 22:10:01 GMT
+Server: Oracle-Application-Server-11g
+Cache-Control: Public
+Expires: Sun, 06 Dec 2020 22:10:01 GMT
+Last-Modified: Thu, 14 Dec 2017 13:05:24 GMT
+X-ORACLE-DMS-ECID: 005aKmcBLDH6iKQqu^n3EH0002rj001Xru
+X-Powered-By: JSF/2.0
+Keep-Alive: timeout=5, max=96
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: application/x-javascript
+Content-Language: en
+ uncompressed-len 0 net-response-time-onstart 4323 net-response-time-onstop 4353   

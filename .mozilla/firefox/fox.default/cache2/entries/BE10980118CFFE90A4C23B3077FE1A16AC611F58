@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- Copyright (c) 2005, 2016, Oracle and/or its affiliates. All rights reserved. -->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Oracle(R) Integrated Lights Out Manager - Login</title>
+<script type="text/javascript" src="/Extensions/browserVersion.js"></script>
+<script type="text/javascript" src="/Extensions/cssPicker.js"></script>
+<script type="text/javascript" src="/Extensions/htui.js"></script>
+<script type="text/javascript" src="/Extensions/about.js"></script>
+<script type="text/javascript" src="/Extensions/platform.jasp"></script>
+
+<script type="text/javascript">
+function login()
+{
+    document.cookie = "ilom=1;path=/";
+    if (-1 == document.cookie.indexOf("ilom")) {
+        alert("Your browser must accept Cookies to use this interface.");
+        return false;
+    }
+    if (!ErrorCheck()) {
+        return false;
+    }
+    document.form1.action = "loginProcessor.asp";
+    document.form1.target = "LoginHidden";
+    return true;
+}
+function logout()
+{
+    document.location = "/logout.asp";
+}
+function setLoginFocus()
+{
+    var hasFocus = document.activeElement;
+    if (!hasFocus || hasFocus == document.body) {
+        hasFocus = null;
+    } else if (document.querySelector) {
+        hasFocus = document.querySelector(":focus");
+    }
+    if (hasFocus == null) {
+        document.form1.username.focus();
+    }
+}
+function ErrorCheck()
+{
+    var alertmsg = "";
+    var setfocus = "";
+    if (getElementValue("username") == "") {
+        alertmsg += "Please enter a username.\n";
+        setfocus = DefaultInit(setfocus, getElement("username"));
+    }
+    if (getElementValue("password") == "") {
+        alertmsg += "Please enter a password.\n";
+        setfocus = DefaultInit(setfocus, getElement("password"));
+    }
+    return alertMessage(alertmsg, setfocus);
+}
+function setBanner(text, loginMsg, loginAccept)
+{
+    if (isElementVisible("bannerDisplay")) {
+        return;
+    }
+    setButtonDisable("loginButton");
+    getElement("bannerText").style.height = "";
+    var encodedMsg = String(text).replace(/\n/g, "\r\n");
+    setElementValue("bannerText", encodedMsg);
+    var setFocusId;
+    if (loginAccept) {
+        getElement("bannerHelp").innerHTML = "This is the login banner message, click Accept to accept this, Logout to log out.";
+        showElement("bannerLogout");
+        setElementValue("bannerAccept", "Accept");
+        showElement("bannerAccept");
+        setFocusId = "bannerAccept";
+    } else if(loginMsg) {
+        getElement("bannerHelp").innerHTML = "This is the login banner message, click Ok to continue.";
+        setElementValue("bannerAccept", "Ok");
+        showElement("bannerAccept");
+        setFocusId = "bannerAccept";
+    } else {
+        getElement("bannerHelp").innerHTML = "This is the connect banner message, click Close to close this message.";
+        showElement("bannerClose");
+        setFocusId = "bannerClose";
+    }
+    showElement("bannerDisplay");
+    getElement("bannerText").scrollTop = 0;
+    var bannerHeight = getElement("bannerText").scrollHeight;
+    getElement("bannerText").style.height = Math.min(bannerHeight, 300) + "px";
+    getElement(setFocusId).focus();
+}
+function closeBanner()
+{
+    hideElement("bannerDisplay");
+    hideElement("bannerAccept");
+    hideElement("bannerClose");
+    hideElement("bannerLogout");
+    setButtonEnable("loginButton");
+}
+</script>
+<script type="text/javascript" src="/Extensions/preload.js"></script>
+</head>
+<body class="loginBody" onLoad="setLoginFocus();">
+  <div class="loginBanner">
+    <div class="loginLabel">
+      <script type='text/javascript'>showTransparentPng({imgPath:'/Images/oracle/masthead/Oracle_logo.png',width:118,height:14,alt:'Oracle Logo',valign:'top',classname:'MastLogo'})
+</script>
+      <span id="MastProdName" class="MastProdName">Integrated Lights Out Manager</span>
+    </div>
+    <div class="loginBtnArea">
+
+      <button onclick="doAbout(event); return false;"
+              title="Copyright Information"
+              class="blueButton">About</button>
+
+    </div>
+  </div>
+  <div class="loginContent">
+    <div class="loginHeader">
+      <div style="float:left">
+        <p>Please Log In</p>
+      </div>
+      <div style="float:right;padding-top:10px"></div>
+    </div>
+    <div class="loginBox">
+      <div class="loginErrorArea">
+        <div class="loginMsgBox">
+<div class='loginMsgTxt'><script type='text/javascript'>
+showTransparentPng({imgPath:'/Images/oracle/icons/attention_icon.png',width:12,height:13,alt:'Attention',title:'Attention',valign:'middle', classname:'loginErrorIcon'});
+</script>
+Your session has timed out</div>
+
+        </div>
+      </div>
+      <form action="/home.asp" method="post" name="form1" id="form1" style="margin-top:0px" onsubmit="setButtonDisable('loginButton');">
+      <input type="hidden" name="sclink" value="" />
+      <input type="hidden" id="loginToken" name="loginToken" value="" />
+        <table class="tblLayout" title="" role="presentation" style="margin-left:100px">
+          <tr>
+            <td class="subtitle" style="vertical-align:baseline;text-align:right;"><span><label for="hostname">SP Hostname:</label></span></td>
+            <td class="tblSpace" style="vertical-align:baseline;padding-top:8px;padding-bottom:8px;"><span class="text" id="hostname">ORACLESP-1146FMM0LU</span></td>
+          </tr>
+          <tr>
+             <td class="subtitle" style="vertical-align:baseline;text-align:right;"><span><label for="username">User Name:</label></span></td>
+             <td class="tblSpace" style="vertical-align:baseline">
+               <input name="username" type="text" class="TxtFld" id="username" size="36" maxlength="128" required="required" aria-required="true" />
+             </td>
+          </tr>
+          <tr>
+             <td class="subtitle" style="vertical-align:baseline;text-align:right;"><span><label for="password">Password:</label></span></td>
+             <td class="tblSpace" style="vertical-align:baseline"><input name="password" type="password" class="TxtFld" id="password" size="36" maxlength="80" required="required" aria-required="true" autocomplete="off" /></td>
+          </tr>
+          <tr>
+             <td></td>
+             <td class="tblSpace">
+               <input class="loginButton" type="submit"
+                      name="button" id="loginButton" value="Log In"
+                      onclick="return login();"
+                      title="Log In to Oracle(R) Integrated Lights Out Manager" />
+             </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+  <div id="connectBannerRow" class="loginBannerMsg" style="visibility:hidden;">
+  <table class="tblLayout" title="" role="presentation" style="width:100%;margin-bottom:10px">
+    <tr>
+      <td align="left">
+        <textarea id="connectMsg" rows="4" readonly="readonly" name="connectMsg" wrap="soft" class="loginBannerMsgTxt"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <a href='#' onclick="javascript:setBanner(getElementValue('connectMsg'), false, false); return false;">(View...)</a>
+      </td>
+    </tr>
+  </table>
+  </div>
+  <div class="loginFooter">
+    <div class="loginJavaLogo">
+      <script type="text/javascript">
+        showTransparentPng({imgPath:'/Images/oracle/login/Login_Java_Logo.png',width:92,height:45,alt:'Java Logo',valign:'middle',classname:'loginJavaLogoImg'});
+      </script>
+    </div>
+    <div class="loginCopyright">Copyright &#169; 2016, Oracle and/or its affiliates. All rights reserved. Oracle and Java are registered trademarks of Oracle and/or its affiliates. Other names may be trademarks of their respective owners.
+</div>
+  </div>
+  <div id="bannerDisplay" class="bannerDiv" style="display:none">
+     <div class="hiddenContent" id="bannerHelp"></div>
+     <textarea id="bannerText" class="bannerTextArea" readonly="readonly"></textarea>
+     <div style="float:right">
+     <input type="button" id="bannerAccept" class="loginButton" value="Accept" onclick="LoginHidden.finishLogin();" style="display:none;margin:10px 0 10px 10px;" />
+     <input type="button" id="bannerClose" class="loginButton" value="Close" onclick="closeBanner();" style="display:none;margin:10px 0 10px 10px;" />
+     <input type="button" id="bannerLogout" class="loginButton" value="Logout" onclick="logout();" style="display:none;margin:10px 0 10px 10px;" />
+     </div>
+  </div>
+<iframe id="LoginHidden" name="LoginHidden" src="/iPages/blank.htm" style="display:none;"></iframe>
+<script type="text/javascript">
+writeConnectMsg = function() {
+    var msg = "";
+    if (msg.length > 0) {
+        setElementValue("connectMsg", msg);
+        document.getElementById("connectBannerRow").style.visibility = "visible";
+    }
+}
+onload = function() {
+
+    setElementValue("loginToken", "uCWlYhENnzIBZLLrrBQYhxKcFbMmbd");
+    writeConnectMsg();
+    setLoginFocus();
+}
+</script>
+</body>
+</html>
+ß®)[Ó           ]÷ÊMA"3ÿ       C    :https://adc-mgmt-1146fmm0lu.us.oracle.com/iPages/i_login.asp?msg=7 strongly-framed 0 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeBAQAAgAAAAAAAAAAAAAAAAAAAAAB4vFIJp5wRkeyPxAQ9RJGKPqbqVvKO0mKuIl8ec8o/uhmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAASNMIIEiTCCA3GgAwIBAgIJAOJ0rN3uRWu+MA0GCSqGSIb3DQEBCwUAMIGJMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEXMBUGA1UEBxMOUmVkd29vZCBTaG9yZXMxHTAbBgNVBAoTFE9yYWNsZSBBbWVyaWNhLCBJbmMuMS0wKwYDVQQDEyRPcmFjbGUgSW50ZWdyYXRlZCBMaWdodHMgT3V0IE1hbmFnZXIwHhcNMTQwNjEyMTUyOTAxWhcNMzQwNjA3MTUyOTAxWjCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvMQXO6DUOUnSJ7IXLCR0E9iAmJtQlyO10sds8ZERf08FVsjWvE5D5s9dFeDTSGNJLmiSM/TmkC1aCcHi+YZI92yREcUPJP8oAYs1kZsOC8SPpZ0ykfHgBajgU90SsbSe3v2G+dMVgSX3xParoi+XxdAKFpvWqypsFL21n+PfnxJMbbNkqZHS+YqDhF4aljZ5C55a5O+1z2+qNBLgVLakK36XvWH5+3xzUksH9Ew6IYxrCKAMEc7/eJYGtel2RdW3WQlx3DZ+6TFbvTnI0/Jl4+mGH/n79xTICGlFJrX09AuiU/FVasb78+2gMB6y/AgETFjFxu2myuuoAx8HEF+2owIDAQABo4HxMIHuMB0GA1UdDgQWBBTPh78BeErvt1lLsZ6Iea8XLjhVKzCBvgYDVR0jBIG2MIGzgBTPh78BeErvt1lLsZ6Iea8XLjhVK6GBj6SBjDCBiTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFzAVBgNVBAcTDlJlZHdvb2QgU2hvcmVzMR0wGwYDVQQKExRPcmFjbGUgQW1lcmljYSwgSW5jLjEtMCsGA1UEAxMkT3JhY2xlIEludGVncmF0ZWQgTGlnaHRzIE91dCBNYW5hZ2VyggkA4nSs3e5Fa74wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAbTaZeskxbirmUTW/QCXkZLcvY5/2FgrgWU6+0c1WyLpfg8qO+0KAH2GLSe9xxkFomFd0kzRncw/i1bF/4RXMoBnEM6ANp/aSGFggaUfoo0mhjyN66s+rNtWPNvDQCADxaWq67HyNdpEzWY4cAcgDGJphrgZCsTy7A9Y7Fc283YCbWVnYyiKWX35B3kr2E/4pDNj1gig2nPd/MPobdy7ZCYpXsPTpgpsQnIExi3THJijiz6NLjG1k2e8IAi2Y68taFO8cvN2m5jhEuwYSkXV5hjMrr6EffS8KkHVgPziBPjWbgboN5QUO2XPimjwH44/vP5JPB02xnU6Rlp6Kg9A1iwAvAwMBAAEAAQEBAAAAAAAEbm9uZQAAAARub25lAAAA request-method GET response-head HTTP/1.0 200 OK
+Date: Mon Dec 16 18:54:12 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+ original-response-headers Date: Mon Dec 16 18:54:12 2019
+Server: Oracle-ILOM-Web-Server/1.0
+Pragma: no-cache
+Cache-Control: no-cache,private
+Expires: 0
+Content-type: text/html
+X-CONTENT-TYPE-OPTIONS: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors adc-mgmt-1146fmm0lu.us.oracle.com:*
+Set-Cookie: ORA_ILOM_LOGIN=uCWlYhENnzIBZLLrrBQYhxKcFbMmbd; path=/; secure; HttpOnly;
+ uncompressed-len 0 predictor::resource-count 14 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/browserVersion.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/cssPicker.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/htui.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/about.js 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/platform.jasp 1,1,0,4097 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Styles/oracle.css 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Extensions/preload.js 1,1,0,4096 net-response-time-onstart 6090 net-response-time-onstop 6605 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/sun/2.2/other/dot.gif 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/tabs/tab_highlight_bk.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/tabs/tab_normal_bk.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/icons/attention_icon.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/login/Login_Java_Logo.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/login/Login_Banner_Bkgd.png 1,1,0,4096 predictor::https://adc-mgmt-1146fmm0lu.us.oracle.com/Images/oracle/login/Login_Box_Bkgd.png 1,1,0,4096   #Á

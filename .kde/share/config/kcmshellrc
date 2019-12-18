@@ -1,0 +1,19 @@
+[KFileDialog Settings]
+Preview Size=60
+ShowPreviews=false
+ViewMode=SmallColumns
+
+[KFileDialog Speedbar]
+Speedbar IconSize=32
+
+[KPrinter Settings]
+ApplicationOptions=
+PrintCommand=
+Printer=tmpprinter_yqRLaJ0
+
+[Notification Messages]
+LanguageChangesApplyOnlyToNewlyStartedPrograms=false
+
+[Open-with settings]
+CompletionMode=5
+History=acroread,oowriter,xine,/usr/bin/artsdsp,oocalc,env,ooimpress,env LANG=C /usr/bin/acroread

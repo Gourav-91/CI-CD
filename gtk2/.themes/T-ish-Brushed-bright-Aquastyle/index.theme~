@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=T-ish-Brushed-bright-Aquastyle
+Type=X-GNOME-Metatheme
+Comment=A tweaked version of Ish, with buttons from Expose and window borders tweaked from Ale Panther
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=T-ish-Brushed-bright-Aquastyle
+MetacityTheme=T-ish-Brushed-bright-Aquastyle
+IconTheme=OSX

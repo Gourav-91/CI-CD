@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_impress.xpm
+Type=MimeType
+Patterns=*.sdd
+MimeType=application/vnd.stardivision.impress
+Comment=StarImpress 5

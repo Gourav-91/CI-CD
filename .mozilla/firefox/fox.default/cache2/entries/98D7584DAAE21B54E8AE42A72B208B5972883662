@@ -1,0 +1,374 @@
+var countdownTimer, globalTimeout, popupMenuMouseTimer, popupMenuMouseIn, mouseInsidePopupMenuTimer;
+function sendBrowserSize(){
+    var w = $(window).width(), h = $(window).height(), params,
+    //source = AdfPage.PAGE.findComponent('pt1:itasForm');
+    source = AdfPage.PAGE.findComponent('pt1:browserSizeComp');
+    if(undefined == source)
+        source = AdfPage.PAGE.findComponent('d1');
+    if(undefined == source)
+        source = AdfPage.PAGE.findComponent('d2');
+    //console.log('source is: ' + source);
+    params = w + '|' + h;
+    if(undefined != source && null != source)
+    parent.AdfCustomEvent.queue(source,
+      "sendBrowserSize",
+      {adfParam:params},
+      false
+    );
+  }
+
+function templateGoBackAction(e){
+    var evtSrc, pageButtonId, button;
+    evtSrc = e.getSource();
+    pageButtonId = evtSrc.getProperty('templatePageGoBackButtonId');
+    if(pageButtonId != '' && pageButtonId != null && typeof(pageButtonId) != 'undefined'){
+        //pageButtonId = 'pt1:' + pageButtonId;
+        //button = AdfPage.PAGE.findComponentByAbsoluteId(pageButtonId);
+        //AdfCustomEvent.queue(button,true);
+        $("#pt1\\:"+pageButtonId).click();
+    }
+}
+
+function handleCustomInsideLabel(){    
+    var 
+    inputId = "pt1\\:pt_it24\\:\\:content", 
+    dummyInputId = "pt1\\:pt_itDummy\\:\\:content";
+    
+    $("#"+dummyInputId).live("focus",function(){
+        $("#"+dummyInputId).hide();
+        $("#"+inputId).focus();
+    });
+    
+    $("#"+inputId).live("blur",function(){
+        var _value = $("#"+inputId).val();
+        if(_value == ""){
+            $("#"+dummyInputId).show();
+        }
+    });
+    
+    /*replace for future versions of jQuery
+    $( selector ).live( events, data, handler ); // jQuery 1.3+
+    $( document ).delegate( selector, events, data, handler );  // jQuery 1.4.3+
+    $( document ).on( events, selector, data, handler );  // jQuery 1.7+
+    */
+}
+
+function togglePausePlay(){
+    var 
+    playSrc = "/itas/images/poll-play.png",
+    pauseSrc = "/itas/images/poll-pause.png",
+    timeout = 30000, secs = timeout/1000, remainingMS, remainingCurrentSecondMS;
+    
+    $('#pt1\\:pt_goBackPauseImg').children('span').attr('style','color:#003286;').text('');
+    
+    $("#pt1\\:pt_goBackPauseImg\\:\\:icon").live("click",function(){
+        //switch source
+        src = $(this).attr('src');
+        if(src == playSrc){
+            $(this).attr('src',pauseSrc);
+            globalTimeout.resume();
+                //start the countdown after the remaining ms of the current second have passed
+            setTimeout(
+                function(){
+                    doCountdown();
+                },remainingCurrentSecondMS
+            );
+        } else if (src == pauseSrc){
+            $(this).attr('src',playSrc);
+            globalTimeout.pause();
+            if(countdownTimer != null){
+                clearInterval(countdownTimer);
+            }
+            remainingMS = globalTimeout.getRemaining();
+                //get remaining ms from the current second
+            remainingCurrentSecondMS = remainingMS % 1000;
+            globalTimeout.setRemaining(secs*1000 + remainingCurrentSecondMS);
+        }
+    });
+    
+    $("#pt1\\:pt_goBackPauseImg\\:\\:icon").live("mouseover", function(){
+       $(this).attr('style','cursor: pointer; cursor: hand;');
+    });
+    
+    $("#pt1\\:pt_goBackPauseImg\\:\\:icon").live("mouseout", function(){
+       $(this).attr('style','');
+    });
+    
+    //start countdown
+    globalTimeout = new TimerTimeout(null,timeout);
+    doCountdown();
+    
+    function doCountdown(){
+        countdownTimer = setInterval(
+            function(){
+                if(secs >= 0){
+                    $('#pt1\\:pt_goBackPauseImg').children('span').text('( Back in ' + secs + ' secs.)');
+                } else {
+                    // countdown reached 0
+                    //TODO: generate click to go back !
+                }
+                secs--;
+            }
+        ,1000);
+    }
+}
+
+function TimerTimeout(callback, delay) {
+        var timerId, start, remaining = delay;
+    
+        this.pause = function() {
+            window.clearTimeout(timerId);
+            remaining -= new Date() - start;
+        };
+    
+        this.resume = function() {
+            start = new Date();
+            timerId = window.setTimeout(callback, remaining);
+        };
+        
+        this.getRemaining = function(){
+            return remaining;
+        }
+        
+        this.setRemaining = function(r){
+            remaining = r;
+        }
+    
+        this.resume();
+    }
+
+function __templateLaunchSubTabsMenu(tabId){
+    alert(tabId);
+}
+
+function doTheMighty(popupMenuTabId){
+    popupMenuMouseTimer = setTimeout(
+        function(){
+            //console.log("inside timeout, popupMenuMouseIn = " + popupMenuMouseIn + ", popupMenuTabId = " + popupMenuTabId);
+            //if mouse is still above the menu tab, launch popup menu
+            if(popupMenuMouseIn){
+                popupMenuTabId = popupMenuTabId.substring(8);
+                
+                source = AdfPage.PAGE.findComponent('pt1:pt_pgl2');//('pt1:itasForm');
+                if(undefined != source && null != source)
+                AdfCustomEvent.queue(source,
+                  "launchSecondaryPopupMenu",
+                  {tabId:popupMenuTabId},
+                  false
+                );
+                //console.log("call for launch popup Menu");
+            }
+        },100
+    );
+}
+
+function attachSubTabsMenuHandler(){
+    var tabs = $("[id^='pt1:np2:tab_']").filter(function(){if($(this).attr('id').indexOf('::') < 0) return $(this);})
+    $.each(tabs,function(){
+        $(this).hover(function(){
+            popupMenuMouseIn = true;
+            var title = $(this).attr('title');
+            $(this).attr('_title',title).attr('title','');
+            doTheMighty($(this).attr('id'));
+             //console.log("" + popupMenuMouseTimer);
+             /*
+             var popupId = "pt1:pt_tabs_p1";
+             var popup = AdfPage.PAGE.findComponentByAbsoluteId(popupId);
+  
+             if (!popup.isPopupVisible()) {
+                 var hints = {    };
+                 hints[AdfRichPopup.HINT_LAUNCH_ID] = buttonId;
+                 hints[AdfRichPopup.HINT_ALIGN_ID] = buttonId;
+                 hints[AdfRichPopup.HINT_ALIGN] = AdfRichPopup.ALIGN_AFTER_START;
+                 popup.show(hints);
+             }*/
+        },
+        function(){
+            popupMenuMouseIn = false;
+            var title = $(this).attr('_title');
+            $(this).attr('title',title);
+            clearTimeout(popupMenuMouseTimer);
+        });
+    });
+    
+    /*$('body').delegate("[id$='pt_m1::ScrollBox']", "mouseenter",
+        function(){
+            if("undefined" != typeof(mouseInsidePopupMenuTimer))
+                clearTimeout(mouseInsidePopupMenuTimer);
+        }
+    );*/
+    $('body').delegate("[id$='pt_m1::ScrollBox']", "mouseleave",
+        function(){
+            var popup = AdfPage.PAGE.findComponentByAbsoluteId("pt1:pt_tabs_p1");
+            //mouseInsidePopupMenuTimer = setTimeout(function(){
+                $("[id$='pt_m1::ScrollBox']")
+                .fadeOut(20,
+                    function(){
+                        popup.hide();
+                        $("#pt1\\:pt_m2").removeClass('p_AFHighlighted')
+                    }
+                );
+            //}, 400);
+        }
+    );
+}
+
+function calcPageLoadTime(){
+    var now, loadTime, comp,t;
+    
+    now = new Date().getTime();
+    loadTime = now - performance.timing.navigationStart;
+    
+    t = setTimeout(function(){
+        comp = AdfPage.PAGE.findComponentByAbsoluteId('pt1:pt_otLT');
+        //console.log("found comp = " + comp);
+        //console.log("load time: " + loadTime);
+        if(null != comp){
+            comp.setValue(loadTime + ' ms.');
+        }
+    }, 1000);
+}
+
+/* function used to force clearing the filters on the Object Search Results table in Information Console(in the UI)
+ * called when using Spotlight Search to search for objects
+ * called also from informationConsole
+ */
+function waitTableLoading(evt) {
+    var t, timeToCicle = 300;
+    t = setInterval(function () {
+        //if table loaded, clear the filters
+        if ($("div[id^='pt1:pc1:t1']").length > 0) {
+            clearInterval(t);
+            $("input[name^='pt1:pc1:t1']").val('');
+        }
+        
+        //if it loads directly the Object Dashboard, then skip looping
+        if ($("div#pt1\\:r1").length > 0) {
+            clearInterval(t);
+        }
+    },
+    timeToCicle);
+}
+
+ITAS_CUSTOM_REPLACE_CHARS = {
+    illegalCharsCodes : [9, 11], 
+    illegalCharsReplacement : [' ', ' '], 
+    replaceCharsWhenBlur : function (id, where) {
+        //console.log("replaceCharsWhenBlur from itas template " + id);
+        if ("iframe" === where) {
+            //input field is in popup page (different DOM structure as the main page since it is loaded 
+            //inside an iframe -> this is the way ADF generates the HTML content)
+            $.each($("iframe"), function () {
+                var field = $(this).contents().find("[id*='" + id + "::content']"), obj;
+                if (field.length > 0) {
+                    obj = field[0];
+                    var objVal = $(obj).val();
+                    $(obj).val(ITAS_CUSTOM_REPLACE_CHARS.replaceThemAll(objVal));
+                }
+                //console.log($(obj).val());
+            });
+        }
+        else if ("main" === where) {
+            //input field is in the main page
+            var obj = $("[id*='" + id + "::content']"), objVal;
+            if ("undefined" !== typeof (obj)) {
+                objVal = $(obj).val();
+                $(obj).val(ITAS_CUSTOM_REPLACE_CHARS.replaceThemAll(objVal));
+            }
+        }
+        else {
+            //should not get here
+        }
+    },
+    
+    replaceThemAll : function (objVal) {
+        var i, newObjVal = objVal;
+        for (i = 0;i < ITAS_CUSTOM_REPLACE_CHARS.illegalCharsCodes.length;i++) {
+            newObjVal = newObjVal.replaceAll(String.fromCharCode(ITAS_CUSTOM_REPLACE_CHARS.illegalCharsCodes[i]), ITAS_CUSTOM_REPLACE_CHARS.illegalCharsReplacement[i]);
+        }
+        return newObjVal.replace(/  +/g, ' '); //also replace multiple occurences of consecutive spaces
+    }
+}
+
+String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
+function attachReplaceCharsHandler(){
+    var comps = ["input","textarea"],i;
+    for(i=0; i<comps.length; i++){
+        $.each($(comps[i]), function(){
+            $(this).blur(function(){
+                var val, compId, adfComp;
+                //find Adf UI Component based on id
+                compId = $(this).attr('id');
+                compId = compId.split(':');
+                compId = compId[0] + ':' + compId[1];
+                adfComp = AdfPage.PAGE.findComponent(compId);
+                if("undefined" !== typeof(adfComp)){
+                    if("oracle.adf.RichInputText" === adfComp._componentType){
+                        if("function" === typeof(adfComp._props.clientListeners.blur)){
+                            return;
+                        }
+                    }
+                }
+                val = $(this).val();
+                $(this).val(ITAS_CUSTOM_REPLACE_CHARS.replaceThemAll(val));
+            });
+        });
+    }
+}
+
+$(document).ready(function(){
+
+    calcPageLoadTime();
+ /* this will get source to be undefined*/
+// var source = AdfPage.PAGE.findComponent('pt1:itasForm');
+// console.log('source is: ' + source);
+ 
+ /* this will work, waiting for the component to appear in the DOM,
+  * sending the browser size for the very first time*/
+ setTimeout('sendBrowserSize()',1000);
+ 
+ //also refresh the dimensions on the server, when they change on the client
+ var sendTimer = null;
+ $(window).resize(function(){
+    if(sendTimer) clearTimeout(sendTimer);
+    sendTimer = setTimeout(function(){
+      sendBrowserSize();
+    });
+ });
+ 
+ /*
+ $("#pt1\\:pt_ctb3\\:\\:icon").click(function(){
+    //handleCustomInsideLabel();
+ }); */
+ 
+ //togglePausePlay();
+
+attachSubTabsMenuHandler();
+attachReplaceCharsHandler();
+});
+
+$(document).load(function(){
+    $('head').append('<meta http-equiv="X-UA-Compatible" content="IE-EmulateIE9" />');
+});©`<É†      ]îÆ4]îÆ9Aô*]ø ´   ;    :https://itas.oraclecorp.com/itas/resources/itasTemplate.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Mon, 09 Dec 2019 22:10:01 GMT
+Server: Oracle-Application-Server-11g
+Accept-Ranges: bytes
+Last-Modified: Tue, 02 Jul 2019 13:43:30 GMT
+X-ORACLE-DMS-ECID: 005aKmcADQ16iKQqu^n3EH0002rj001Xrs
+Content-Type: application/javascript
+Content-Language: en
+ original-response-headers Date: Mon, 09 Dec 2019 22:10:01 GMT
+Server: Oracle-Application-Server-11g
+Accept-Ranges: bytes
+Last-Modified: Tue, 02 Jul 2019 13:43:30 GMT
+X-ORACLE-DMS-ECID: 005aKmcADQ16iKQqu^n3EH0002rj001Xrs
+Keep-Alive: timeout=5, max=97
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: application/javascript
+Content-Language: en
+ uncompressed-len 0 net-response-time-onstart 4592 net-response-time-onstop 4599   1e

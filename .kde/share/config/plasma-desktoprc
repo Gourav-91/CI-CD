@@ -1,0 +1,37 @@
+[BackgroundConfigDialog]
+Height 950=719
+Width 1920=659
+
+[PlasmaViews][1]
+panelVisibility=0
+
+[PlasmaViews][1][Sizes]
+lastsize=1920
+
+[PlasmaViews][1][Sizes][Horizontal800]
+max=800,27
+min=800,27
+offset=0
+size=800,27
+
+[Updates]
+performed=/usr/share/kde-settings/kde-profile/default/share/apps/plasma-desktop/updates/00-start-here-kde.js,/usr/share/kde4/apps/plasma-desktop/updates/00-fedora-networkmanagement.js,/usr/share/kde4/apps/plasma-desktop/updates/addShowActivitiesManagerPlasmoid.js,/usr/share/kde4/apps/plasma-desktop/updates/set-hidden-single-vd-pager.js,/usr/share/kde4/apps/plasma-desktop/updates/systray-to-notifications-widget.js
+
+[ViewIds]
+1=1
+8=2
+
+[invokeAction]
+__file=
+predicate=test-predicate-openinwindow.desktop
+
+[stopSuppressingScreenPowerManagement]
+__file=
+cookie=-1
+
+[stopSuppressingSleep]
+__file=
+cookie=-1
+
+[updateFreespace]
+__file=

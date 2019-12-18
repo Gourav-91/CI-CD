@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gconf>
+        <entry name="uri" mtime="1217886229" type="string">
+                <stringvalue>dav://gourav.s.sarkar@files.oraclecorp.com:80/content</stringvalue>
+        </entry>
+        <entry name="display_name" mtime="1217886229" type="string">
+                <stringvalue>OFO</stringvalue>
+        </entry>
+        <entry name="icon" mtime="1217886229" type="string">
+                <stringvalue>gnome-fs-share</stringvalue>
+        </entry>
+</gconf>

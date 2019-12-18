@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="enabled" mtime="1575638034" type="bool" value="true"/>
+	<entry name="command" mtime="1575638034" type="string">
+		<stringvalue>firefox %s</stringvalue>
+	</entry>
+</gconf>

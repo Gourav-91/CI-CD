@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.92
+Encoding=UTF-8
+Hidden=false
+Icon=ooo_draw.xpm
+Type=MimeType
+Patterns=*.sda
+MimeType=application/vnd.stardivision.draw
+Comment=StarDraw 5

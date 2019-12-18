@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=test
+Comment[en_US]=test
+Encoding=UTF-8
+Icon=/usr/share/icons/locolor/32x32/apps/catalogmanager.png
+Name=test
+Name[en_US]=test
+NoDisplay=true
+Type=Directory
